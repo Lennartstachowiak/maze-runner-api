@@ -1,0 +1,12 @@
+services:
+  api:
+    image: python:3
+    command: sh -c "pip install --no-cache-dir -r requirements.txt && flask run --host=0.0.0.0"
+    ports:
+      - 5000:5000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      - FLASK_APP=run
+      - FLASK_ENV=production
