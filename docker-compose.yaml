@@ -8,5 +8,5 @@ services:
       - ./:/app
     environment:
       - FLASK_APP=run
-      - FLASK_ENV=production
-    command: sh -c "pip install --no-cache-dir -r requirements.txt && flask run"
+      - FLASK_ENV=development
+    command: sh -c "pip install --no-cache-dir -r requirements.txt && flask run --host=0.0.0.0"

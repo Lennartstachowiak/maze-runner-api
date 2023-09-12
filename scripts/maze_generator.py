@@ -302,6 +302,7 @@ class MazeSolver:
         self.maze = maze
         self.solution = []
         self.visited = []
+        self.score = None
 
     def _find_start(self):
         for row in range(self.maze.height):
@@ -326,6 +327,17 @@ class MazeSolver:
 
         if not self.solution:
             raise ValueError("No solution found")
+        
+    def calculateScore(self):
+        maze_height = self.maze.height
+        maze_width = self.maze.width
+        efficiency_score = (maze_height*maze_width)/len(self.solution)
+        search_score = len(self.visited)/(maze_height*maze_width)
+        print(efficiency_score)
+        print(search_score)
+        final_score = efficiency_score+efficiency_score*search_score
+        self.score = round(final_score,2)
+
 
 
 solver = MazeSolver(maze=sidewinderMaze)
