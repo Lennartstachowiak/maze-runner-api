@@ -329,12 +329,14 @@ class MazeSolver:
             raise ValueError("No solution found")
         
     def calculateScore(self):
+        # The score will be calculate by efficency of the solution and search percentage
+        #   - efficency -> solution steps divided by maze size 0 to ∞
+        #   - search -> how many cells have been visited in the maze to find the solution (0 to 1)
+        # In the end we calculate the efficency and add the efficency multiplied by the search score
         maze_height = self.maze.height
         maze_width = self.maze.width
         efficiency_score = (maze_height*maze_width)/len(self.solution)
         search_score = len(self.visited)/(maze_height*maze_width)
-        print(efficiency_score)
-        print(search_score)
         final_score = efficiency_score+efficiency_score*search_score
         self.score = round(final_score,2)
 
