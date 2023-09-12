@@ -20,6 +20,17 @@ class Cell:
 
     def __repr__(self):
         return self.__str__()
+    
+class Difficulty:
+    def __init__(self,index,name):
+        self._index=index
+        self._name=name
+    @property
+    def index(self):
+        return self._index
+    @property
+    def name(self):
+        return self._name
 
 
 class Maze:
@@ -27,6 +38,17 @@ class Maze:
         self.height = height
         self.width = width
         self.structure = structure
+        self.difficulty = None
+
+    def calculateDifficultyOfMaze(self):
+        size = (self.height+self.width)/2
+        if size <= 15:
+            self.difficulty = Difficulty(0, "Easy")
+        elif size <= 30:
+            self.difficulty = Difficulty(1, "Medium")
+        else:
+            self.difficulty = Difficulty(2, "Hard")
+
 
     def __str__(self, solutionList=[]):
         maze_str = ""
@@ -167,7 +189,9 @@ class SidewinderAlgorithmMazeGenerator(MazeGenerator):
         self.structure = []
         self.generate_init_maze_without_paths()
         self.sidewinder_algorithm()
-        return Maze(self.height, self.width, self.structure)
+        maze = Maze(self.height, self.width, self.structure)
+        maze.calculateDifficultyOfMaze()
+        return maze
 
 
 class MazeGeneratorFactory:

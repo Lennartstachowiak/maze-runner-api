@@ -9,4 +9,5 @@ services:
     environment:
       - FLASK_APP=run
       - FLASK_ENV=development
+      - DATABASE_URL=sqlite:///instance/database.db
     command: sh -c "pip install --no-cache-dir -r requirements.txt && flask run --host=0.0.0.0"
