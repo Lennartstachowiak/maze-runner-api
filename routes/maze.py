@@ -28,14 +28,6 @@ def register_maze_routes(api):
                        "difficulty": maze.difficulty, "imgLink": maze.imgLink, "highscores": highscoreList, "structure": maze.structure}
         return jsonify(single_maze)
 
-    @api.route("/v1/get_algorithms", methods=["GET"])
-    def get_algorithms():
-        algorithmList = []
-        for algorithm in Algorithms.query.all():
-            algorithmList.append(
-                {"id": algorithm.id, "name": algorithm.name, "code": algorithm.code})
-        return jsonify(algorithmList)
-
     @api.route("/v1/get_maze_algorithm_solution", methods=["POST"])
     def get_maze_algorithm_solution():
         algorithm_id = request.json["algorithmId"]

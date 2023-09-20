@@ -1,6 +1,7 @@
 from db.db import register_database, db, migrate
 from routes.maze import register_maze_routes
 from routes.user import register_user_routes
+from routes.algorithm import register_algorithm_routes
 from flask import Flask
 from flask_cors import CORS
 from config import Config
@@ -13,6 +14,7 @@ def create_api():
     register_database(api)
     register_user_routes(api)
     register_maze_routes(api)
+    register_algorithm_routes(api)
     return api
 
 

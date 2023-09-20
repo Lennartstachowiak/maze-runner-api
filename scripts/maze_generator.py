@@ -289,8 +289,8 @@ def dfs(node, maze, solution, visited):
     return False
 
 
-def bfs(start_node, maze, solution, visited):
-    queue = deque([(start_node, [])])
+def bfs(node, maze, solution, visited):
+    queue = deque([(node, [])])
 
     while queue:
         node, path = queue.popleft()
