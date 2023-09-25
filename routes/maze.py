@@ -40,15 +40,16 @@ def register_maze_routes(api):
         # Solve maze with algorithm
         maze = Maze(maze_object.height, maze_object.width,
                     json.loads(maze_object.structure))
-        
+
         solver = MazeSolver(maze=maze)
-        solver.solve(algorithm_id)
+        algorithm_object = Algorithms.query.filter_by(id=algorithm_id).first()
+        algorithm_code = algorithm_object.code
+        solver.solve(algorithm_code)
         solver.calculateScore()
 
         solver_result = {"solution": solver.solution,
                          "visited": solver.visited,
                          "score": solver.score}
-        
         # Return solution
         return jsonify(solver_result)
 

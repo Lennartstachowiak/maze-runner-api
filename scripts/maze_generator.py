@@ -1,9 +1,11 @@
 from collections import deque
 import random
 import json
+import subprocess
 from io import BytesIO
 from PIL import Image, ImageDraw
 from abc import ABC, abstractmethod
+from flask import jsonify
 
 
 class Cell:
@@ -15,19 +17,45 @@ class Cell:
         self.start = start
         self.goal = goal
 
+    def to_dict(self):
+        return {
+            "north": self.north,
+            "east": self.east,
+            "south": self.south,
+            "west": self.west,
+            "start": self.start,
+            "goal": self.goal
+        }
+
     def __str__(self):
-        return json.dumps({"north": self.north, "east": self.east, "south": self.south, "west": self.west, "start": self.start, "goal": self.goal})
+        return json.dumps(self.to_dict())
 
     def __repr__(self):
         return self.__str__()
-    
+
+
 class Difficulty:
-    def __init__(self,index,name):
-        self._index=index
-        self._name=name
+    def __init__(self, index, name):
+        self._index = index
+        self._name = name
+
+    def to_dict(self):
+        maze_dict = {
+            "index": self._index,
+            "name": self._name,
+        }
+        return maze_dict
+
+    def __str__(self):
+        return json.dumps(self.to_dict())
+
+    def __repr__(self):
+        return self.__str__()
+
     @property
     def index(self):
         return self._index
+
     @property
     def name(self):
         return self._name
@@ -40,6 +68,21 @@ class Maze:
         self.structure = structure
         self.difficulty = None
 
+    def to_dict(self):
+        maze_dict = {
+            "height": self.height,
+            "width": self.width,
+            "structure": self.structure,
+            "difficulty": self.difficulty
+        }
+        return maze_dict
+
+    def __str__(self):
+        return json.dumps(self.to_dict())
+
+    def __repr__(self):
+        return self.__str__()
+
     def calculateDifficultyOfMaze(self):
         size = (self.height+self.width)/2
         if size <= 15:
@@ -48,7 +91,6 @@ class Maze:
             self.difficulty = Difficulty(1, "Medium")
         else:
             self.difficulty = Difficulty(2, "Hard")
-
 
     def __str__(self, solutionList=[]):
         maze_str = ""
@@ -145,9 +187,6 @@ class Maze:
                 row_str += cell_row_str
             maze_str += row_str
         return maze_str
-
-    def __repr__(self):
-        return self.__str__()
 
 
 @abstractmethod
@@ -338,20 +377,30 @@ class MazeSolver:
                 if cell.start:
                     return (row, col)
 
-    def solve(self, algorithm=""):
+    def solve(self, algorithm_code):
         start = self._find_start()
-        if start:
-            if algorithm == "258e6ff8b3fa4856b320eda39b22950f":
-                dfs(start, self.maze, self.solution,
-                    self.visited)
-            bfs(start, self.maze, self.solution,
-                self.visited)
+        maze_dict = self.maze.to_dict()
+        if start and algorithm_code:
+            try:
+                result = subprocess.run(
+                    ['node', '-p',
+                        f'{algorithm_code}; returnSolution(JSON.parse(\'{json.dumps(start)}\'), {json.dumps(maze_dict)})'],
+                    capture_output=True,
+                    encoding='utf-8',
+                ).stdout
+                solution, visited = json.loads(result)
+                self.solution = solution
+                self.visited = visited
+            except subprocess.CalledProcessError as e:
+                print(
+                    f"Command execution failed with exit code {e.returncode}")
+                print("ERROR", e.output)
         else:
             raise ValueError("No starting point in the maze")
 
         if not self.solution:
             raise ValueError("No solution found")
-        
+
     def calculateScore(self):
         # The score will be calculate by efficency of the solution and search percentage
         #   - efficency -> solution steps divided by maze size 0 to ∞
@@ -362,9 +411,7 @@ class MazeSolver:
         efficiency_score = (maze_height*maze_width)/len(self.solution)
         search_score = len(self.visited)/(maze_height*maze_width)
         final_score = efficiency_score+efficiency_score*search_score
-        self.score = round(final_score,2)
-
+        self.score = round(final_score, 2)
 
 
 solver = MazeSolver(maze=sidewinderMaze)
-solver.solve()
