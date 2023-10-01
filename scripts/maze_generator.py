@@ -379,12 +379,13 @@ class MazeSolver:
 
     def solve(self, algorithm_code):
         start = self._find_start()
-        maze_dict = self.maze.to_dict()
+        maze_json = json.dumps(self.maze.to_dict())
         if start and algorithm_code:
             try:
+                command = ['node', '-p',
+                           f'{algorithm_code}; returnSolution(JSON.parse(\'{json.dumps(start)}\'), {maze_json})']
                 result = subprocess.run(
-                    ['node', '-p',
-                        f'{algorithm_code}; returnSolution(JSON.parse(\'{json.dumps(start)}\'), {json.dumps(maze_dict)})'],
+                    command,
                     capture_output=True,
                     encoding='utf-8',
                 ).stdout
