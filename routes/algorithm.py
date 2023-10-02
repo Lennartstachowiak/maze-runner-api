@@ -48,5 +48,13 @@ def register_algorithm_routes(api):
         new_algorithm = Algorithms(
             name=f"Algorithm nr. {algorithms_count}", code=algorithm_schema_code)
         new_algorithm.save()
-        response = {"status": 200}
+        response = {"status": 201}
+        return jsonify(response)
+
+    @api.route("/v1/delete_algorithm", methods=["DELETE"])
+    def delete_algorithm():
+        algorithm_id = request.json["algorithmId"]
+        algorithm = Algorithms.query.filter_by(id=algorithm_id).first()
+        algorithm.delete()
+        response = {"status": 204}
         return jsonify(response)
