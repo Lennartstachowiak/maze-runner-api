@@ -3,9 +3,24 @@ from db.db import db
 import json
 from scripts.maze_generator import Maze, MazeSolver
 from db import models
+import textwrap
 
 Mazes = models.Mazes
 Algorithms = models.Algorithms
+algorithm_schema_code = """
+function returnSolution(node, maze) {
+    const solution = [];
+    const visited = [];
+
+    function solveMaze(node) {
+    
+    }
+
+    solveMaze(node);
+    return JSON.stringify([solution, visited])
+}
+""".strip() + '\n'
+
 
 def register_algorithm_routes(api):
     @api.route("/v1/get_algorithms", methods=["GET"])
@@ -15,8 +30,8 @@ def register_algorithm_routes(api):
             algorithmList.append(
                 {"id": algorithm.id, "name": algorithm.name, "code": algorithm.code})
         return jsonify(algorithmList)
-    
-    @api.route("/v1/save_algorithm_changes",methods=["POST"])
+
+    @api.route("/v1/save_algorithm_changes", methods=["POST"])
     def save_algorithm():
         algorithm_id = request.json["algorithmId"]
         new_code = request.json["newCode"]
@@ -24,5 +39,14 @@ def register_algorithm_routes(api):
         algorithm.code = new_code
         # Commit the changes
         db.session.commit()
+        response = {"status": 200}
+        return jsonify(response)
+
+    @api.route("/v1/add_new_algorithm", methods=["POST"])
+    def add_new_algorithm():
+        algorithms_count = len(Algorithms.query.all())
+        new_algorithm = Algorithms(
+            name=f"Algorithm nr. {algorithms_count}", code=algorithm_schema_code)
+        new_algorithm.save()
         response = {"status": 200}
         return jsonify(response)
