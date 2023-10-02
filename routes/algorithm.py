@@ -58,3 +58,13 @@ def register_algorithm_routes(api):
         algorithm.delete()
         response = {"status": 204}
         return jsonify(response)
+
+    @api.route("/v1/rename_algorithm", methods=["PATCH"])
+    def rename_algorithm():
+        algorithm_id = request.json["algorithmId"]
+        new_name = request.json["newName"]
+        algorithm = Algorithms.query.filter_by(id=algorithm_id).first()
+        algorithm.name = new_name
+        db.session.commit()
+        response = {"status": 200}
+        return jsonify(response)
