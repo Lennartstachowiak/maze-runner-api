@@ -81,5 +81,6 @@ class Algorithms(db.Model, CRUDMixin):
     __tablename__ = "algorithms"
     id = db.Column(db.String(32), primary_key=True,
                    unique=True, default=get_uuid)
-    name = db.Column(db.Text, unique=True, nullable=False)
+    name = db.Column(db.Text, nullable=False)
     code = db.Column(db.Text, nullable=False)
+    userId = db.Column(db.String(32), db.ForeignKey('user.id'), nullable=False)
