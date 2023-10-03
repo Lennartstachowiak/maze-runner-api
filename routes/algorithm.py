@@ -36,38 +36,58 @@ def register_algorithm_routes(api):
 
     @api.route("/v1/save_algorithm_changes", methods=["POST"])
     def save_algorithm():
+        user = get_user(request)
+        user_id = user.id
         algorithm_id = request.json["algorithmId"]
         new_code = request.json["newCode"]
         algorithm = Algorithms.query.filter_by(id=algorithm_id).first()
-        algorithm.code = new_code
-        # Commit the changes
-        db.session.commit()
-        response = {"status": 200}
-        return jsonify(response)
+        if (algorithm.userId == user_id):
+            algorithm.code = new_code
+            db.session.commit()
+            response = {"status": 200}
+            return jsonify(response)
+        else:
+            response = {"status": 401}
+            return jsonify(response)
 
     @api.route("/v1/add_new_algorithm", methods=["POST"])
     def add_new_algorithm():
-        algorithms_count = len(Algorithms.query.all())
+        user = get_user(request)
+        user_id = user.id
+        algorithms_count = len(
+            Algorithms.query.filter_by(userId=user_id).all())+1
         new_algorithm = Algorithms(
-            name=f"Algorithm nr. {algorithms_count}", code=algorithm_schema_code)
+            name=f"Algorithm {algorithms_count}", code=algorithm_schema_code, userId=user_id)
         new_algorithm.save()
         response = {"status": 201}
         return jsonify(response)
 
     @api.route("/v1/delete_algorithm", methods=["DELETE"])
     def delete_algorithm():
+        user = get_user(request)
+        user_id = user.id
         algorithm_id = request.json["algorithmId"]
         algorithm = Algorithms.query.filter_by(id=algorithm_id).first()
-        algorithm.delete()
-        response = {"status": 204}
-        return jsonify(response)
+        if (algorithm.userId == user_id):
+            algorithm.delete()
+            response = {"status": 204}
+            return jsonify(response)
+        else:
+            response = {"status": 401}
+            return jsonify(response)
 
     @api.route("/v1/rename_algorithm", methods=["PATCH"])
     def rename_algorithm():
+        user = get_user(request)
+        user_id = user.id
         algorithm_id = request.json["algorithmId"]
         new_name = request.json["newName"]
         algorithm = Algorithms.query.filter_by(id=algorithm_id).first()
-        algorithm.name = new_name
-        db.session.commit()
-        response = {"status": 200}
-        return jsonify(response)
+        if (algorithm.userId == user_id):
+            algorithm.name = new_name
+            db.session.commit()
+            response = {"status": 200}
+            return jsonify(response)
+        else:
+            response = {"status": 401}
+            return jsonify(response)
