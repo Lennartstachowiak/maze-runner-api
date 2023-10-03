@@ -388,8 +388,10 @@ class MazeSolver:
                     command,
                     capture_output=True,
                     encoding='utf-8',
-                ).stdout
-                solution, visited = json.loads(result)
+                )
+                stderr = result.stderr
+                stdout = result.stdout
+                solution, visited = json.loads(stdout)
                 self.solution = solution
                 self.visited = visited
             except subprocess.CalledProcessError as e:
