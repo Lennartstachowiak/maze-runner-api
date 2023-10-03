@@ -4,8 +4,10 @@ from db import models
 from flask_bcrypt import Bcrypt
 from flask_session import Session
 from datetime import date, datetime, timedelta
+from scripts.addAlgorithms import addAlgorithms
 
 User = models.User
+Algorithms = models.Algorithms
 SessionAuth = models.SessionAuth
 
 
@@ -59,6 +61,10 @@ def register_user_routes(api):
 
         # Get User
         user = User.query.filter_by(email=email).first()
+
+        # Add default user algorithms
+        userId = user.id
+        addAlgorithms(userId)
 
         sessionData = create_session(user)
         res = make_response()

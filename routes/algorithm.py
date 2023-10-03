@@ -4,6 +4,7 @@ import json
 from scripts.maze_generator import Maze, MazeSolver
 from db import models
 import textwrap
+from routes.user import get_user
 
 Mazes = models.Mazes
 Algorithms = models.Algorithms
@@ -25,8 +26,10 @@ function returnSolution(node, maze) {
 def register_algorithm_routes(api):
     @api.route("/v1/get_algorithms", methods=["GET"])
     def get_algorithms():
+        user = get_user(request)
+        user_id = user.id
         algorithmList = []
-        for algorithm in Algorithms.query.all():
+        for algorithm in Algorithms.query.filter_by(userId=user_id).all():
             algorithmList.append(
                 {"id": algorithm.id, "name": algorithm.name, "code": algorithm.code})
         return jsonify(algorithmList)
