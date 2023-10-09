@@ -45,6 +45,9 @@ def register_maze_routes(api):
         algorithm_object = Algorithms.query.filter_by(id=algorithm_id).first()
         algorithm_code = algorithm_object.code
         solver.solve(algorithm_code)
+        check = solver.check_solution()
+        if not check[0]:
+            return jsonify(check)
         solver.calculateScore()
 
         solver_result = {"solution": solver.solution,

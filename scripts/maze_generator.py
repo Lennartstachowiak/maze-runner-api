@@ -27,6 +27,17 @@ class Cell:
             "goal": self.goal
         }
 
+    def get_neigbour(self, position):
+        x, y = position
+        neigbours = []
+        directions = [(-1, 0), [0, 1], [1, 0], [0, -1]]  # N, O, S, W
+        for is_wall, (dx, dy) in zip([self.north, self.east, self.south, self.west], directions):
+            if not is_wall:
+                neigbour_x, neigbour_y = x + dx, y + dy
+                neigbours.append([neigbour_x, neigbour_y])
+
+        return neigbours
+
     def __str__(self):
         return json.dumps(self.to_dict())
 
@@ -403,6 +414,39 @@ class MazeSolver:
 
         if not self.solution:
             raise ValueError("No solution found")
+
+    def check_solution(self):
+        solution = self.solution
+        visited = self.visited
+        if not solution:
+            return (False, "No solution yet")
+        found_goal = False
+        # Check solution path
+        for index, step in enumerate(solution):
+            x, y = step
+            cell = Cell(*self.maze.structure[x][y].values())
+            neigbours = cell.get_neigbour((x, y))
+            if cell.goal:
+                found_goal = True
+            try:
+                next_step = solution[index + 1]
+            except IndexError:
+                break
+            if next_step not in neigbours:
+                return (False, "Solution path wrong")
+        # Check visited path
+        start_visited = visited[0]
+        can_be_visited = [start_visited]
+        for step in visited:
+            x, y = step
+            cell = Cell(*self.maze.structure[x][y].values())
+            neigbours = cell.get_neigbour([x, y])
+            can_be_visited.extend(neigbours)
+            if [x, y] not in can_be_visited:
+                return (False, "Visited path wrong")
+        if not found_goal:
+            return (False, "No Goal found")
+        return (True, "All good")
 
     def calculateScore(self):
         # The score will be calculate by efficency of the solution and search percentage
