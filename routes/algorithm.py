@@ -34,6 +34,14 @@ def register_algorithm_routes(api):
                 {"id": algorithm.id, "name": algorithm.name, "code": algorithm.code})
         return jsonify(algorithmList)
 
+    @api.route("/v1/get_single_algorithm", methods=["GET"])
+    def get_single_algorithm():
+        algorithm_id = request.args.get("id")
+        algorithm = Algorithms.query.filter_by(id=algorithm_id).first()
+        single_algorithm = {"id": algorithm.id,
+                            "name": algorithm.name, "code": algorithm.code}
+        return jsonify(single_algorithm)
+
     @api.route("/v1/save_algorithm_changes", methods=["POST"])
     def save_algorithm():
         user = get_user(request)
