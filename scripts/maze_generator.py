@@ -96,9 +96,9 @@ class Maze:
 
     def calculateDifficultyOfMaze(self):
         size = (self.height+self.width)/2
-        if size <= 15:
+        if size <= 10:
             self.difficulty = Difficulty(0, "Easy")
-        elif size <= 30:
+        elif size <= 20:
             self.difficulty = Difficulty(1, "Medium")
         else:
             self.difficulty = Difficulty(2, "Hard")
@@ -376,6 +376,7 @@ class MazeSolver:
         self.maze = maze
         self.solution = []
         self.visited = []
+        self.error = ""
         self.score = None
 
     def _find_start(self):
@@ -402,6 +403,10 @@ class MazeSolver:
                 )
                 stderr = result.stderr
                 stdout = result.stdout
+                if stderr:
+                    error_message = stderr
+                    self.error = error_message
+                    return
                 solution, visited = json.loads(stdout)
                 self.solution = solution
                 self.visited = visited

@@ -14,6 +14,8 @@ def register_maze_routes(api):
     def get_mazes():
         mazes = []
         for maze in Mazes.query.all():
+            if maze.isTest:
+                continue
             highscoreList = get_highscores(maze.id)
             mazes.append({"id": maze.id, "name": maze.name,
                           "difficulty": maze.difficulty, "imgLink": maze.imgLink, "highscores": highscoreList})
@@ -45,6 +47,9 @@ def register_maze_routes(api):
         algorithm_object = Algorithms.query.filter_by(id=algorithm_id).first()
         algorithm_code = algorithm_object.code
         solver.solve(algorithm_code)
+        if solver.error:
+            error_message = {"error": solver.error}
+            return jsonify(error_message)
         check = solver.check_solution()
         if not check[0]:
             return jsonify(check)
