@@ -1,9 +1,7 @@
 from flask import jsonify, request
 from db.db import db
-import json
 from scripts.maze_generator import Maze, MazeSolver
 from db import models
-import textwrap
 from routes.user import get_user
 
 Mazes = models.Mazes
@@ -31,7 +29,7 @@ def register_algorithm_routes(api):
         algorithmList = []
         for algorithm in Algorithms.query.filter_by(userId=user_id).all():
             algorithmList.append(
-                {"id": algorithm.id, "name": algorithm.name, "code": algorithm.code})
+                {"id": algorithm.id, "name": algorithm.name, "code": algorithm.code, "isWorking": algorithm.isWorking})
         return jsonify(algorithmList)
 
     @api.route("/v1/get_single_algorithm", methods=["GET"])

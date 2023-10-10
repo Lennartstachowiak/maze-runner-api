@@ -85,3 +85,4 @@ class Algorithms(db.Model, CRUDMixin):
     name = db.Column(db.Text, nullable=False)
     code = db.Column(db.Text, nullable=False)
     userId = db.Column(db.String(32), db.ForeignKey('user.id'), nullable=False)
+    isWorking = db.Column(db.Boolean, default=False)

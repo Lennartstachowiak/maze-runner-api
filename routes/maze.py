@@ -2,6 +2,7 @@ from flask import jsonify, request
 import json
 from scripts.maze_generator import Maze, MazeSolver
 from db import models
+from db.db import db
 
 User = models.User
 Mazes = models.Mazes
@@ -37,19 +38,29 @@ def register_maze_routes(api):
 
         # Get Maze
         maze_object = Mazes.query.filter_by(id=maze_id).first()
-        # Get Algorithm
+        is_test = maze_object.isTest
 
-        # Solve maze with algorithm
         maze = Maze(maze_object.height, maze_object.width,
                     json.loads(maze_object.structure))
 
         solver = MazeSolver(maze=maze)
+
+        # Get Algorithm
         algorithm_object = Algorithms.query.filter_by(id=algorithm_id).first()
         algorithm_code = algorithm_object.code
+
+        # Solve maze with algorithm
         solver.solve(algorithm_code)
         if solver.error:
             error_message = {"error": solver.error}
+            # Update is working
+            algorithm_object.isWorking = False
+            db.session.commit()
             return jsonify(error_message)
+        elif is_test:
+            # Update is working
+            algorithm_object.isWorking = True
+            db.session.commit()
         check = solver.check_solution()
         if not check[0]:
             return jsonify(check)
