@@ -66,6 +66,7 @@ class Mazes(db.Model, CRUDMixin):
     height = db.Column(db.Integer, nullable=False)
     width = db.Column(db.Integer, nullable=False)
     isTest = db.Column(db.Boolean, default=False)
+    creator = db.Column(db.Integer, default=0)
 
 
 class Highscores(db.Model, CRUDMixin):
