@@ -1,7 +1,7 @@
 from db.db import register_database, db, migrate
-from routes.maze import register_maze_routes
-from routes.user import register_user_routes
-from routes.algorithm import register_algorithm_routes
+from app.routes.maze import register_maze_routes
+from app.routes.user import register_user_routes
+from app.routes.algorithm import register_algorithm_routes
 from flask import Flask
 from flask_cors import CORS
 from config import Config
