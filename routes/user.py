@@ -1,8 +1,8 @@
 from flask import request
-from controller.user.login import login_user
-from controller.user.logout import logout_user
-from controller.user.register import register_user
-from controller.user.me import me
+from controller.user.login_controller import login_user_controller
+from controller.user.logout_controller import logout_user_controller
+from controller.user.register_user_controller import register_user_controller
+from controller.user.get_user_controller import get_user_controller
 from db import models
 
 User = models.User
@@ -18,20 +18,20 @@ def register_user_routes(api):
 
     @ api.route("/v1/@me", methods=["GET"])
     def get_current_user():
-        response = me(request)
+        response = get_user_controller(request)
         return response
 
     @ api.route("/v1/register", methods=["POST"])
     def register():
-        response = register_user(request, api)
+        response = register_user_controller(request, api)
         return response
 
     @ api.route("/v1/login", methods=["POST"])
     def login():
-        response = login_user(request, api)
+        response = login_user_controller(request, api)
         return response
 
     @ api.route("/v1/logout", methods=["POST"])
     def logout():
-        response = logout_user(request)
+        response = logout_user_controller(request)
         return response

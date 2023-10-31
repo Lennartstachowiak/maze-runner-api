@@ -1,23 +1,16 @@
-from flask import jsonify, make_response
 from db.db import db
 from db import models
 from scripts.addAlgorithms import addAlgorithms
 from services.user.create_session import create_session
-from flask_bcrypt import Bcrypt
 
 User = models.User
 
 
-def register_user(request, api):
-    bcrypt = Bcrypt(api)
-    username = request.json.get("username")
-    email = request.json.get("email")
-    password = request.json.get("password")
-
+def register_user(bcrypt, username, email, password):
     user_exists = User.query.filter_by(email=email).first() is not None
 
     if user_exists:
-        return jsonify({"error": "User already exists"}), 409
+        return 409
 
     # Builder Pattern
 
@@ -58,7 +51,4 @@ def register_user(request, api):
     addAlgorithms(userId)
 
     sessionData = create_session(user)
-    res = make_response()
-    res.set_cookie(
-        "sessionId", value=sessionData["sessionId"], expires=sessionData["expiryDate"], samesite="None", secure=True, httponly=True)
-    return res
+    return sessionData
