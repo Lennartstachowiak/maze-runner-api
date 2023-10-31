@@ -2,7 +2,7 @@ import base64
 from flask import jsonify, make_response, request
 import json
 from routes.user import get_user_id
-from scripts.maze_generator import Maze, MazeGeneratorFactory, MazeImage, MazeSolver
+from scripts.maze_generator import Maze, SidewinderFactory, RecursiveBacktracking, MazeImage, MazeSolver
 from db import models
 from db.db import db
 
@@ -93,8 +93,7 @@ def register_maze_routes(api):
             error_message = "Invalid request"
             response = make_response(error_message, 400)
             return response
-        sidewinder_maze_generator = MazeGeneratorFactory.create_maze_generator(
-            "sidewinder")
+        sidewinder_maze_generator = RecursiveBacktracking().create_generator()
 
         maze = sidewinder_maze_generator.generate(int(maze_size))
         maze_image_byte_array = MazeImage.generateMazeImage(maze)

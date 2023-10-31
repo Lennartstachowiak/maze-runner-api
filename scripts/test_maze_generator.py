@@ -1,18 +1,11 @@
 import pytest
-from maze_generator import MazeGeneratorFactory, SidewinderAlgorithmMazeGenerator, Cell, Maze
+from maze_generator import SidewinderFactory, SidewinderAlgorithmMazeGenerator, Cell, Maze
 from copy import copy
 
 
 def test_maze_generator_factory_for_sidewinder():
-    result = MazeGeneratorFactory.create_maze_generator("sidewinder")
+    result = SidewinderFactory().create_generator()
     assert isinstance(result, SidewinderAlgorithmMazeGenerator)
-
-
-def test_maze_generator_factory_for_error():
-    with pytest.raises(ValueError) as exc_info:
-        MazeGeneratorFactory.create_maze_generator("invalid_algorithm")
-
-    assert str(exc_info.value) == "Invalid algorithm name"
 
 
 @pytest.fixture

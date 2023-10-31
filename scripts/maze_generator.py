@@ -200,25 +200,42 @@ class Maze:
         return maze_str
 
 
+class MazeStructure:
+    @staticmethod
+    def generate_structure(height, width):
+        structure = []
+        for row in range(height):
+            structure.append([])
+            for column in range(width):
+                if row == 0 and column == 0:
+                    structure[row].append(Cell(start=True))
+                elif row == height-1 and column == width-1:
+                    structure[row].append(Cell(goal=True))
+                else:
+                    structure[row].append(Cell())
+        return structure
+
+
 @abstractmethod
+# Abstract Product
 class MazeGenerator(ABC):
-    def generate(self, size):
+    def generate_maze(self):
         pass
+
+    def generate(self, size):
+        self.height = size
+        self.width = size
+        self.structure = MazeStructure.generate_structure(
+            self.height, self.width)
+        self.generate_maze()
+        maze = Maze(self.height, self.width, self.structure)
+        maze.calculateDifficultyOfMaze()
+        return maze
 
 
 class SidewinderAlgorithmMazeGenerator(MazeGenerator):
-    def generate_init_maze_without_paths(self):
-        for row in range(self.height):
-            self.structure.append([])
-            for column in range(self.width):
-                if row == 0 and column == 0:
-                    self.structure[row].append(Cell(start=True))
-                elif row == self.height-1 and column == self.width-1:
-                    self.structure[row].append(Cell(goal=True))
-                else:
-                    self.structure[row].append(Cell())
-
-    def sidewinder_algorithm(self):
+    # Concrete Product
+    def generate_maze(self):
         for row in range(self.height):
             run_start = 0
             for column in range(self.width):
@@ -234,23 +251,75 @@ class SidewinderAlgorithmMazeGenerator(MazeGenerator):
                     self.structure[row][column+1].west = 0
 
     def generate(self, size):
-        self.height = size
-        self.width = size
-        self.structure = []
-        self.generate_init_maze_without_paths()
-        self.sidewinder_algorithm()
-        maze = Maze(self.height, self.width, self.structure)
-        maze.calculateDifficultyOfMaze()
-        return maze
+        return super().generate(size)
 
 
-class MazeGeneratorFactory:
-    @staticmethod
-    def create_maze_generator(algorithm):
-        if algorithm == "sidewinder":
-            return SidewinderAlgorithmMazeGenerator()
-        else:
-            raise ValueError("Invalid algorithm name")
+class RecursiveBacktracking(MazeGenerator):
+    # Concrete Product
+    def generate_maze(self):
+        self._recursive_backtracking(0, 0)
+
+    def _recursive_backtracking(self, row, column):
+        neighbors = self._get_randomized_neighbors(row, column)
+        for neighbor_row, neighbor_column in neighbors:
+            if self._is_valid_cell(neighbor_row, neighbor_column) and self._is_not_visited(neighbor_row, neighbor_column):
+                self._carve_path(row, column, neighbor_row, neighbor_column)
+                self._recursive_backtracking(neighbor_row, neighbor_column)
+
+    def _get_randomized_neighbors(self, row, column):
+        neighbors = [(row-1, column), (row, column+1),
+                     (row+1, column), (row, column-1)]  # N, E, S, W
+        random.shuffle(neighbors)
+        return neighbors
+
+    def _is_valid_cell(self, row, column):
+        return 0 <= row < self.height and 0 <= column < self.width
+
+    def _is_not_visited(self, row, column):
+        cell = self.structure[row][column]
+        return cell.north == 1 and cell.east == 1 and cell.south == 1 and cell.west == 1
+
+    def _carve_path(self, current_row, current_column, row, column):
+        print((current_row, current_column, row, column))
+        # North
+        if current_row < row:
+            self.structure[current_row][current_column].south = 0
+            self.structure[row][column].north = 0
+            return
+        # East
+        if current_column < column:
+            self.structure[current_row][current_column].east = 0
+            self.structure[row][column].west = 0
+            return
+        # South
+        if current_row > row:
+            self.structure[current_row][current_column].north = 0
+            self.structure[row][column].south = 0
+            return
+        # West
+        if current_column > column:
+            self.structure[current_row][current_column].west = 0
+            self.structure[row][column].east = 0
+            return
+
+    def generate(self, size):
+        return super().generate(size)
+
+
+@abstractmethod
+class MazeGeneratorFactory(ABC):
+    def create_generator(self):
+        pass
+
+
+class SidewinderFactory(MazeGeneratorFactory):
+    def create_generator(self):
+        return SidewinderAlgorithmMazeGenerator()
+
+
+class RecursiveBacktrackingFactory(MazeGeneratorFactory):
+    def create_generator(self):
+        return RecursiveBacktracking()
 
 
 # Facade
@@ -306,69 +375,6 @@ class MazeImage:
         img.save(byte_array, format="png")
         image_data = byte_array.getvalue()
         return image_data
-
-
-size = 15
-
-sidewinder_maze_generator = MazeGeneratorFactory.create_maze_generator(
-    "sidewinder")
-sidewinderMaze = sidewinder_maze_generator.generate(size)
-sidewinderMazeImage = MazeImage.generateMazeImage(sidewinderMaze)
-
-
-def dfs(node, maze, solution, visited):
-    (x, y) = node
-    # Refactor this part is duplicated
-    cell = maze.structure[x][y]
-    if type(cell) == dict:
-        cell = Cell(**cell)
-    if cell.goal:
-        solution.append(node)
-        return True
-    directions = [(0, -1), (-1, 0), (0, 1), (1, 0)]  # W, N, E, S
-    for direction, (dx, dy) in zip(['west', 'north', 'east', 'south'], directions):
-        next_x, next_y = x + dx, y + dy
-        if (0 <= next_x < maze.height and
-            0 <= next_y < maze.width and
-            not (next_x, next_y) in visited and
-                getattr(cell, direction) == 0):
-            visited.append((next_x, next_y))
-            if dfs((next_x, next_y), maze, solution, visited):
-                solution.append(node)
-                return True
-    return False
-
-
-def bfs(node, maze, solution, visited):
-    queue = deque([(node, [])])
-
-    while queue:
-        node, path = queue.popleft()
-        if node in visited:
-            continue
-        visited.append(node)
-
-        (x, y) = node
-        cell = maze.structure[x][y]
-        if type(cell) == dict:
-            cell = Cell(**cell)
-
-        if cell.goal:
-            solution.extend(path + [node])
-            return True
-
-        directions = [(0, -1), (-1, 0), (0, 1), (1, 0)]  # W, N, E, S
-
-        for direction, (dx, dy) in zip(['west', 'north', 'east', 'south'], directions):
-            next_x, next_y = x + dx, y + dy
-            if (0 <= next_x < maze.height and
-                0 <= next_y < maze.width and
-                (next_x, next_y) not in visited and
-                    getattr(cell, direction) == 0):
-
-                queue.append(((next_x, next_y), path + [node]))
-
-    return False
 
 
 class MazeSolver:
@@ -466,4 +472,15 @@ class MazeSolver:
         self.score = round(final_score, 2)
 
 
-solver = MazeSolver(maze=sidewinderMaze)
+size = 30
+
+# sidewinder_maze_generator = SidewinderFactory().create_generator()
+# sidewinderMaze = sidewinder_maze_generator.generate(size)
+# sidewinderMazeImage = MazeImage.generateMazeImage(sidewinderMaze)
+
+backtracking_factory = RecursiveBacktrackingFactory().create_generator()
+backtrackingMaze = backtracking_factory.generate(size)
+backtrackingMazeImage = MazeImage.generateMazeImage(backtrackingMaze)
+
+solver = MazeSolver(maze=backtrackingMaze)
+print(backtrackingMaze)
