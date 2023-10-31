@@ -1,8 +1,7 @@
 from flask import jsonify, request
+from services.user.get_user import get_user
 from db.db import db
-from scripts.maze_generator import Maze, MazeSolver
 from db import models
-from routes.user import get_user
 
 Mazes = models.Mazes
 Algorithms = models.Algorithms

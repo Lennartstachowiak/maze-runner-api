@@ -1,7 +1,7 @@
 import base64
 from flask import jsonify, make_response, request
 import json
-from routes.user import get_user_id
+from services.user.get_user import get_user_id
 from scripts.maze_generator import Maze, SidewinderFactory, RecursiveBacktrackingFactory, MazeImage, MazeSolver
 from db import models
 from db.db import db

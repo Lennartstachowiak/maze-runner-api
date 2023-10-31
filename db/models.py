@@ -42,6 +42,7 @@ class User(db.Model, CRUDMixin):
     __tablename__ = "user"
     id = db.Column(db.String(32), primary_key=True,
                    unique=True, default=get_uuid)
+    username = db.Column(db.String(32), unique=True)
     email = db.Column(db.String(32), unique=True)
     password = db.Column(db.Text, nullable=False)
 
