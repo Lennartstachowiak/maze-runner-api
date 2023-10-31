@@ -1,12 +1,12 @@
 from api import create_api
 from db.models import Mazes
-from scripts.maze_generator import SidewinderFactory, RecursiveBacktracking, MazeImage
+from scripts.maze_generator import SidewinderFactory, RecursiveBacktrackingFactory, MazeImage
 import base64
 
 api = create_api()
 api.app_context().push()
 
-sidewinder_maze_generator = RecursiveBacktracking().create_generator()
+sidewinder_maze_generator = RecursiveBacktrackingFactory().create_generator()
 
 simple_maze = sidewinder_maze_generator.generate(10)
 simple_maze_image_byte_array = MazeImage.generateMazeImage(simple_maze)
