@@ -280,7 +280,6 @@ class RecursiveBacktracking(MazeGenerator):
         return cell.north == 1 and cell.east == 1 and cell.south == 1 and cell.west == 1
 
     def _carve_path(self, current_row, current_column, row, column):
-        print((current_row, current_column, row, column))
         # North
         if current_row < row:
             self.structure[current_row][current_column].south = 0
@@ -483,4 +482,3 @@ backtrackingMaze = backtracking_factory.generate(size)
 backtrackingMazeImage = MazeImage.generateMazeImage(backtrackingMaze)
 
 solver = MazeSolver(maze=backtrackingMaze)
-print(backtrackingMaze)
