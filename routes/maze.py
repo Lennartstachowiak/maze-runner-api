@@ -13,6 +13,7 @@ Algorithms = models.Algorithms
 
 
 def register_maze_routes(api):
+
     @ api.route("/v1/get_mazes", methods=["GET"])
     def get_mazes_request():
         response = get_mazes_contoller()
@@ -20,12 +21,12 @@ def register_maze_routes(api):
 
     @ api.route("/v1/get_my_mazes", methods=["GET"])
     def get_my_maze_request():
-        response = get_my_mazes_controller()
+        response = get_my_mazes_controller(request)
         return response
 
     @api.route("/v1/get_single_maze", methods=["GET"])
     def get_single_maze_request():
-        response = get_single_maze_controller()
+        response = get_single_maze_controller(request)
         return response
 
     @api.route("/v1/get_maze_algorithm_solution", methods=["POST"])

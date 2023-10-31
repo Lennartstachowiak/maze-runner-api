@@ -1,11 +1,7 @@
 from flask import jsonify, make_response
-from db import models
 from services.user.create_session import create_session
 from flask_bcrypt import Bcrypt
-
 from services.user.login_user import login_user
-
-User = models.User
 
 
 def login_user_controller(request, api):

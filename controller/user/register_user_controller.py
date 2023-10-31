@@ -3,8 +3,6 @@ from db import models
 from flask_bcrypt import Bcrypt
 from services.user.register_user import register_user
 
-User = models.User
-
 
 def register_user_controller(request, api):
     bcrypt = Bcrypt(api)

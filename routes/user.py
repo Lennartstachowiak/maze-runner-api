@@ -17,21 +17,21 @@ def register_user_routes(api):
         return "connected"
 
     @ api.route("/v1/@me", methods=["GET"])
-    def get_current_user():
+    def get_user_request():
         response = get_user_controller(request)
         return response
 
     @ api.route("/v1/register", methods=["POST"])
-    def register():
+    def register_user_request():
         response = register_user_controller(request, api)
         return response
 
     @ api.route("/v1/login", methods=["POST"])
-    def login():
+    def login_user_request():
         response = login_user_controller(request, api)
         return response
 
     @ api.route("/v1/logout", methods=["POST"])
-    def logout():
+    def logout_user_request():
         response = logout_user_controller(request)
         return response

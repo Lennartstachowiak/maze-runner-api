@@ -2,8 +2,6 @@ from flask import make_response
 from db import models
 from services.user.logout_user import logout_user
 
-SessionAuth = models.SessionAuth
-
 
 def logout_user_controller(request):
     session_id = request.cookies.get('sessionId')

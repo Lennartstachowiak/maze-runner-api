@@ -1,9 +1,6 @@
 from flask import jsonify
 from services.maze.generate_maze import generate_maze
 from services.user.get_user import get_user_id
-from db import models
-
-Mazes = models.Mazes
 
 
 def generate_maze_controller(request):
