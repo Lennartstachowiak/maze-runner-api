@@ -9,5 +9,5 @@ def get_my_mazes(user_id):
     for maze in Mazes.query.filter_by(creator=user_id):
         highscoreList = get_highscores(maze.id)
         mazes.append({"id": maze.id, "name": maze.name,
-                      "difficulty": maze.difficulty, "imgLink": maze.imgLink, "highscores": highscoreList})
+                      "difficulty": maze.difficulty, "imgLink": maze.imgLink, "highscores": highscoreList, "official": False})
     return mazes

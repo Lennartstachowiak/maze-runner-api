@@ -11,5 +11,5 @@ def get_mazes():
             continue
         highscoreList = get_highscores(maze.id)
         mazes.append({"id": maze.id, "name": maze.name,
-                      "difficulty": maze.difficulty, "imgLink": maze.imgLink, "highscores": highscoreList})
+                      "difficulty": maze.difficulty, "imgLink": maze.imgLink, "highscores": highscoreList, "official": True})
     return mazes
