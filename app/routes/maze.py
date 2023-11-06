@@ -1,4 +1,5 @@
 from flask import request
+from app.controller.maze.delete_maze_controller import delete_maze_controller
 from app.controller.maze.generate_maze_controller import generate_maze_controller
 from app.controller.maze.get_maze_algorithm_solution_controller import get_maze_algorithm_solution_controller
 from app.controller.maze.get_mazes_controller import get_mazes_contoller
@@ -37,4 +38,9 @@ def register_maze_routes(api):
     @api.route("/v1/generate_maze", methods=["POST"])
     def generate_maze_request():
         response = generate_maze_controller(request)
+        return response
+
+    @api.route("/v1/delete_maze", methods=["DELETE"])
+    def delete_maze():
+        response = delete_maze_controller(request)
         return response

@@ -7,7 +7,7 @@ Mazes = models.Mazes
 
 
 def generate_maze(user_id, maze_name, maze_size):
-    if maze_size > 30:
+    if maze_size > 30 or maze_size < 4:
         error_message = "Invalid request"
         response = make_response(error_message, 400)
         return response
