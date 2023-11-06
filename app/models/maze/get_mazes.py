@@ -6,7 +6,7 @@ Mazes = models.Mazes
 
 def get_mazes():
     mazes = []
-    for maze in Mazes.query.filter_by(creator=0):
+    for maze in Mazes.query.filter_by(creator="official"):
         if maze.isTest:
             continue
         highscoreList = get_highscores(maze.id)

@@ -7,7 +7,7 @@ from app.controller.maze.get_my_mazes_controller import get_my_mazes_controller
 from app.controller.maze.get_single_maze_controller import get_single_maze_controller
 from db import models
 
-User = models.User
+User = models.Users
 Mazes = models.Mazes
 Highscores = models.Highscores
 Algorithms = models.Algorithms

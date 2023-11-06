@@ -1,7 +1,7 @@
 from db import models
 from app.models.user.create_session import create_session
 
-User = models.User
+User = models.Users
 
 
 def login_user(bcrypt, email, password):

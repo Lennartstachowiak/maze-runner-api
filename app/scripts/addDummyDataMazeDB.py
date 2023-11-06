@@ -37,10 +37,10 @@ for maze in dummy_mazes:
         new_maze = Mazes(id=maze["id"], isTest=maze["isTest"], name=maze["name"], difficulty=maze["difficulty"],
                          imgLink=maze["imgLink"], structure=str(
                              maze["structure"]),
-                         height=int(maze["height"]), width=int(maze["width"]), creator=0)
+                         height=int(maze["height"]), width=int(maze["width"]), creator="official")
     else:
         new_maze = Mazes(name=maze["name"], difficulty=maze["difficulty"],
                          imgLink=maze["imgLink"], structure=str(
                              maze["structure"]),
-                         height=int(maze["height"]), width=int(maze["width"]), creator=0)
+                         height=int(maze["height"]), width=int(maze["width"]), creator="official")
     new_maze.save()

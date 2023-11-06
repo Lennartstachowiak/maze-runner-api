@@ -5,7 +5,7 @@ from app.controller.user.register_user_controller import register_user_controlle
 from app.controller.user.get_user_controller import get_user_controller
 from db import models
 
-User = models.User
+User = models.Users
 Algorithms = models.Algorithms
 SessionAuth = models.SessionAuth
 

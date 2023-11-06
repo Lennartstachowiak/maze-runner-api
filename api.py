@@ -1,4 +1,4 @@
-from db.db import register_database, db, migrate
+from db.db import register_database
 from app.routes.maze import register_maze_routes
 from app.routes.user import register_user_routes
 from app.routes.algorithm import register_algorithm_routes

@@ -38,8 +38,8 @@ def from_dict(dict, model_instance):
 # Tutorial -> https://codecookies.xyz/flask-2-tutorial/v1/sql-database-setup/
 # If error try
 #   -> flask db stamp head
-class User(db.Model, CRUDMixin):
-    __tablename__ = "user"
+class Users(db.Model, CRUDMixin):
+    __tablename__ = "users"
     id = db.Column(db.String(32), primary_key=True,
                    unique=True, default=get_uuid)
     username = db.Column(db.String(32), unique=True)
@@ -67,16 +67,19 @@ class Mazes(db.Model, CRUDMixin):
     height = db.Column(db.Integer, nullable=False)
     width = db.Column(db.Integer, nullable=False)
     isTest = db.Column(db.Boolean, default=False)
-    creator = db.Column(db.Integer, default=0)
+    creator = db.Column(db.String(32), default="official")
 
 
 class Highscores(db.Model, CRUDMixin):
     __tablename__ = "highscores"
     id = db.Column(db.String(32), primary_key=True,
                    unique=True, default=get_uuid)
-    userId = db.Column(db.String(32), db.ForeignKey('user.id'), nullable=False)
+    userId = db.Column(db.String(32), db.ForeignKey(
+        'users.id'), nullable=False)
     mazeId = db.Column(
         db.String(32), db.ForeignKey('mazes.id'), nullable=False)
+    algorithm_id = db.Column(
+        db.String(32), db.ForeignKey('algorithms.id'), nullable=False)
     score = db.Column(db.Integer, nullable=False)
 
 
@@ -86,5 +89,6 @@ class Algorithms(db.Model, CRUDMixin):
                    unique=True, default=get_uuid)
     name = db.Column(db.Text, nullable=False)
     code = db.Column(db.Text, nullable=False)
-    userId = db.Column(db.String(32), db.ForeignKey('user.id'), nullable=False)
+    userId = db.Column(db.String(32), db.ForeignKey(
+        'users.id'), nullable=False)
     isWorking = db.Column(db.Boolean, default=False)

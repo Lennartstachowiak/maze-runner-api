@@ -2,7 +2,7 @@ from flask import abort
 from db import models
 from app.models.user.create_session import is_session_expired
 
-User = models.User
+User = models.Users
 SessionAuth = models.SessionAuth
 
 

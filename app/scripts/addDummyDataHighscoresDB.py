@@ -1,13 +1,13 @@
 
 from api import create_api
-from db.models import Highscores, User, Mazes
+from db.models import Highscores, Users, Mazes
 import random
 
 api = create_api()
 api.app_context().push()
 
 allUserIds = []
-for user in User.query.all():
+for user in Users.query.all():
     allUserIds.append(user.id)
 
 allMazeIds = []
