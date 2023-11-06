@@ -23,7 +23,7 @@ def register_algorithm_routes(api):
         response = get_single_algorithm_controller(request)
         return response
 
-    @api.route("/v1/save_algorithm_changes", methods=["POST"])
+    @api.route("/v1/save_algorithm_changes", methods=["PATCH"])
     def save_algorithm_request():
         response = save_algorithm_controller(request)
         return response
