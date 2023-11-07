@@ -35,5 +35,8 @@ RUN /bin/bash -c "source ~/.nvm/nvm.sh && nvm alias default 16"
 ENV NVM_DIR /root/.nvm
 ENV NODE_VERSION 16
 
+RUN flask db init
+RUN flask db upgrade
+
 # Start the API
 CMD ["sh", "-c", "flask run --host=0.0.0.0"]
