@@ -3,17 +3,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - 5000:5000
-    working_dir: /app
     volumes:
       - ./:/app
-    environment:
-      - FLASK_APP=run
-      - FLASK_ENV=${FLASK_ENV}
-      - SECRET_KEY=${SECRET_KEY}
-      - DATABASE_URL=${DATABASE_URL}
-    command: sh -c "flask run --host=0.0.0.0"
+    ports:
+      - 5000:5000
 
   db:
     image: postgres:latest
