@@ -4,17 +4,14 @@ FROM python:3.9
 # Set working directory
 WORKDIR /app
 
-# Copy project files to working directory
-COPY . /app
-
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy project files to working directory
+COPY . /app
+
 # Set environment variables
 ENV FLASK_APP=run
-ENV FLASK_ENV=development
-ENV SECRET_KEY=fneiowbiufuoziNBIGQEVU0GOIHFGQ0EZGROIHN
-ENV DATABASE_URL=postgresql://fast-runner:runner-fast@db:5432/maze-runner-db
 
 # Expose port
 EXPOSE 5000
@@ -35,8 +32,7 @@ RUN /bin/bash -c "source ~/.nvm/nvm.sh && nvm alias default 16"
 ENV NVM_DIR /root/.nvm
 ENV NODE_VERSION 16
 
-RUN flask db init
-RUN flask db upgrade
-
 # Start the API
-CMD ["sh", "-c", "flask run --host=0.0.0.0"]
+# Start the API with migrations
+CMD sh -c "flask db init && flask db upgrade && flask run --host=0.0.0.0"
+
