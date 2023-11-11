@@ -1,17 +1,23 @@
 # Maze runner backend
 
-## Flask
+## Overview
 
-Create a venv in api_folder -> `python3 -m venv venv`
+This is the backend for https://github.com/Lennartstachowiak/maze-runner-website.
+Here the user authentication and authorisation is handled, the maze and user data is managed, the data is handled with the database, algorithms are executed and mazes are generated.
+
+## Installation
+
+### Flask
+
+Create a virtual enviorment (venv) -> `python3 -m venv venv`
 Start venv with -> `source venv/bin/activate`
-For flask command set flask with -> `export FLASK_APP=run`
 Install packages for virtual enviorment -> `pip install -r requirements.txt`
+For flask commands set flask with -> `export FLASK_APP=run`
 
 ## Create database
 
-Currently the database is sqlite
+Migration should already pre set the database
 
-migrate should already pre set the database
 If not run this command:
 
 - `flask db init`
@@ -19,24 +25,27 @@ If not run this command:
 To create the database locally use:
 
 - `flask db migrate -m 'init'`
-- `flask db upgrade`
-  This will create a file called: database.db
 
-If no error occured then it should be set, but you can still check it in postman with the endpoint
-/get_all
+- `flask db upgrade`
+
+This will create a file called: database.db
 
 ## Scripts to set up the database data
 
-### `python3 -m scripts.addDummyDataMazeDB`
-
-### `python3 -m scripts.addDummyDataAlgorithmsDB`
+`python3 -m scripts.addDummyDataMazeDB`
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### Start development enviormnet: `docker compose up`
+#### Start development environment:
 
-### Delete all algorithms for all users: `python3 -m scripts.deleteAlgorithms`
+`docker compose up`
 
-### Delete all mazes: `python3 -m scripts.deleteMazes`
+#### Delete all algorithms for all users:
+
+`python3 -m scripts.deleteAlgorithms`
+
+#### Delete all mazes:
+
+`python3 -m scripts.deleteMazes`
