@@ -17,6 +17,10 @@ Install packages for virtual enviorment -> `pip install -r requirements.txt`
 
 For flask commands set flask with -> `export FLASK_APP=run`
 
+### More
+
+Install docker
+
 ## Create database
 
 Migration should already pre set the database
@@ -36,6 +40,10 @@ This will create a file called: database.db
 ## Scripts to set up the database data
 
 `python3 -m scripts.addDummyDataMazeDB`
+
+## Start project
+
+`docker compose up`
 
 ## Available Scripts
 
