@@ -10,8 +10,11 @@ Here the user authentication and authorisation is handled, the maze and user dat
 ### Flask
 
 Create a virtual enviorment (venv) -> `python3 -m venv venv`
+
 Start venv with -> `source venv/bin/activate`
+
 Install packages for virtual enviorment -> `pip install -r requirements.txt`
+
 For flask commands set flask with -> `export FLASK_APP=run`
 
 ## Create database
