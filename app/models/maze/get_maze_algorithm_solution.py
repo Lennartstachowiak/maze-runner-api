@@ -1,6 +1,6 @@
 from flask import jsonify
 import json
-from app.scripts.maze_generator import Maze, MazeSolver
+from app.models.maze.maze import Maze, MazeSolver
 from db import models
 from db.db import db
 

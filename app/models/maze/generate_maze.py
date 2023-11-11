@@ -1,6 +1,6 @@
 import base64
 from flask import make_response
-from app.scripts.maze_generator import Maze, SidewinderFactory, RecursiveBacktrackingFactory, MazeImage
+from app.models.maze.maze import MazeImage, RecursiveBacktrackingFactory
 from db import models
 
 Mazes = models.Mazes

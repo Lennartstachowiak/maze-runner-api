@@ -1,6 +1,6 @@
 from api import create_api
+from app.models.maze.maze import MazeImage, RecursiveBacktrackingFactory
 from db.models import Mazes
-from app.scripts.maze_generator import SidewinderFactory, RecursiveBacktrackingFactory, MazeImage
 import base64
 
 api = create_api()
