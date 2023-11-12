@@ -12,8 +12,7 @@ def get_maze_algorithm_solution_controller(request):
     is_test = check_if_test(maze_id)
     solution = get_maze_algorithm_solution(maze_id, algorithm_id, is_test)
 
-    is_no_test_and_no_error = not is_test and hasattr(solution, 'solution') and hasattr(
-        solution, 'visited') and hasattr(solution, 'score')
+    is_no_test_and_no_error = not is_test and 'solution' in solution and 'visited' in solution and 'score' in solution
     if is_no_test_and_no_error:
         add_maze_highscore(user_id, maze_id, algorithm_id, solution)
 
