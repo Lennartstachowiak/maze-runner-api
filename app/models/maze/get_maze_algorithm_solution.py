@@ -1,4 +1,3 @@
-from flask import jsonify
 import json
 from app.models.maze.maze import Maze, MazeSolver
 from db import models
@@ -8,10 +7,9 @@ Mazes = models.Mazes
 Algorithms = models.Algorithms
 
 
-def get_maze_algorithm_solution(maze_id, algorithm_id):
+def get_maze_algorithm_solution(maze_id, algorithm_id, is_test):
     # Get Maze
     maze_object = Mazes.query.filter_by(id=maze_id).first()
-    is_test = maze_object.isTest
 
     maze = Maze(maze_object.height, maze_object.width,
                 json.loads(maze_object.structure))
@@ -29,14 +27,14 @@ def get_maze_algorithm_solution(maze_id, algorithm_id):
         # Update is working
         algorithm_object.isWorking = False
         db.session.commit()
-        return jsonify(error_message)
+        return error_message
     elif is_test:
         # Update is working
         algorithm_object.isWorking = True
         db.session.commit()
     check = solver.check_solution()
     if not check[0]:
-        return jsonify(check)
+        return check
     solver.calculateScore()
 
     solver_result = {"solution": solver.solution,
