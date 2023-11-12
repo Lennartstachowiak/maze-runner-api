@@ -121,5 +121,5 @@ algorithmList = [
 def addAlgorithms(id):
     for algorithm in algorithmList:
         new_algorithm = Algorithms(
-            name=algorithm["name"], code=algorithm["code"], userId=id)
+            name=algorithm["name"], code=algorithm["code"], userId=id, isWorking=True)
         new_algorithm.save()

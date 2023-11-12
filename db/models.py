@@ -80,7 +80,7 @@ class Highscores(db.Model, CRUDMixin):
         db.String(32), db.ForeignKey('mazes.id'), nullable=False)
     algorithm_id = db.Column(
         db.String(32), db.ForeignKey('algorithms.id'), nullable=False)
-    score = db.Column(db.Integer, nullable=False)
+    score = db.Column(db.Float, nullable=False)
 
 
 class Algorithms(db.Model, CRUDMixin):

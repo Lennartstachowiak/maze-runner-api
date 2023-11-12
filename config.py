@@ -7,6 +7,7 @@ load_dotenv()
 class Config:
     if environ.get('FLASK_ENV') == 'production':
         SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_URL')
+
     elif environ.get('DATABASE_TYPE') == 'sqlite':
         SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db'
 
