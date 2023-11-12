@@ -31,7 +31,7 @@ To use Docker with this project, you'll need to have Docker installed on your sy
 
 4.  Once the installation is complete, start the Docker application.
 
-        💡 For detailed installation instructions and   system requirements, please refer to the official Docker documentation.
+    `💡 For detailed installation instructions and system requirements, please refer to the official Docker documentation.``
 
 ### Setting up the environment
 
@@ -56,8 +56,6 @@ In root directory run:
 This command will set up everything for you automatically.
 
 **Now you are ready to go!**
-
----
 
 ---
 
