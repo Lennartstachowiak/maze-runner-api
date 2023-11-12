@@ -1,10 +1,8 @@
 from flask import abort, jsonify
-from db import models
-
-Algorithms = models.Algorithms
+from db.models import Algorithms
 
 
-def delete_algorithm(algorithm_id, user_id):
+def delete_algorithm(user_id, algorithm_id):
     algorithm = Algorithms.query.filter_by(id=algorithm_id).first()
     if (algorithm.userId == user_id):
         algorithm.delete()

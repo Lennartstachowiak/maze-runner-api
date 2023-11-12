@@ -45,6 +45,6 @@ def register_maze_routes(api):
         return response
 
     @api.route("/v1/delete_maze", methods=["DELETE"])
-    def delete_maze():
+    def delete_maze_request():
         response = delete_maze_controller(request)
         return response

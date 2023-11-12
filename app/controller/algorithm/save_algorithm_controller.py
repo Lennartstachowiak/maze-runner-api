@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import abort, jsonify
 from app.models.algorithm.save_algorithm import save_algorithm
 from app.models.user.get_user import get_user
 
@@ -13,5 +13,4 @@ def save_algorithm_controller(request):
         response = {"status": 200}
         return jsonify(response)
     else:
-        response = {"status": 401}
-        return jsonify(response)
+        abort(401, "Unauthorized")

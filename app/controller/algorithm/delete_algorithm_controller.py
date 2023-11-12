@@ -7,8 +7,8 @@ def delete_algorithm_controller(request):
     user = get_user(request)
     user_id = user.id
     algorithm_id = request.json["algorithmId"]
-    is_delted = delete_algorithm(user_id, algorithm_id)
-    if (is_delted):
+    is_deleted = delete_algorithm(user_id, algorithm_id)
+    if (is_deleted):
         response = {"status": 204}
         return jsonify(response)
     else:
