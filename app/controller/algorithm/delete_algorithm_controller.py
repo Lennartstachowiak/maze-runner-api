@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import abort, jsonify
 from app.models.algorithm.delete_algorithm import delete_algorithm
 from app.models.user.get_user import get_user
 
@@ -12,5 +12,4 @@ def delete_algorithm_controller(request):
         response = {"status": 204}
         return jsonify(response)
     else:
-        response = {"status": 401}
-        return jsonify(response)
+        abort(401, "Unauthorized")

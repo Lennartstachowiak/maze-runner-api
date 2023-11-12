@@ -1,4 +1,4 @@
-from flask import request
+from flask import jsonify, request
 from app.controller.maze.delete_maze_controller import delete_maze_controller
 from app.controller.maze.generate_maze_controller import generate_maze_controller
 from app.controller.maze.get_maze_algorithm_solution_controller import get_maze_algorithm_solution_controller
@@ -14,6 +14,10 @@ Algorithms = models.Algorithms
 
 
 def register_maze_routes(api):
+
+    @api.errorhandler(401)
+    def unauthorized(error):
+        return jsonify({"error": "Unauthorized"}), 401
 
     @ api.route("/v1/get_mazes", methods=["GET"])
     def get_mazes_request():

@@ -1,4 +1,4 @@
-from flask import jsonify, make_response
+from flask import abort, jsonify, make_response
 from flask_bcrypt import Bcrypt
 from app.models.user.login_user import login_user
 
@@ -10,11 +10,11 @@ def login_user_controller(request, api):
 
     login_data = login_user(bcrypt, email, password)
     if login_data is False:
-        return jsonify({"error": "Unauthorized"}), 401
+        abort(401, "Unauthorized")
     else:
         session_data = login_data
 
     res = make_response()
     res.set_cookie(
-        "sessionId", value=session_data["sessionId"], expires=session_data["expiryDate"], samesite="None", secure=True, httponly=True)
+        "session_id_maze_runner", value=session_data["session_id_maze_runner"], expires=session_data["expiryDate"], samesite="None", secure=True, httponly=True)
     return res

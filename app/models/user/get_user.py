@@ -13,7 +13,7 @@ def get_user(request):
 
 
 def get_user_id(request):
-    sessionId = request.cookies.get('sessionId')
+    sessionId = request.cookies.get('session_id_maze_runner')
     if not sessionId:
         abort(401, "Unauthorized")
     session = SessionAuth.query.filter_by(

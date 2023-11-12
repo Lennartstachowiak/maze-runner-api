@@ -20,7 +20,7 @@ def create_session(user):
         session = SessionAuth.query.filter_by(userId=user.id).first()
         print("session", session)
         if is_session_expired(session) is False:
-            return {"sessionId": session.id, "expiryDate": session.expiryDate}
+            return {"session_id_maze_runner": session.id, "expiryDate": session.expiryDate}
     # Create Session
     expiryDate = datetime.today().date() + timedelta(days=7)
     new_session = SessionAuth(userId=user.id, expiryDate=expiryDate)
@@ -28,4 +28,4 @@ def create_session(user):
     # Add session to db
     db.session.add(new_session)
     db.session.commit()
-    return {"sessionId": new_session.id, "expiryDate": new_session.expiryDate}
+    return {"session_id_maze_runner": new_session.id, "expiryDate": new_session.expiryDate}

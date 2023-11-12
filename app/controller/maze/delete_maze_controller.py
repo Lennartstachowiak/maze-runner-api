@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import abort, jsonify
 from app.models.maze.delete_maze import delete_maze
 from app.models.user.get_user import get_user_id
 
@@ -10,4 +10,4 @@ def delete_maze_controller(request):
     if isDeleted:
         return jsonify("Maze deleted!")
     else:
-        return jsonify({"error": "Unauthorized"}), 401
+        abort(401, "Unauthorized")

@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import abort, jsonify
 from app.models.algorithm.rename_algorithm import rename_algorithm
 from app.models.user.get_user import get_user
 from db.db import db
@@ -15,5 +15,4 @@ def rename_algorithm_controller(request):
         response = {"status": 200}
         return jsonify(response)
     else:
-        response = {"status": 401}
-        return jsonify(response)
+        abort(401, "Unauthorized")
