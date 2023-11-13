@@ -88,7 +88,7 @@ This command will set up everything for you automatically.
 
 ### Flask
 
-#### In root directory (if `venv`` already exist skip to step 2):
+#### In root directory (if `venv` already exist skip to step 2):
 
 1.  Create a virtual enviorment (venv):
 
