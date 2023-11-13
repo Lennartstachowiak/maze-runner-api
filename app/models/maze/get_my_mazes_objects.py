@@ -4,7 +4,7 @@ from db import models
 Mazes = models.Mazes
 
 
-def get_my_mazes(user_id):
+def get_my_mazes_objects(user_id):
     mazes = []
     for maze in Mazes.query.filter_by(creator=user_id):
         highscoreList = get_highscores(maze.id)

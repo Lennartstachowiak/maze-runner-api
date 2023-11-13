@@ -4,7 +4,7 @@ from app.models.maze.get_highscores import get_highscores
 Mazes = models.Mazes
 
 
-def get_mazes():
+def get_mazes_objects():
     mazes = []
     for maze in Mazes.query.filter_by(creator="official"):
         if maze.isTest:

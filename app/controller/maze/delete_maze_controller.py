@@ -10,7 +10,7 @@ Mazes = models.Mazes
 def delete_maze_controller(request):
     user_id = get_user_id(request)
     maze_id = request.json["mazeId"]
-    maze = get_single_maze(maze_id)
+    maze: type[Mazes] = get_single_maze(maze_id)
     if not maze or maze.creator != user_id:
         abort(401, "Unauthorized")
     maze.delete()
