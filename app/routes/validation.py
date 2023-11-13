@@ -1,4 +1,4 @@
-from flask import request
+from flask import jsonify, request
 from os import environ
 from dotenv import load_dotenv
 
@@ -13,3 +13,11 @@ def register_validation(api):
         origin = request.headers.get("Origin")
         if request.endpoint != "connect" and origin != expected_origin:
             return {"error": "Invalid request origin"}, 403
+
+    @api.errorhandler(401)
+    def unauthorized(error):
+        return jsonify({"error": "Unauthorized"}), 401
+
+    @api.errorhandler(400)
+    def invalid_request(error):
+        return jsonify({"error": "Invalid request"}), 400

@@ -5,5 +5,5 @@ SessionAuth = models.SessionAuth
 
 
 def remove_session_controller(session: type[SessionAuth]):
-    session.delete()
+    db.session.delete(session)
     db.session.commit()

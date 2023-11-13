@@ -15,10 +15,6 @@ Algorithms = models.Algorithms
 
 def register_maze_routes(api):
 
-    @api.errorhandler(401)
-    def unauthorized(error):
-        return jsonify({"error": "Unauthorized"}), 401
-
     @ api.route("/v1/get_mazes", methods=["GET"])
     def get_mazes_request():
         response = get_mazes_contoller()

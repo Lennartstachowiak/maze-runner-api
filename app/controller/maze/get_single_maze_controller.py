@@ -1,8 +1,10 @@
 from flask import jsonify
+from app.models.maze.create_maze_object import create_maze_object
 from app.models.maze.get_single_maze import get_single_maze
 
 
 def get_single_maze_controller(request):
     maze_id = request.args.get("id")
     maze = get_single_maze(maze_id)
-    return jsonify(maze)
+    maze_object = create_maze_object(maze)
+    return jsonify(maze_object)
