@@ -19,7 +19,7 @@ def register_algorithm_routes(api):
     expected_origin = environ.get('ALLOW_ORIGIN')
 
     @api.before_request
-    def validate_referer():
+    def validate_origin():
         origin = request.headers.get("Origin")
         if request.endpoint != "connect" and origin != expected_origin:
             return {"error": "Invalid request origin"}, 403
