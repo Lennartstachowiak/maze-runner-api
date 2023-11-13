@@ -4,10 +4,6 @@ from app.controller.user.logout_controller import logout_user_controller
 from app.controller.user.register_user_controller import register_user_controller
 from app.controller.user.get_user_controller import get_user_controller
 from db import models
-from os import environ
-from dotenv import load_dotenv
-
-load_dotenv()
 
 User = models.Users
 Algorithms = models.Algorithms
@@ -15,13 +11,6 @@ SessionAuth = models.SessionAuth
 
 
 def register_user_routes(api):
-    expected_origin = environ.get('ALLOW_ORIGIN')
-
-    @api.before_request
-    def validate_origin():
-        origin = request.headers.get("Origin")
-        if request.endpoint != "connect" and origin != expected_origin:
-            return {"error": "Invalid request origin"}, 403
 
     @api.route("/", methods=["GET"])
     def connect():

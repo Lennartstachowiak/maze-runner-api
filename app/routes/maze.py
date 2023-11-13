@@ -6,10 +6,6 @@ from app.controller.maze.get_mazes_controller import get_mazes_contoller
 from app.controller.maze.get_my_mazes_controller import get_my_mazes_controller
 from app.controller.maze.get_single_maze_controller import get_single_maze_controller
 from db import models
-from os import environ
-from dotenv import load_dotenv
-
-load_dotenv()
 
 User = models.Users
 Mazes = models.Mazes
@@ -18,13 +14,6 @@ Algorithms = models.Algorithms
 
 
 def register_maze_routes(api):
-    expected_origin = environ.get('ALLOW_ORIGIN')
-
-    @api.before_request
-    def validate_origin():
-        origin = request.headers.get("Origin")
-        if request.endpoint != "connect" and origin != expected_origin:
-            return {"error": "Invalid request origin"}, 403
 
     @api.errorhandler(401)
     def unauthorized(error):

@@ -6,23 +6,12 @@ from app.controller.algorithm.get_single_algorithm_controller import get_single_
 from app.controller.algorithm.rename_algorithm_controller import rename_algorithm_controller
 from app.controller.algorithm.save_algorithm_controller import save_algorithm_controller
 from db import models
-from os import environ
-from dotenv import load_dotenv
-
-load_dotenv()
 
 Mazes = models.Mazes
 Algorithms = models.Algorithms
 
 
 def register_algorithm_routes(api):
-    expected_origin = environ.get('ALLOW_ORIGIN')
-
-    @api.before_request
-    def validate_origin():
-        origin = request.headers.get("Origin")
-        if request.endpoint != "connect" and origin != expected_origin:
-            return {"error": "Invalid request origin"}, 403
 
     @api.route("/v1/get_algorithms", methods=["GET"])
     def get_algorithms_request():

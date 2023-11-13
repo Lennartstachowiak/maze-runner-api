@@ -1,3 +1,4 @@
+from app.routes.validation import register_validation
 from db.db import register_database
 from app.routes.maze import register_maze_routes
 from app.routes.user import register_user_routes
@@ -20,6 +21,7 @@ def create_api():
     register_user_routes(api)
     register_maze_routes(api)
     register_algorithm_routes(api)
+    register_validation(api)
     return api
 
 
