@@ -16,11 +16,12 @@ Algorithms = models.Algorithms
 
 
 def register_algorithm_routes(api):
-    expected_referer = environ.get('ALLOW_ORIGIN')
+    expected_origin = environ.get('ALLOW_ORIGIN')
 
     @api.before_request
     def validate_referer():
-        if request.endpoint != "connect" and request.headers.get("Referer")+'*' != expected_referer:
+        origin = request.headers.get("Origin")
+        if request.endpoint != "connect" and origin != expected_origin:
             return {"error": "Invalid request origin"}, 403
 
     @api.route("/v1/get_algorithms", methods=["GET"])

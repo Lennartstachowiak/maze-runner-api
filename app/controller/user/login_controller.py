@@ -9,12 +9,12 @@ def login_user_controller(request, api):
     password = request.json["password"]
 
     login_data = login_user(bcrypt, email, password)
-    if login_data is False:
+    if not login_data:
         abort(401, "Unauthorized")
     else:
         session_data = login_data
 
     res = make_response()
     res.set_cookie(
-        "session_id_maze_runner", value=session_data["session_id_maze_runner"], expires=session_data["expiryDate"], samesite="Strict", secure=True, httponly=True)
+        "session_id_maze_runner", value=session_data["session_id_maze_runner"], expires=session_data["expiryDate"], samesite="None", secure=True, httponly=True)
     return res
