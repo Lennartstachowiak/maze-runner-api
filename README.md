@@ -6,7 +6,6 @@
 - [Getting Started](#started)
 - [Running with Docker (recommended)](#docker)
   - [Prerequisites](#prerequisitesdocker)
-  - [Tested versions](#testedversion)
   - [Installation](#installation)
   - [Setting up the environment](#envdocker)
   - [Running the application](#rundocker)
@@ -17,6 +16,8 @@
   - [Create database](#databasepython)
   - [Running the application](#runpython)
 - [Available Scripts](#scripts)
+
+---
 
 ## Description <a name="description">
 
@@ -33,14 +34,14 @@ You can run the programm locally in two different ways.
 - Running with **Docker** (recommended)
 - Running with **Python**
 
-## Running with **Docker** (recommended) <a name="docker">
+## Running with **Docker** (recommended) <a name="docker"></a>
 
-### Prerequisites <a name="prerequisitesdocker">
+### Prerequisites <a name="prerequisitesdocker"></a>
 
 - **Docker**
   - It is a platform that allows you to package, distribute, and run applications using containers.
 
-### Tested versions <a name="testedversion">
+#### Tested versions <a name="testedversion"></a>
 
 - **Docker** version 24.0.6, build ed223bc
 
@@ -54,7 +55,7 @@ You can run the programm locally in two different ways.
 
         docker-compose -v
 
-### Installation <a name="installation">
+### Installation <a name="installation"></a>
 
 To use Docker with this project, you'll need to have Docker installed on your system. If you haven't installed Docker yet, follow these steps:
 
@@ -68,7 +69,7 @@ To use Docker with this project, you'll need to have Docker installed on your sy
 
 > 💡 For detailed installation instructions and system requirements, please refer to the official Docker documentation.
 
-### Setting up the environment <a name="envdocker">
+### Setting up the environment <a name="envdocker"></a>
 
 You need to create a `.env` file in the root directory and need to add some PostgreSQL data for the database:
 
@@ -84,7 +85,7 @@ Furthermore you also need to add to `.env`
 
 These keys will be used for encryption and to allow localhost requests.
 
-### Running the application <a name="rundocker">
+### Running the application <a name="rundocker"></a>
 
 In root directory run:
 
@@ -96,18 +97,18 @@ This command will set up everything for you automatically.
 
 ---
 
-## Running with **Python** <a name="python">
+## Running with **Python** <a name="python"></a>
 
-### Prerequisites <a name="prerequisitespython">
+### Prerequisites <a name="prerequisitespython"></a>
 
 - Python
 
-### Installation <a name="installationpython">
+### Installation <a name="installationpython"></a>
 
 - Python
   - Check out the official website of python (https://www.python.org/) to install python for your operating system.
 
-### Flask <a name="flask">
+### Flask <a name="flask"></a>
 
 #### In root directory (if `venv` already exist skip to step 2):
 
@@ -129,7 +130,7 @@ This command will set up everything for you automatically.
 
     > ⚠️ Needed if you encounter this error `Error: Failed to find Flask application or factory in module 'app'. Use 'app:name' to specify one.`
 
-### Create database <a name="databasepython">
+### Create database <a name="databasepython"></a>
 
 > 💡 We will use a `SQLite` locally with this approach. `PostgreSQL` will be used for docker.
 
@@ -168,7 +169,7 @@ In the root directory run:
 
     python3 -m app.scripts.addDummyDataMazeDB
 
-### Running the application <a name="runpython">
+### Running the application <a name="runpython"></a>
 
     python3 run.py
 
@@ -176,7 +177,7 @@ In the root directory run:
 
 ---
 
-## Available Scripts <a name="scripts">
+## Available Scripts <a name="scripts"></a>
 
 In the project directory you can run:
 
