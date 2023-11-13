@@ -1,5 +1,5 @@
 from db import models
-from app.models.user.create_session import create_session
+from app.controller.user.create_session_controller import create_session_controller
 
 User = models.Users
 
@@ -10,5 +10,5 @@ def login_user(bcrypt, email, password):
         return False
     if not bcrypt.check_password_hash(user.password, password):
         return False
-    sessionData = create_session(user)
+    sessionData = create_session_controller(user)
     return sessionData

@@ -1,7 +1,8 @@
 from datetime import date, timedelta
-from server.routes import is_session_expired
-from server.extensions.database import db
-from server.models import SessionAuth
+from app.models.user.is_session_expired import is_session_expired
+import db.db
+
+from db.models import SessionAuth
 
 today = date.today()
 tomorrow = today + timedelta(days=1)
