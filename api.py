@@ -5,11 +5,16 @@ from app.routes.algorithm import register_algorithm_routes
 from flask import Flask
 from flask_cors import CORS
 from config import Config
+from os import environ
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def create_api():
     api = Flask(__name__)
-    CORS(api, supports_credentials=True)
+    allow_origin = [environ.get('ALLOW_ORIGIN')]
+    CORS(api, supports_credentials=True, origins=allow_origin)
     api.config.from_object(Config)
     register_database(api)
     register_user_routes(api)

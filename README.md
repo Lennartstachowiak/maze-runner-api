@@ -59,8 +59,9 @@ You need to create a `.env` file in the root directory and need to add some Post
 Furthermore you also need to add to `.env`
 
     SECRET_KEY=your_secret_key
+    ALLOW_ORIGIN=http://localhost:*
 
-This key will be used for encryption of sessions and cookies.
+These keys will be used for encryption and to allow localhost requests.
 
 ### Running the application
 
@@ -116,14 +117,17 @@ This command will set up everything for you automatically.
 You need to create a `.env` file in the root directory and need to add the database type:
 
     DATABASE_TYPE=sqlite
+    SECRET_KEY=your_secret_key
+    ALLOW_ORIGIN=http://localhost:*
 
 #### Set up database
 
-Migration should already pre set the database structure
+Migration folder (`/migrations`) for the database structure should already set.
 
 If not run this command:
 
 -     flask db init
+-     flask db migrate -m 'init'
 
 To create the database locally use:
 
