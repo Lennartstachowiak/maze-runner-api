@@ -5,6 +5,9 @@
 This is the backend for [Maze Runner Website](https://github.com/Lennartstachowiak/maze-runner-website).
 The user authentication and authorisation is handled, the maze and user data is managed, the data is handled with the database, algorithms are executed and mazes are generated here.
 
+- The backend is built with [Python](https://www.python.org/) and [Flask](https://flask.palletsprojects.com/en/3.0.x/).
+- For the database creation it uses [SQLAlchamy](https://www.sqlalchemy.org/) as ORM and [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/) to handle SQLAlchemy database migrations.
+
 # Getting Started
 
 You can run the programm locally in two different ways.
@@ -71,7 +74,7 @@ In root directory run:
 
 This command will set up everything for you automatically.
 
-**Now you are ready to go!**
+**Now you are ready to go!** 🚀
 
 ---
 
@@ -150,6 +153,8 @@ In the root directory run:
 ### Running the application
 
     python3 run.py
+
+**Now you are ready to go!** 🚀
 
 ---
 
