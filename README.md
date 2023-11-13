@@ -1,6 +1,24 @@
 # Maze Runner Backend
 
-## Description
+#### Table of Contents
+
+- [Description](#description)
+- [Getting Started](#started)
+- [Running with Docker (recommended)](#docker)
+  - [Prerequisites](#prerequisitesdocker)
+  - [Tested versions](#testedversion)
+  - [Installation](#installation)
+  - [Setting up the environment](#envdocker)
+  - [Running the application](#rundocker)
+- [Running with Python](#python)
+  - [Prerequisites](#prerequisitespython)
+  - [Flask](#flask)
+  - [Installation](#installationpython)
+  - [Create database](#databasepython)
+  - [Running the application](#runpython)
+- [Available Scripts](#scripts)
+
+## Description <a name="description">
 
 This is the backend for [Maze Runner Website](https://github.com/Lennartstachowiak/maze-runner-website).
 The user authentication and authorisation is handled, the maze and user data is managed, the data is handled with the database, algorithms are executed and mazes are generated here.
@@ -8,21 +26,21 @@ The user authentication and authorisation is handled, the maze and user data is 
 - The backend is built with [Python](https://www.python.org/) and [Flask](https://flask.palletsprojects.com/en/3.0.x/).
 - For the database creation it uses [SQLAlchamy](https://www.sqlalchemy.org/) as ORM and [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/) to handle SQLAlchemy database migrations.
 
-# Getting Started
+# Getting Started <a name="started">
 
 You can run the programm locally in two different ways.
 
 - Running with **Docker** (recommended)
 - Running with **Python**
 
-## Running with **Docker** (recommended)
+## Running with **Docker** (recommended) <a name="docker">
 
-### Prerequisites
+### Prerequisites <a name="prerequisitesdocker">
 
 - **Docker**
   - It is a platform that allows you to package, distribute, and run applications using containers.
 
-### Tested versions
+### Tested versions <a name="testedversion">
 
 - **Docker** version 24.0.6, build ed223bc
 
@@ -36,7 +54,7 @@ You can run the programm locally in two different ways.
 
         docker-compose -v
 
-### Installation
+### Installation <a name="installation">
 
 To use Docker with this project, you'll need to have Docker installed on your system. If you haven't installed Docker yet, follow these steps:
 
@@ -50,7 +68,7 @@ To use Docker with this project, you'll need to have Docker installed on your sy
 
 > 💡 For detailed installation instructions and system requirements, please refer to the official Docker documentation.
 
-### Setting up the environment
+### Setting up the environment <a name="envdocker">
 
 You need to create a `.env` file in the root directory and need to add some PostgreSQL data for the database:
 
@@ -66,7 +84,7 @@ Furthermore you also need to add to `.env`
 
 These keys will be used for encryption and to allow localhost requests.
 
-### Running the application
+### Running the application <a name="rundocker">
 
 In root directory run:
 
@@ -78,18 +96,18 @@ This command will set up everything for you automatically.
 
 ---
 
-## Running with **Python**
+## Running with **Python** <a name="python">
 
-### Prerequisites
+### Prerequisites <a name="prerequisitespython">
 
 - Python
 
-### Installation
+### Installation <a name="installationpython">
 
 - Python
   - Check out the official website of python (https://www.python.org/) to install python for your operating system.
 
-### Flask
+### Flask <a name="flask">
 
 #### In root directory (if `venv` already exist skip to step 2):
 
@@ -111,7 +129,7 @@ This command will set up everything for you automatically.
 
     > ⚠️ Needed if you encounter this error `Error: Failed to find Flask application or factory in module 'app'. Use 'app:name' to specify one.`
 
-### Create database
+### Create database <a name="databasepython">
 
 > 💡 We will use a `SQLite` locally with this approach. `PostgreSQL` will be used for docker.
 
@@ -144,13 +162,13 @@ If you want to modify the db you need to create a migration commit like this:
 
 -     flask db migrate -m 'your changes'
 
-### Scripts to set up the database data
+#### Scripts to set up the database data
 
 In the root directory run:
 
     python3 -m app.scripts.addDummyDataMazeDB
 
-### Running the application
+### Running the application <a name="runpython">
 
     python3 run.py
 
@@ -158,7 +176,7 @@ In the root directory run:
 
 ---
 
-## Available Scripts
+## Available Scripts <a name="scripts">
 
 In the project directory you can run:
 
