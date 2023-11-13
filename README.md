@@ -81,7 +81,7 @@ You need to create a `.env` file in the root directory and need to add some Post
 Furthermore you also need to add to `.env`
 
     SECRET_KEY=your_secret_key
-    ALLOW_ORIGIN=http://localhost:3000/*
+    ALLOW_ORIGIN=http://localhost:3000
 
 These keys will be used for encryption and to allow localhost requests.
 
@@ -140,7 +140,7 @@ You need to create a `.env` file in the root directory and need to add the datab
 
     DATABASE_TYPE=sqlite
     SECRET_KEY=your_secret_key
-    ALLOW_ORIGIN=http://localhost:3000/*
+    ALLOW_ORIGIN=http://localhost:3000
 
 #### Set up database
 
