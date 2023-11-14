@@ -418,10 +418,10 @@ class MazeSolver:
                     f"Command execution failed with exit code {e.returncode}")
                 print("ERROR", e.output)
         else:
-            raise ValueError("No starting point in the maze")
+            print("No starting point in the maze")
 
         if not self.solution:
-            raise ValueError("No solution found")
+            print("No solution found")
 
     def check_solution(self):
         solution = self.solution

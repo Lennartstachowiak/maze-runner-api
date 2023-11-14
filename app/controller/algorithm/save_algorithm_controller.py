@@ -11,7 +11,7 @@ def save_algorithm_controller(request):
     algorithm_id = request.json["algorithmId"]
     new_code = request.json["newCode"]
     algorithm: type[Algorithms] = get_single_algorithm(algorithm_id)
-    if not algorithm or algorithm["userId"] != user_id:
+    if not algorithm or algorithm.userId != user_id:
         abort(401, "Unauthorized")
     algorithm.code = new_code
     db.session.commit()
