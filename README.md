@@ -30,10 +30,10 @@ The user authentication and authorisation is handled, the maze and user data is 
 
 ### Project Structure / Diagram
 
-|:---:|:---:|
+|--------------------------------------------|-----------------------------------------------------------|
 |![User Overview](images/1_mms_overview.png) | ![Application Overview](images/2_application_overview.png)|
-![Backend Overview](images/3_backend_overview.png) | ![Backend Controller](images/4_backend_controller.png)|
-|:---:|:---:|
+|![Backend Overview](images/3_backend_overview.png) | ![Backend Controller](images/4_backend_controller.png)|
+|---------------------------------------------------|-------------------------------------------------------|
 
 ### Tech Stack
 
