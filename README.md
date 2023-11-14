@@ -2,7 +2,9 @@
 
 #### Table of Contents
 
-- [Description](#description)
+- [Documentation](#documentation)
+  - [Overview](#overview)
+  - [Controllers](#controllers)
 - [Getting Started](#started)
 - [Running with Docker (recommended)](#docker)
   - [Prerequisites](#prerequisitesdocker)
@@ -19,13 +21,79 @@
 
 ---
 
-## Description <a name="description">
+# Documentation <a name="documentation">
+
+## Overview <a name="overview">
 
 This is the backend for [Maze Runner Website](https://github.com/Lennartstachowiak/maze-runner-website).
 The user authentication and authorisation is handled, the maze and user data is managed, the data is handled with the database, algorithms are executed and mazes are generated here.
 
+### Tech Stack
+
 - The backend is built with [Python](https://www.python.org/) and [Flask](https://flask.palletsprojects.com/en/3.0.x/).
 - For the database creation it uses [SQLAlchamy](https://www.sqlalchemy.org/) as ORM and [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/) to handle SQLAlchemy database migrations.
+
+## Controllers <a name="controllers">
+
+> 💡 Orchestrating Application Flow and User Interactions
+
+![C4 Model of Backend Controller](images/MMS Software Architecture.png)
+
+### User
+
+These are controller which handle user related tasks.
+
+- (Login Controller)[app/controller/user/login_controller.py]
+  - Allow users to sign in to application.
+- (Register Controller)[app/controller/user/register_user_controller.py]
+  - Allow users to register to application.
+- (Logout Controller)[app/controller/user/logout_controller.py]
+  - Allow users to log out of application.
+- (Authentication Controller)[app/controller/user/get_user_controller.py]
+  - Authenticats user with session cookie.
+- (Session Controller)[app/controller/user/session_controller.py]
+  - Creates a new session for a user with expiry date and deletes old sessions.
+
+### Maze
+
+These are controller which handle maze related tasks. From fetching mazes to generate new mazes and solving them.
+
+- (Get Mazes Controller)[app/controller/maze/get_mazes_controller.py]
+  - Fetches all official mazes.
+- (Get Single Maze Controller)[app/controller/maze/get_single_maze_controller.py]
+  - Fetches one specific maze.
+  - This can be a user own maze or an official maze.
+- (Get User Mazes Contoller)[app/controller/maze/get_my_mazes_controller.py]
+  - Fetches all mazes of the user.
+- (Get Maze Solution Controller)[app/controller/maze/get_maze_algorithm_solution_controller.py]
+  - Handles to generate the solution for a maze and the given user algorithm.
+- (Generate Maze Controller)[app/controller/maze/generate_maze_controller.py]
+  - Allows users to generate their own mazes.
+- (Delete Maze Controller)[app/controller/maze/delete_maze_controller.py]
+  - Allows users to delete their own mazes.
+- (Add Maze Highscore Controller)[app/controller/maze/add_maze_highscore.py]
+  - Adding the score achieved by users on mazes with their alogrithms.
+- (Remove Maze Highscore Controller)[app/controller/maze/remove_maze_highscore.py]
+  - Removes user highscore if the user achieves a better score with another algorithm.
+
+### Algorithm
+
+These are controller which handle algorithm related tasks. A algorithm can be newly created or changes can be saved.
+
+- (Get Algorithms Controller)[app/controller/algorithm/get_algorithms_controller.py]
+  - Fetches all users algorithms.
+- (Get Single Algorithm Controller)[app/controller/algorithm/get_single_algorithm_controller.py]
+  - Fetches one specific algorithm of the user.
+- (Add New Algorithm Controller)[app/controller/algorithm/add_new_algorithm_controller.py]
+  - Creates a new algorthm for the user.
+- (Delete Algorithm Controller)[app/controller/algorithm/delete_algorithm_controller.py]
+  - Deletes a existing algorihm of the user.
+- (Rename Algorithm Controller)[app/controller/algorithm/rename_algorithm_controller.py]
+  - Renames an user algorithm for the user.
+- (Save Algorithm Controller)[app/controller/algorithm/save_algorithm_controller.py]
+  - Saves changes made to the algorithm.
+
+---
 
 # Getting Started <a name="started">
 
