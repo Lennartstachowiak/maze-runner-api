@@ -77,7 +77,6 @@ algorithmList = [
             visited.push(currentNode.position);
 
             if (cell.goal) {
-                // Reached the goal, backtrack to construct the solution path
                 let pathNode = currentNode;
                 while (pathNode !== null) {
                     solution.unshift(pathNode.position);
