@@ -45,7 +45,7 @@ The user authentication and authorisation is handled, the maze and user data is 
 
 > 💡 Orchestrating Application Flow and User Interactions
 
-<img src="images/5_backend_controller_path.png" alt="Code Diagram with path" style="width: 50%;">
+<img src="images/5_backend_controller_path.png" alt="Code Diagram with path" style="width: 75%;">
 
 ### User
 
