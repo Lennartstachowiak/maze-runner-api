@@ -26,6 +26,13 @@
 ## Overview <a name="overview">
 
 This is the backend for [Maze Runner Website](https://github.com/Lennartstachowiak/maze-runner-website).
+
+- Maze Runner is a application on which users can compete against each other by creating algorithms to solve mazes.
+- Each successful solution path from the start to the goal will be added to the highscore list.
+- Users can generate new mazes which they own and can practice with.
+- Algorithms can directly be created and edited in the application and can be tested while writing the code.
+  - Errors will be shown as well.
+
 The user authentication and authorisation is handled, the maze and user data is managed, the data is handled with the database, algorithms are executed and mazes are generated here.
 
 ### Tech Stack
