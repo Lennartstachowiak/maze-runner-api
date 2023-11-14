@@ -30,11 +30,11 @@ The user authentication and authorisation is handled, the maze and user data is 
 
 ### Project Structure / Diagram
 
-|                    1. [User Overview](images/1_mms_overview.png)                     |                 2. [Application Overview](images/2_application_overview.png)                 |
-| :----------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: |
-|    <img src="images/1_mms_overview.png" alt="User Overview" style="width: 100%;">    | <img src="images/2_application_overview.png" alt="Application Overview" style="width: 60%;"> |
-|                 3. [Backend Overview](images/3_backend_overview.png)                 |                   4. [Backend Controller](images/4_backend_controller.png)                   |
-| <img src="images/3_backend_overview.png" alt="Backend Overview" style="width: 80%;"> |   <img src="images/4_backend_controller.png" alt="Backend Controller" style="width: 60%;">   |
+|                     1. [User Overview](images/1_mms_overview.png)                     |                 2. [Application Overview](images/2_application_overview.png)                 |
+| :-----------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: |
+|    <img src="images/1_mms_overview.png" alt="User Overview" style="width: 120%;">     | <img src="images/2_application_overview.png" alt="Application Overview" style="width: 60%;"> |
+|                 3. [Backend Overview](images/3_backend_overview.png)                  |                   4. [Backend Controller](images/4_backend_controller.png)                   |
+| <img src="images/3_backend_overview.png" alt="Backend Overview" style="width: 100%;"> |   <img src="images/4_backend_controller.png" alt="Backend Controller" style="width: 80%;">   |
 
 ### Tech Stack
 
