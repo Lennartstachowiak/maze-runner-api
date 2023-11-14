@@ -1,7 +1,7 @@
 from db.db import db
 from db import models
 from app.scripts.addAlgorithms import addAlgorithms
-from app.controller.user.create_session_controller import create_session_controller
+from app.controller.user.session_controller import session_controller
 
 User = models.Users
 
@@ -50,5 +50,5 @@ def register_user(bcrypt, username, email, password):
     userId = user.id
     addAlgorithms(userId)
 
-    sessionData = create_session_controller(user)
+    sessionData = session_controller(user)
     return sessionData

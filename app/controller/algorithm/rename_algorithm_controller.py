@@ -1,5 +1,6 @@
 from flask import abort, jsonify
 from app.models.algorithm.get_single_algorithm import get_single_algorithm
+from app.models.algorithm.rename_algorithm import rename_algorithm
 from app.models.user.get_user import get_user
 from db.db import db
 from db.models import Algorithms
@@ -13,7 +14,6 @@ def rename_algorithm_controller(request):
     algorithm: type[Algorithms] = get_single_algorithm(algorithm_id)
     if not algorithm or algorithm.userId != user_id:
         abort(401, "Unauthorized")
-    algorithm.name = new_name
-    db.session.commit()
+    rename_algorithm(algorithm, new_name)
     response = {"status": 200}
     return jsonify(response)
