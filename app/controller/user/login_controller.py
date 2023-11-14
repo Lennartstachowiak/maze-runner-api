@@ -1,5 +1,6 @@
 from flask import abort, jsonify, make_response
 from flask_bcrypt import Bcrypt
+from app.controller.user.create_session_controller import create_session_controller
 from app.models.user.login_user import login_user
 
 
@@ -8,11 +9,11 @@ def login_user_controller(request, api):
     email = request.json["email"]
     password = request.json["password"]
 
-    login_data = login_user(bcrypt, email, password)
-    if not login_data:
+    user = login_user(bcrypt, email, password)
+    if not user:
         abort(401, "Unauthorized")
-    else:
-        session_data = login_data
+
+    session_data = create_session_controller(user)
 
     res = make_response()
     res.set_cookie(

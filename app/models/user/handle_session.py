@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 SessionAuth = models.SessionAuth
 
 
-def handle_session(old_session: type[SessionAuth], user):
+def create_new_session(old_session: type[SessionAuth], user):
     if old_session is not None:
         remove_session_controller(old_session)
 

@@ -6,9 +6,7 @@ Mazes = models.Mazes
 
 def get_mazes_objects():
     mazes = []
-    for maze in Mazes.query.filter_by(creator="official"):
-        if maze.isTest:
-            continue
+    for maze in Mazes.query.filter_by(creator="official", isTest=False):
         highscoreList = get_highscores(maze.id)
         mazes.append({"id": maze.id, "name": maze.name,
                       "difficulty": maze.difficulty, "imgLink": maze.imgLink, "highscores": highscoreList, "official": True})
