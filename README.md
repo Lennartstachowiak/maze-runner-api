@@ -38,14 +38,14 @@ The user authentication and authorisation is handled, the maze and user data is 
 |                     [Context Diagram](images/1_mms_overview.png)                      |                    [Container Diagram](images/2_application_overview.png)                    |
 | :-----------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: |
 |    <img src="images/1_mms_overview.png" alt="User Overview" style="width: 160%;">     | <img src="images/2_application_overview.png" alt="Application Overview" style="width: 60%;"> |
-|                  [Component Diagram](images/3_backend_overview.png)                   |                       [Code Diagram ](images/4_backend_controller.png)                       |
+|                  [Component Diagram](images/3_backend_overview.png)                   |                       [Code Diagram](images/4_backend_controller.png)                        |
 | <img src="images/3_backend_overview.png" alt="Backend Overview" style="width: 120%;"> |   <img src="images/4_backend_controller.png" alt="Backend Controller" style="width: 80%;">   |
 
 ## Controllers <a name="controllers">
 
 > 💡 Orchestrating Application Flow and User Interactions
 
-![C4 Model of Backend Controller](images/5_backend_controller_path.png)
+<img src="images/1_mms_overview.png" alt="Code Diagram with path" style="width: 50%;">
 
 ### User
 
