@@ -28,16 +28,21 @@
 This is the backend for [Maze Runner Website](https://github.com/Lennartstachowiak/maze-runner-website).
 The user authentication and authorisation is handled, the maze and user data is managed, the data is handled with the database, algorithms are executed and mazes are generated here.
 
+### Project Structure / Diagram
+
+![User Overview](images/1_mms_overview.png) ![Application Overview](images/2_application_overview.png)
+![Backend Overview](images/3_backend_overview.png) ![Backend Controller](images/4_backend_controller.png)
+
 ### Tech Stack
 
 - The backend is built with [Python](https://www.python.org/) and [Flask](https://flask.palletsprojects.com/en/3.0.x/).
-- For the database creation it uses [SQLAlchamy](https://www.sqlalchemy.org/) as ORM and [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/) to handle SQLAlchemy database migrations.
+- The database is [PostgreSQL](https://www.postgresql.org/) and it uses [SQLAlchamy](https://www.sqlalchemy.org/) as ORM and [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/) to handle SQLAlchemy database migrations.
 
 ## Controllers <a name="controllers">
 
 > 💡 Orchestrating Application Flow and User Interactions
 
-![C4 Model of Backend Controller](images/backend_controller.png)
+![C4 Model of Backend Controller](images/5_backend_controller_path.png)
 
 ### User
 
