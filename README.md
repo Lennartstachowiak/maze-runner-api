@@ -126,7 +126,7 @@ I created a [MazeCreationFacade](app/models/maze/generate_maze.py) which simplif
 
 ### Builder
 
-I created a [NewMazeBuilder](app/models/maze/generate_maze.py) and a [NewMazeDirector](app/models/maze/generate_maze.py) to build a [NewMaze](app/models/maze/generate_maze.py). [NewMaze](app/models/maze/generate_maze.py) is a SQLAlchemy model.
+I created a [NewMazeBuilder](app/models/maze/generate_maze.py) and a [NewMazeDirector](app/models/maze/generate_maze.py) to build a [NewMaze](app/models/maze/generate_maze.py).
 
 <img src="images/builder_pattern.png" alt="Builder Pattern" style="width: 70%;">
 
