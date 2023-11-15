@@ -34,7 +34,7 @@ class MazeGenerator:
         elif type == "Sidewinder":
             maze_generator = SidewinderFactory().create_generator()
 
-        maze = maze_generator.create_maze(int(maze_size))
+        maze = maze_generator.generate_maze(int(maze_size))
         return maze
 
 

@@ -130,6 +130,8 @@ I created a [NewMazeBuilder](app/models/maze/generate_maze.py) and a [NewMazeDir
 
 <img src="images/builder_pattern.png" alt="Builder Pattern" style="width: 70%;">
 
+I created a simple [UserBuilder](app/models/user/register_user.py) which created the user at the registration.
+
 ### Model-View-Controller (MVC)
 
 I created a MVC architectural structure for the backend application.
