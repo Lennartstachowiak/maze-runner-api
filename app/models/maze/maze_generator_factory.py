@@ -3,15 +3,15 @@ import random
 from app.models.maze.maze import Cell, Maze
 
 
-@abstractmethod
 class MazeGeneratorFactory(ABC):
+    @abstractmethod
     def create_generator(self):
         pass
 
 
 class SidewinderFactory(MazeGeneratorFactory):
     def create_generator(self):
-        return SidewinderAlgorithmMazeGenerator()
+        return SidewinderAlgorithm()
 
 
 class RecursiveBacktrackingFactory(MazeGeneratorFactory):
@@ -35,9 +35,9 @@ class MazeStructure:
         return structure
 
 
-@abstractmethod
 # Abstract Product
 class MazeGenerator(ABC):
+    @abstractmethod
     def generate_maze(self):
         pass
 
@@ -99,11 +99,8 @@ class RecursiveBacktracking(MazeGenerator):
             self.structure[row][column].east = 0
             return
 
-    def generate(self, size):
-        return super().generate(size)
 
-
-class SidewinderAlgorithmMazeGenerator(MazeGenerator):
+class SidewinderAlgorithm(MazeGenerator):
     # Concrete Product
     def generate_maze(self):
         for row in range(self.height):
@@ -119,6 +116,3 @@ class SidewinderAlgorithmMazeGenerator(MazeGenerator):
                     # carve east
                     self.structure[row][column].east = 0
                     self.structure[row][column+1].west = 0
-
-    def generate(self, size):
-        return super().generate(size)

@@ -1,5 +1,5 @@
 from api import create_api
-from app.models.maze.maze import MazeImageFacade
+from app.models.maze.generate_maze import MazeImageDrawer
 from app.models.maze.maze_generator_factory import RecursiveBacktrackingFactory
 from db.models import Mazes
 import base64
@@ -10,17 +10,17 @@ api.app_context().push()
 sidewinder_maze_generator = RecursiveBacktrackingFactory().create_generator()
 
 simple_maze = sidewinder_maze_generator.generate(10)
-simple_maze_image_byte_array = MazeImageFacade.generate_maze_image(simple_maze)
+simple_maze_image_byte_array = MazeImageDrawer.generate_maze_image(simple_maze)
 simple_maze_image_base_64 = base64.b64encode(
     simple_maze_image_byte_array).decode('utf-8')
 
 medium_maze = sidewinder_maze_generator.generate(20)
-medium_maze_image_byte_array = MazeImageFacade.generate_maze_image(medium_maze)
+medium_maze_image_byte_array = MazeImageDrawer.generate_maze_image(medium_maze)
 medium_maze_image_base_64 = base64.b64encode(
     medium_maze_image_byte_array).decode('utf-8')
 
 hard_maze = sidewinder_maze_generator.generate(30)
-hard_maze_image_byte_array = MazeImageFacade.generate_maze_image(hard_maze)
+hard_maze_image_byte_array = MazeImageDrawer.generate_maze_image(hard_maze)
 hard_maze_image_base_64 = base64.b64encode(
     hard_maze_image_byte_array).decode('utf-8')
 

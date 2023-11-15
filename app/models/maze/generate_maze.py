@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 import base64
 from enum import Enum
 from io import BytesIO
@@ -33,7 +34,7 @@ class MazeGenerator:
         elif type == "Sidewinder":
             maze_generator = SidewinderFactory().create_generator()
 
-        maze = maze_generator.generate(int(maze_size))
+        maze = maze_generator.create_maze(int(maze_size))
         return maze
 
 
@@ -117,7 +118,41 @@ class NewMaze:
         return new_maze
 
 
-class NewMazeBuilder:
+class MazeBuilderInterface(ABC):
+    @abstractmethod
+    def set_name(self, name):
+        pass
+
+    @abstractmethod
+    def set_difficulty(self, difficulty):
+        pass
+
+    @abstractmethod
+    def set_img(self, img):
+        pass
+
+    @abstractmethod
+    def set_structure(self, structure):
+        pass
+
+    @abstractmethod
+    def set_height(self, height):
+        pass
+
+    @abstractmethod
+    def set_width(self, width):
+        pass
+
+    @abstractmethod
+    def set_creator(self, creator):
+        pass
+
+    @abstractmethod
+    def build(self):
+        pass
+
+
+class NewMazeBuilder(MazeBuilderInterface):
     def __init__(self):
         self.maze = NewMaze()
 
@@ -154,12 +189,14 @@ class NewMazeBuilder:
 
 
 class NewMazeDirector:
-    def __init__(self):
-        self.builder = NewMazeBuilder()
+    def __init__(self, builder):
+        self.builder = builder
 
     def construct_new_maze(self, name, difficulty, img, structure, height, width, creator):
         self.builder.set_name(name).set_difficulty(difficulty).set_img(img).set_structure(
             structure).set_height(height).set_width(width).set_creator(creator)
+
+    def get_maze(self):
         return self.builder.build()
 
 
@@ -174,7 +211,10 @@ class MazeCreationFacade:
         maze = self.maze_generator.generate_maze(maze_size, type)
         img = self.maze_image_drawer.generate_maze_image(maze)
 
-        new_maze = NewMazeDirector().construct_new_maze(
+        builder = NewMazeDirector()
+        director = NewMazeDirector(builder)
+        director.construct_new_maze(
             name=maze_name, difficulty=maze.difficulty.name, img=img, structure=str(maze.structure), height=int(maze.height), width=int(maze.width), creator=user_id)
+        new_maze = director.get_maze()
 
         return new_maze

@@ -52,7 +52,7 @@ The user authentication and authorisation is handled, the maze and user data is 
 
 > 💡 Orchestrating Application Flow and User Interactions
 
-<img src="images/5_backend_controller_path.png" alt="Code Diagram with path" style="width: 75%;">
+<img src="images/5_backend_controller_path.png" alt="Code Diagram with path" style="width: 70%;">
 
 ### User
 
@@ -116,21 +116,27 @@ I created a [MazeGeneratorFactory](app/models/maze/maze_generator_factory.py) an
 
 The factories are used in the file [generate_maze.py](app/models/maze/generate_maze.py) in the class `MazeGenerator` (line 29).
 
+<img src="images/abstract_factory_method.png" alt="Abstract Factory Method" style="width: 70%;">
+
 ### Facade
 
 I created a [MazeCreationFacade](app/models/maze/generate_maze.py) which simplifies the usage of the underlying subsystems by providing a higher-level and more user-friendly interface to create a maze.
+
+<img src="images/facade_pattern.png" alt="Facade Pattern" style="width: 70%;">
 
 ### Builder
 
 I created a [NewMazeBuilder](app/models/maze/generate_maze.py) and a [NewMazeDirector](app/models/maze/generate_maze.py) to build a [NewMaze](app/models/maze/generate_maze.py). [NewMaze](app/models/maze/generate_maze.py) is a SQLAlchemy model.
 
+<img src="images/builder_pattern.png" alt="Builder Pattern" style="width: 70%;">
+
 ### Model-View-Controller (MVC)
 
 I created a MVC architectural structure for the backend application.
 
-- Views = [Routes](app/controller)
-- Controller = [Controller](app/controller)
-- Models = [Models](app/models)
+- View = [Routes](app/routes)
+- Controller = [Controllers](app/controller)
+- Model = [Models](app/models)
 
 ---
 
