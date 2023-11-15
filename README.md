@@ -108,6 +108,30 @@ These are controller which handle algorithm related tasks. A algorithm can be ne
 - [Save Algorithm Controller](app/controller/algorithm/save_algorithm_controller.py)
   - Saves changes made to the algorithm.
 
+## Design Patterns
+
+### Abstract Factory Method
+
+I created a [MazeGeneratorFactory](app/models/maze/maze_generator_factory.py) and two Factories ([SidewinderFactory](app/models/maze/maze_generator_factory.py), [RecursiveBacktrackingFactory](app/models/maze/maze_generator_factory.py)).
+
+The factories are used in the file [generate_maze.py](app/models/maze/generate_maze.py) in the class `MazeGenerator` (line 29).
+
+### Facade
+
+I created a [MazeCreationFacade](app/models/maze/generate_maze.py) which simplifies the usage of the underlying subsystems by providing a higher-level and more user-friendly interface to create a maze.
+
+### Builder
+
+I created a [NewMazeBuilder](app/models/maze/generate_maze.py) and a [NewMazeDirector](app/models/maze/generate_maze.py) to build a [NewMaze](app/models/maze/generate_maze.py). [NewMaze](app/models/maze/generate_maze.py) is a SQLAlchemy model.
+
+### Model-View-Controller (MVC)
+
+I created a MVC architectural structure for the backend application.
+
+- Views = [Routes](app/controller)
+- Controller = [Controller](app/controller)
+- Models = [Models](app/models)
+
 ---
 
 # Getting Started <a name="started">
