@@ -6,18 +6,22 @@
   - [Overview](#overview)
   - [Controllers](#controllers)
 - [Getting Started](#started)
-- [Running with Docker (recommended)](#docker)
-  - [Prerequisites](#prerequisitesdocker)
-  - [Installation](#installation)
-  - [Setting up the environment](#envdocker)
-  - [Running the application](#rundocker)
-- [Running with Python](#python)
-  - [Prerequisites](#prerequisitespython)
-  - [Flask](#flask)
-  - [Installation](#installationpython)
-  - [Create database](#databasepython)
-  - [Running the application](#runpython)
-- [Available Scripts](#scripts)
+  - [Running with Docker (recommended)](#docker)
+    - [Prerequisites](#prerequisitesdocker)
+    - [Installation](#installation)
+    - [Setting up the environment](#envdocker)
+    - [Running the application](#rundocker)
+  - [Running with Python](#python)
+    - [Prerequisites](#prerequisitespython)
+    - [Flask](#flask)
+    - [Installation](#installationpython)
+    - [Create database](#databasepython)
+    - [Running the application](#runpython)
+  - [Available Scripts](#scripts)
+- [Security](#security)
+  - [List of cyber security measures](#measures)
+  - [Thread Models](#thread)
+    - [List of Security Vulnerabilities and Weaknesses](#vulnerabilities)
 
 ---
 
@@ -118,12 +122,6 @@ The factories are used in the file [generate_maze.py](app/models/maze/generate_m
 
 <img src="images/abstract_factory_method.png" alt="Abstract Factory Method" style="width: 70%;">
 
-### Facade
-
-I created a [MazeCreationFacade](app/models/maze/generate_maze.py) which simplifies the usage of the underlying subsystems by providing a higher-level and more user-friendly interface to create a maze.
-
-<img src="images/facade_pattern.png" alt="Facade Pattern" style="width: 70%;">
-
 ### Builder
 
 I created a [NewMazeBuilder](app/models/maze/generate_maze.py) and a [NewMazeDirector](app/models/maze/generate_maze.py) to build a [NewMaze](app/models/maze/generate_maze.py).
@@ -131,6 +129,12 @@ I created a [NewMazeBuilder](app/models/maze/generate_maze.py) and a [NewMazeDir
 <img src="images/builder_pattern.png" alt="Builder Pattern" style="width: 70%;">
 
 I created a simple [UserBuilder](app/models/user/register_user.py) which created the user at the registration.
+
+### Facade
+
+I created a [MazeCreationFacade](app/models/maze/generate_maze.py) which simplifies the usage of the underlying subsystems by providing a higher-level and more user-friendly interface to create a maze.
+
+<img src="images/facade_pattern.png" alt="Facade Pattern" style="width: 70%;">
 
 ### Model-View-Controller (MVC)
 
@@ -331,3 +335,43 @@ In the project directory you can run:
 #### Delete all user session:
 
     python3 -m app.scripts.deleteSession user_id
+
+---
+
+# Security <a name="security"></a>
+
+The following parts are security measures for the **backend application** here as well as for the [**frontend application**](https://github.com/Lennartstachowiak/maze-runner-website).
+
+## List of cyber security measures <a name="measures"></a>
+
+- **CORS** Allow-Origin: Controls and restricts access to resources from different origins.
+- **Request Origin** Header check at endpoints: Verifies the request's origin header to prevent unauthorized cross-origin requests.
+- Cookie with **httponly** attribute: Prevents JavaScript access to the cookie, reducing the risk of session hijacking and unauthorized account access.
+- Cookie with **secure** attribute: Ensures that the cookie is transmitted only over secure and encrypted HTTPS connections.
+- Backend and frontend hosted on **HTTPS**: Both the backend and frontend are hosted using HTTPS for secure communication.
+- Password is **hashed and salted**: Passwords are securely encrypted using a hash function and unique salts for increased security.
+- Authentication: Users are required to create and **secure passwords**.
+
+## Thread Models <a name="thread"></a>
+
+![Thread Model Table](images/thread_model_table.png)
+
+![Thread Model](images/thread_model.png)
+
+### List of Security Vulnerabilities and Weaknesses <a name="vulnerabilities"></a>
+
+The following list is partly already included in the upper diagram. The diagram was created with help with the following bulletpoints:
+
+- SQL Injections and stored XSS
+- Lack of two-factor authentication for password-based authentication
+- Insufficient input sanitization:
+  - Failure to validate and restrict user input based on expected format (e.g., allowing only alphanumeric characters)
+  - Pain points in my application:
+    - Username and algorithm name inputs
+    - Code in algorithms
+- Insufficient output encoding:
+  - Failure to encode user-generated content before displaying it in HTML or JavaScript contexts
+- DDoS or DoS vulnerability
+- Elevation of Privilege:
+  - Possible to access other user mazes by manipulating the URL ID
+- Lack of logging of the identity of the caller
