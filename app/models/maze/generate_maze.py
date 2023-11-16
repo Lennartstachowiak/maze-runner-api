@@ -34,7 +34,7 @@ class MazeGenerator:
         elif type == "Sidewinder":
             maze_generator = SidewinderFactory().create_generator()
 
-        maze = maze_generator.generate_maze(int(maze_size))
+        maze = maze_generator.generate(int(maze_size))
         return maze
 
 
@@ -211,7 +211,7 @@ class MazeCreationFacade:
         maze = self.maze_generator.generate_maze(maze_size, type)
         img = self.maze_image_drawer.generate_maze_image(maze)
 
-        builder = NewMazeDirector()
+        builder = NewMazeBuilder()
         director = NewMazeDirector(builder)
         director.construct_new_maze(
             name=maze_name, difficulty=maze.difficulty.name, img=img, structure=str(maze.structure), height=int(maze.height), width=int(maze.width), creator=user_id)
