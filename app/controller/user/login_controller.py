@@ -6,7 +6,7 @@ from app.models.user.login_user import login_user
 
 def login_user_controller(request, api):
     bcrypt = Bcrypt(api)
-    email = request.json["email"]
+    email = request.json["email"].lower()
     password = request.json["password"]
 
     user = login_user(bcrypt, email, password)

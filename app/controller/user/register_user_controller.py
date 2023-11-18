@@ -8,6 +8,7 @@ def register_user_controller(request, api):
     bcrypt = Bcrypt(api)
     username = request.json.get("username")
     email = request.json.get("email")
+    email = email.lower()
     password = request.json.get("password")
     repeated_password = request.json.get("repeatedPassword")
 
@@ -19,7 +20,7 @@ def register_user_controller(request, api):
 
     register_data = register_user(bcrypt, username, email, password)
     if register_data == 409:
-        return jsonify({"error": "User already exists"}), 409
+        abort(409)
 
     session_data = register_data
 
