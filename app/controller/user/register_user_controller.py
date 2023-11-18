@@ -1,5 +1,6 @@
-from flask import jsonify, make_response
+from flask import abort, jsonify, make_response
 from flask_bcrypt import Bcrypt
+from app.models.user.check_if_valid_register import check_if_valid_register
 from app.models.user.register_user import register_user
 
 
@@ -8,6 +9,13 @@ def register_user_controller(request, api):
     username = request.json.get("username")
     email = request.json.get("email")
     password = request.json.get("password")
+    repeated_password = request.json.get("repeatedPassword")
+
+    are_credentials_valid = check_if_valid_register(
+        email, password, repeated_password)
+
+    if not are_credentials_valid:
+        abort(401)
 
     register_data = register_user(bcrypt, username, email, password)
     if register_data == 409:
