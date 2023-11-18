@@ -14,6 +14,10 @@ def register_validation(api):
         if request.endpoint != "connect" and origin != expected_origin:
             return {"error": "Invalid request origin"}, 403
 
+    @api.errorhandler(409)
+    def conflict(error):
+        return jsonify({"error": "Conflict"}), 409
+
     @api.errorhandler(401)
     def unauthorized(error):
         return jsonify({"error": "Unauthorized"}), 401
