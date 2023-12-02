@@ -148,7 +148,7 @@ class MazeBuilderInterface(ABC):
         pass
 
     @abstractmethod
-    def build(self):
+    def get_maze(self):
         pass
 
 
@@ -184,7 +184,7 @@ class NewMazeBuilder(MazeBuilderInterface):
         self.maze.creator = creator
         return self
 
-    def build(self):
+    def get_maze(self):
         return self.maze.get_new_maze()
 
 
@@ -196,25 +196,23 @@ class NewMazeDirector:
         self.builder.set_name(name).set_difficulty(difficulty).set_img(img).set_structure(
             structure).set_height(height).set_width(width).set_creator(creator)
 
-    def get_maze(self):
-        return self.builder.build()
-
 
 class MazeCreationFacade:
     def __init__(self):
+        self.maze = None
         self.input_validation = InputValidation()
         self.maze_generator = MazeGenerator()
         self.maze_image_drawer = MazeImageDrawer()
 
     def get_generated_maze(self, user_id, maze_name, maze_size, type):
         self.input_validation.validate(maze_size, type)
-        maze = self.maze_generator.generate_maze(maze_size, type)
-        img = self.maze_image_drawer.generate_maze_image(maze)
+        self.maze = self.maze_generator.generate_maze(maze_size, type)
+        img = self.maze_image_drawer.generate_maze_image(self.maze)
 
         builder = NewMazeBuilder()
         director = NewMazeDirector(builder)
         director.construct_new_maze(
-            name=maze_name, difficulty=maze.difficulty.name, img=img, structure=str(maze.structure), height=int(maze.height), width=int(maze.width), creator=user_id)
-        new_maze = director.get_maze()
+            name=maze_name, difficulty=self.maze.difficulty.name, img=img, structure=str(self.maze.structure), height=int(self.maze.height), width=int(self.maze.width), creator=user_id)
+        new_maze = builder.get_maze()
 
         return new_maze
