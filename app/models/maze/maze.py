@@ -1,10 +1,5 @@
-import base64
-import random
 import json
 import subprocess
-from io import BytesIO
-from PIL import Image, ImageDraw
-from abc import ABC, abstractmethod
 
 
 class Cell:
