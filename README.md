@@ -4,7 +4,9 @@
 
 - [Documentation](#documentation)
   - [Overview](#overview)
+  - [Diagrams](#diagram)
   - [Controllers](#controllers)
+  - [Design Patterns](#design)
 - [Getting Started](#started)
   - [Running with Docker (recommended)](#docker)
     - [Prerequisites](#prerequisitesdocker)
@@ -25,9 +27,9 @@
 
 ---
 
-# Documentation <a name="documentation">
+# Documentation <a name="documentation"></a>
 
-## Overview <a name="overview">
+## Overview <a name="overview"></a>
 
 Here is the link to the hosted website of [Maze Runner](https://maze-runner-website.vercel.app/).
 
@@ -46,7 +48,9 @@ The user authentication and authorisation is handled, the maze and user data is 
 - The backend is built with [Python](https://www.python.org/) and [Flask](https://flask.palletsprojects.com/en/3.0.x/).
 - The database is [PostgreSQL](https://www.postgresql.org/) and it uses [SQLAlchamy](https://www.sqlalchemy.org/) as ORM and [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/) to handle SQLAlchemy database migrations.
 
-### Project Structure / Diagram
+### Project Structure / Diagram <a name="diagram"></a>
+
+#### Structure - C4 Diagram
 
 |                     [Context Diagram](images/1_mms_overview.png)                      |                    [Container Diagram](images/2_application_overview.png)                    |
 | :-----------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: |
@@ -54,7 +58,13 @@ The user authentication and authorisation is handled, the maze and user data is 
 |                  [Component Diagram](images/3_backend_overview.png)                   |                       [Code Diagram](images/4_backend_controller.png)                        |
 | <img src="images/3_backend_overview.png" alt="Backend Overview" style="width: 120%;"> |   <img src="images/4_backend_controller.png" alt="Backend Controller" style="width: 80%;">   |
 
-## Controllers <a name="controllers">
+#### Maze Creation - UML Class Diagram
+
+> 💡 Smaller Diagrams of each Design Pattern can be find [here](#design)
+
+<img src="images/maze_creation_class_diagram.png" alt="Maze Creation class diagram">
+
+## Controllers <a name="controllers"></a>
 
 > 💡 Orchestrating Application Flow and User Interactions
 
@@ -114,7 +124,7 @@ These are controller which handle algorithm related tasks. A algorithm can be ne
 - [Save Algorithm Controller](app/controller/algorithm/save_algorithm_controller.py)
   - Saves changes made to the algorithm.
 
-## Design Patterns
+## Design Patterns <a name="design"></a>
 
 ### Abstract Factory Method
 
@@ -148,7 +158,7 @@ I created a MVC architectural structure for the backend application.
 
 ---
 
-# Getting Started <a name="started">
+# Getting Started <a name="started"></a>
 
 You can run the programm locally in two different ways.
 
