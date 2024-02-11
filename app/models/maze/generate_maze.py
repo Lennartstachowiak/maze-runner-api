@@ -22,9 +22,10 @@ class GenerationTypes:
 class InputValidation:
     def validate(self, maze_size, type):
         if maze_size > 30 or maze_size < 4:
-            abort(400, "Invalid request")
+            return False
         if GenerationTypes().is_type_valid(type):
-            abort(400, "Invalid request")
+            return False
+        return True
 
 
 class MazeGenerator:
@@ -205,7 +206,9 @@ class MazeCreationFacade:
         self.maze_image_drawer = MazeImageDrawer()
 
     def get_generated_maze(self, user_id, maze_name, maze_size, type):
-        self.input_validation.validate(maze_size, type)
+        isValid = self.input_validation.validate(maze_size, type)
+        if (isValid == False):
+            abort(400, "Invalid request")
         self.maze = self.maze_generator.generate_maze(maze_size, type)
         img = self.maze_image_drawer.generate_maze_image(self.maze)
 
