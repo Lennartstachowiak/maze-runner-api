@@ -45,13 +45,18 @@ class Users(db.Model, CRUDMixin):
     username = db.Column(db.String(32), unique=True)
     email = db.Column(db.String(32), unique=True)
     password = db.Column(db.Text, nullable=False)
+    algorithms = db.relationship('Algorithms', backref='user', lazy=True)
+    highscores = db.relationship('Highscores', backref='user', lazy=True)
+    mazes = db.relationship('Mazes', backref='user', lazy=True)
+    sessions = db.relationship('SessionAuth', backref='user', lazy=True)
 
 
 class SessionAuth(db.Model, CRUDMixin):
     __tablename__ = "sessions"
     id = db.Column(db.String(32), primary_key=True,
                    unique=True, default=get_uuid)
-    userId = db.Column(db.String(32), unique=True)
+    userId = db.Column(db.String(32), db.ForeignKey(
+        'users.id'), nullable=False, unique=True)
     expiryDate = db.Column(db.Date())
 
 
@@ -67,7 +72,9 @@ class Mazes(db.Model, CRUDMixin):
     height = db.Column(db.Integer, nullable=False)
     width = db.Column(db.Integer, nullable=False)
     isTest = db.Column(db.Boolean, default=False)
-    creator = db.Column(db.String(32), default="official")
+    creator = db.Column(db.String(32), db.ForeignKey(
+        'users.id'), nullable=False)
+    highscores = db.relationship('Highscores', backref='maze', lazy=True)
 
 
 class Highscores(db.Model, CRUDMixin):
@@ -92,3 +99,4 @@ class Algorithms(db.Model, CRUDMixin):
     userId = db.Column(db.String(32), db.ForeignKey(
         'users.id'), nullable=False)
     isWorking = db.Column(db.Boolean, default=False)
+    highscores = db.relationship('Highscores', backref='algorithm', lazy=True)

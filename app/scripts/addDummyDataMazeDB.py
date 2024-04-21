@@ -9,20 +9,18 @@ api.app_context().push()
 
 sidewinder_maze_generator = RecursiveBacktrackingFactory().create_generator()
 
+maze_image_drawer = MazeImageDrawer()
+
 simple_maze = sidewinder_maze_generator.generate(10)
-simple_maze_image_byte_array = MazeImageDrawer.generate_maze_image(simple_maze)
-simple_maze_image_base_64 = base64.b64encode(
-    simple_maze_image_byte_array).decode('utf-8')
+simple_maze_image_base_64 = maze_image_drawer.generate_maze_image(
+    simple_maze)
 
 medium_maze = sidewinder_maze_generator.generate(20)
-medium_maze_image_byte_array = MazeImageDrawer.generate_maze_image(medium_maze)
-medium_maze_image_base_64 = base64.b64encode(
-    medium_maze_image_byte_array).decode('utf-8')
+medium_maze_image_base_64 = maze_image_drawer.generate_maze_image(medium_maze)
 
 hard_maze = sidewinder_maze_generator.generate(30)
-hard_maze_image_byte_array = MazeImageDrawer.generate_maze_image(hard_maze)
-hard_maze_image_base_64 = base64.b64encode(
-    hard_maze_image_byte_array).decode('utf-8')
+hard_maze_image_base_64 = maze_image_drawer.generate_maze_image(hard_maze)
+
 
 dummy_mazes = [{"id": 100, "isTest": True, "name": "Test Maze", "difficulty": simple_maze.difficulty.name, "imgLink": simple_maze_image_base_64,
                "structure": simple_maze.structure, "height": simple_maze.height, "width": simple_maze.width},

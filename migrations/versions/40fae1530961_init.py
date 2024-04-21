@@ -1,8 +1,8 @@
-"""changed score in highscores from integer to float
+"""init
 
-Revision ID: 659c864175f7
+Revision ID: 40fae1530961
 Revises: 
-Create Date: 2023-11-12 18:54:01.565468
+Create Date: 2024-04-21 19:28:40.406955
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '659c864175f7'
+revision = '40fae1530961'
 down_revision = None
 branch_labels = None
 depends_on = None

@@ -275,9 +275,9 @@ You need to create a `.env` file in the root directory and need to add the datab
 
 #### Set up database
 
-Migration folder (`/migrations`) for the database structure should already set.
+Migration folder (`/migrations`) for the database structure should already exist.
 
-If not run this command:
+If not, run this command:
 
 -     flask db init
 -     flask db migrate -m 'init'
