@@ -7,6 +7,7 @@ from app.controller.maze.get_my_mazes_controller import get_my_mazes_controller
 from app.controller.maze.get_user_mazes_controller import get_user_mazes_controller
 from app.controller.maze.get_single_maze_controller import get_single_maze_controller
 from app.controller.maze.follow_maze_controller import follow_maze_controller
+from app.controller.maze.get_followed_mazes_controller import get_followed_mazes_controller
 from db import models
 
 User = models.Users
@@ -55,4 +56,9 @@ def register_maze_routes(api):
     @ api.route("/v1/follow_maze", methods=["POST"])
     def follow_maze_request():
         response = follow_maze_controller(request)
+        return response
+
+    @ api.route("/v1/get_followed_maze", methods=["GET"])
+    def get_followed_maze_request():
+        response = get_followed_mazes_controller(request)
         return response

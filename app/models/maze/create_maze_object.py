@@ -5,5 +5,5 @@ from db.models import Mazes
 def create_maze_object(maze: type[Mazes]):
     highscores = get_maze_highscores(maze.id)
     maze = {"id": maze.id, "name": maze.name,
-            "difficulty": maze.difficulty, "imgLink": maze.imgLink, "highscores": highscores, "structure": maze.structure}
+            "difficulty": maze.difficulty, "imgLink": maze.imgLink, "highscores": highscores, "structure": maze.structure, "official": False}
     return maze

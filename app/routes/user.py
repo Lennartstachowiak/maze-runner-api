@@ -4,6 +4,8 @@ from app.controller.user.logout_controller import logout_user_controller
 from app.controller.user.register_user_controller import register_user_controller
 from app.controller.user.get_me_user_controller import get_me_user_controller
 from app.controller.user.follow_user_controller import follow_user_controller
+from app.controller.user.user_following_controller import user_following_controller
+from app.controller.user.user_followers_controller import user_followers_controller
 from app.controller.user.search_user_controller import search_user_controller
 from app.controller.user.get_user_controller import get_user_controller
 from db import models
@@ -42,6 +44,16 @@ def register_user_routes(api):
     @ api.route("/v1/follow_user", methods=["POST"])
     def follow_user_request():
         response = follow_user_controller(request)
+        return response
+
+    @ api.route("/v1/user_following", methods=["GET"])
+    def user_following_request():
+        response = user_following_controller(request)
+        return response
+
+    @ api.route("/v1/user_followers", methods=["GET"])
+    def user_followers_request():
+        response = user_followers_controller(request)
         return response
 
     @ api.route("/v1/search_user", methods=["POST"])

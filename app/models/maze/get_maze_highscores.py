@@ -10,5 +10,5 @@ def get_maze_highscores(maze_id):
     highscoreList = []
     for highscore in highscores:
         highscoreList.append(
-            {"name": highscore.user.email, "algorithm_name": highscore.algorithm.name, "score": highscore.score})
+            {"user_id": highscore.user.id, "name": highscore.user.email, "algorithm_name": highscore.algorithm.name, "score": highscore.score})
     return highscoreList

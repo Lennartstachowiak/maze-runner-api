@@ -6,7 +6,8 @@ from flask import abort
 
 def follow_user_controller(request):
     try:
-        user_id = get_user(request)
+        user = get_user(request)
+        user_id = user.id
         user_id_followed = request.json["userIdFollowed"]
         register_data = follow_user(user_id, user_id_followed)
         if register_data == 409:

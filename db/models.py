@@ -1,6 +1,6 @@
 from uuid import uuid4
 from .db import db, CRUDMixin
-from sqlalchemy import UniqueConstraint
+from sqlalchemy import UniqueConstraint, CheckConstraint
 
 
 def get_uuid():
@@ -138,4 +138,6 @@ class UserFollowers(db.Model, CRUDMixin):
     followerId = db.Column(db.String(32), db.ForeignKey(
         'users.id'), nullable=False, index=True)
     __table_args__ = (UniqueConstraint(
-        'userId', 'followerId', name='_user_follower_uc'),)
+        'userId', 'followerId', name='_user_follower_uc'),
+        CheckConstraint(
+            'userId!=followerId', name='_user_follower_check_'))
