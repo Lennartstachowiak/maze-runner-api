@@ -4,7 +4,9 @@ from app.controller.maze.generate_maze_controller import generate_maze_controlle
 from app.controller.maze.get_maze_algorithm_solution_controller import get_maze_algorithm_solution_controller
 from app.controller.maze.get_mazes_controller import get_mazes_contoller
 from app.controller.maze.get_my_mazes_controller import get_my_mazes_controller
+from app.controller.maze.get_user_mazes_controller import get_user_mazes_controller
 from app.controller.maze.get_single_maze_controller import get_single_maze_controller
+from app.controller.maze.follow_maze_controller import follow_maze_controller
 from db import models
 
 User = models.Users
@@ -25,6 +27,11 @@ def register_maze_routes(api):
         response = get_my_mazes_controller(request)
         return response
 
+    @ api.route("/v1/get_user_mazes", methods=["GET"])
+    def get_user_maze_request():
+        response = get_user_mazes_controller(request)
+        return response
+
     @api.route("/v1/get_single_maze", methods=["GET"])
     def get_single_maze_request():
         response = get_single_maze_controller(request)
@@ -43,4 +50,9 @@ def register_maze_routes(api):
     @api.route("/v1/delete_maze", methods=["DELETE"])
     def delete_maze_request():
         response = delete_maze_controller(request)
+        return response
+
+    @ api.route("/v1/follow_maze", methods=["POST"])
+    def follow_maze_request():
+        response = follow_maze_controller(request)
         return response

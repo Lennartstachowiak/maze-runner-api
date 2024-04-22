@@ -1,5 +1,4 @@
 from db import models
-from app.controller.user.session_controller import session_controller
 
 User = models.Users
 

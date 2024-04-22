@@ -6,6 +6,12 @@ User = models.Users
 SessionAuth = models.SessionAuth
 
 
+def get_user_by_id(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    print("USERSS", user.username)
+    return user
+
+
 def get_user(request):
     user_id = get_user_id(request)
     user = User.query.filter_by(id=user_id).first()

@@ -25,3 +25,7 @@ def register_validation(api):
     @api.errorhandler(400)
     def invalid_request(error):
         return jsonify({"error": "Invalid request"}), 400
+
+    @api.errorhandler(500)
+    def conflict(error):
+        return jsonify({"error": "Internal server error"}), 500
