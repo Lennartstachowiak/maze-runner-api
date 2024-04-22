@@ -1,5 +1,6 @@
 from uuid import uuid4
 from .db import db, CRUDMixin
+from sqlalchemy import UniqueConstraint
 
 
 def get_uuid():
@@ -49,6 +50,19 @@ class Users(db.Model, CRUDMixin):
     highscores = db.relationship('Highscores', backref='user', lazy=True)
     mazes = db.relationship('Mazes', backref='user', lazy=True)
     sessions = db.relationship('SessionAuth', backref='user', lazy=True)
+    mazeFollower = db.relationship('MazeFollowers', backref='user', lazy=True)
+    followers = db.relationship(
+        'UserFollowers',
+        foreign_keys='UserFollowers.followerId',
+        backref='followers',
+        lazy='dynamic'
+    )
+    follows = db.relationship(
+        'UserFollowers',
+        foreign_keys='UserFollowers.userId',
+        backref='follows',
+        lazy='dynamic'
+    )
 
 
 class SessionAuth(db.Model, CRUDMixin):
@@ -75,6 +89,7 @@ class Mazes(db.Model, CRUDMixin):
     creator = db.Column(db.String(32), db.ForeignKey(
         'users.id'), nullable=False, index=True)
     highscores = db.relationship('Highscores', backref='maze', lazy=True)
+    maze_follower = db.relationship('MazeFollowers', backref='maze', lazy=True)
 
 
 class Highscores(db.Model, CRUDMixin):
@@ -100,3 +115,27 @@ class Algorithms(db.Model, CRUDMixin):
         'users.id'), nullable=False, index=True)
     isWorking = db.Column(db.Boolean, default=False)
     highscores = db.relationship('Highscores', backref='algorithm', lazy=True)
+
+
+class MazeFollowers(db.Model, CRUDMixin):
+    __tablename__ = "maze_followers"
+    id = db.Column(db.String(32), primary_key=True,
+                   unique=True, default=get_uuid)
+    mazeId = db.Column(
+        db.String(32), db.ForeignKey('mazes.id'), nullable=False, index=True)
+    followerId = db.Column(db.String(32), db.ForeignKey(
+        'users.id'), nullable=False, index=True)
+    __table_args__ = (UniqueConstraint(
+        'mazeId', 'followerId', name='_maze_follower_uc'),)
+
+
+class UserFollowers(db.Model, CRUDMixin):
+    __tablename__ = "user_followers"
+    id = db.Column(db.String(32), primary_key=True,
+                   unique=True, default=get_uuid)
+    userId = db.Column(db.String(32), db.ForeignKey(
+        'users.id'), nullable=False, index=True)
+    followerId = db.Column(db.String(32), db.ForeignKey(
+        'users.id'), nullable=False, index=True)
+    __table_args__ = (UniqueConstraint(
+        'userId', 'followerId', name='_user_follower_uc'),)

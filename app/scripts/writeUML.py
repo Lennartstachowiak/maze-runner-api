@@ -13,4 +13,4 @@ for attr_name in dir(models):
 
 # pass them to the function and set some formatting options
 graph = create_uml_graph(mappers)
-graph.write('schema.txt', prog='dot', format="raw")
+graph.write('schema.png', prog='dot', format="png")

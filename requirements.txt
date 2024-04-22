@@ -43,7 +43,8 @@ redis==4.3.4
 requests==2.31.0
 six==1.16.0
 soupsieve==2.4.1
-SQLAlchemy==1.4.41
+SQLAlchemy==2.0.29
+sqlalchemy_schemadisplay==2.0
 toml==0.10.2
 tomli==2.0.1
 urllib3==2.0.2
