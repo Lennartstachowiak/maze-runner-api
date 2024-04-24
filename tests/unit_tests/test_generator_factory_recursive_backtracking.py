@@ -1,5 +1,9 @@
 import pytest
-from app.models.maze.maze_generator_factory import RecursiveBacktrackingFactory, RecursiveBacktracking, Cell
+from app.models.maze.maze_generator_factory import (
+    RecursiveBacktrackingFactory,
+    RecursiveBacktracking,
+    Cell,
+)
 import copy
 
 
@@ -13,8 +17,7 @@ def test_maze_generator_factory_for_sidewinder():
 def recursive_backtracking_maze():
     size = 10
     recursive_backtracking_maze_generator = RecursiveBacktrackingFactory().create_generator()
-    recursive_backtracking_maze = recursive_backtracking_maze_generator.generate(
-        size)
+    recursive_backtracking_maze = recursive_backtracking_maze_generator.generate(size)
     return recursive_backtracking_maze
 
 
@@ -32,9 +35,11 @@ def test_generated_maze_goals(recursive_backtracking_maze):
 
 def test_sidewinder_algorithm(recursive_backtracking_maze):
     # Test if structure changes and is not empty / initial structure
-    initial_maze = [[Cell(), Cell(), Cell()],
-                    [Cell(), Cell(), Cell()],
-                    [Cell(), Cell(), Cell()]]
+    initial_maze = [
+        [Cell(), Cell(), Cell()],
+        [Cell(), Cell(), Cell()],
+        [Cell(), Cell(), Cell()],
+    ]
     assert initial_maze is not recursive_backtracking_maze.structure
 
 
@@ -49,7 +54,7 @@ def test_maze_has_valid_path(recursive_backtracking_maze):
             visited.add((x, y))
             if current_cell.goal:
                 return True
-            directions = ['north', 'east', 'south', 'west']
+            directions = ["north", "east", "south", "west"]
             deltas = [(-1, 0), (0, 1), (1, 0), (0, -1)]  # N, E, S, W
             for i in range(len(directions)):
                 direction = directions[i]
@@ -62,6 +67,7 @@ def test_maze_has_valid_path(recursive_backtracking_maze):
                 if (new_x, new_y) not in visited:
                     queue.add((new_x, new_y))
         return False
+
     assert has_path_to_goal(start_position) is True
 
 
@@ -75,7 +81,7 @@ def test_maze_doesnt_have_open_walls(recursive_backtracking_maze):
             current_cell_top: Cell = recursive_backtracking_maze.structure[0][i]
             if current_cell_top.north == 0:
                 return False
-            current_cell_bottom: Cell = recursive_backtracking_maze.structure[maze_height-1][i]
+            current_cell_bottom: Cell = recursive_backtracking_maze.structure[maze_height - 1][i]
             if current_cell_bottom.south == 0:
                 return False
         # Check left and right
@@ -83,7 +89,7 @@ def test_maze_doesnt_have_open_walls(recursive_backtracking_maze):
             current_cell_left: Cell = recursive_backtracking_maze.structure[i][0]
             if current_cell_left.west == 0:
                 return False
-            current_cell_right: Cell = recursive_backtracking_maze.structure[i][maze_width-1]
+            current_cell_right: Cell = recursive_backtracking_maze.structure[i][maze_width - 1]
             if current_cell_right.east == 0:
                 return False
         return True
@@ -99,7 +105,6 @@ def test_maze_randomness():
     second_maze = recursive_backtracking_maze_generator.generate(size)
     first_maze_copy = copy.deepcopy(first_maze)
 
-    is_same_maze_same = first_maze.__str__() == first_maze_copy.__str__(
-    )
+    is_same_maze_same = first_maze.__str__() == first_maze_copy.__str__()
     is_different_maze_different = first_maze.__str__() != second_maze.__str__()
     assert is_same_maze_same and is_different_maze_different

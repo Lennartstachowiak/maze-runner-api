@@ -5,12 +5,24 @@ import datetime
 
 
 def create_test_users():
-    new_user_one = Users(id=100000, username="User One",
-                         email="one@web.com", password="password")
-    new_user_two = Users(id=100001, username="User Two",
-                         email="two@web.com", password="password")
-    new_user_three = Users(id=100002, username="User Three",
-                           email="three@web.com", password="password")
+    new_user_one = Users(
+        id=100000,
+        username="User One",
+        email="one@web.com",
+        password="password",
+    )
+    new_user_two = Users(
+        id=100001,
+        username="User Two",
+        email="two@web.com",
+        password="password",
+    )
+    new_user_three = Users(
+        id=100002,
+        username="User Three",
+        email="three@web.com",
+        password="password",
+    )
     db.session.add(new_user_one)
     db.session.add(new_user_two)
     db.session.add(new_user_three)
@@ -28,11 +40,26 @@ def create_test_session():
 
 def create_test_algorithm():
     user_one_algorithm = Algorithms(
-        id=1, userId=100000, name='User One Algorithm', code='console.log(Hello World)', isWorking=True)
+        id=1,
+        userId=100000,
+        name="User One Algorithm",
+        code="console.log(Hello World)",
+        isWorking=True,
+    )
     user_two_algorithm = Algorithms(
-        id=2, userId=100001, name='User Two Algorithm', code='console.log(Hello World)', isWorking=True)
+        id=2,
+        userId=100001,
+        name="User Two Algorithm",
+        code="console.log(Hello World)",
+        isWorking=True,
+    )
     user_three_algorithm = Algorithms(
-        id=3, userId=100002, name='User Three Algorithm', code='console.log(Hello World)', isWorking=True)
+        id=3,
+        userId=100002,
+        name="User Three Algorithm",
+        code="console.log(Hello World)",
+        isWorking=True,
+    )
     db.session.add(user_one_algorithm)
     db.session.add(user_two_algorithm)
     db.session.add(user_three_algorithm)

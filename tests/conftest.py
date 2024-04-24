@@ -8,8 +8,8 @@ from flask_migrate import upgrade
 def client_and_api():
     # use the default in-memory SQLite database for our tests.
     # We don't want our testing data to exist permanently
-    environ['DATABASE_TYPE'] = 'sqlite'
-    environ['ALLOW_ORIGIN'] = '*'
+    environ["DATABASE_TYPE"] = "sqlite"
+    environ["ALLOW_ORIGIN"] = "*"
     # environ['DATABASE_URL'] = 'sqlite://'
 
     api = create_api()

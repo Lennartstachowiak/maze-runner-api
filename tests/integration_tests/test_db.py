@@ -1,4 +1,3 @@
-from sqlite3 import IntegrityError
 import pytest
 from db.models import Users, Mazes, Algorithms
 from db.db import db
@@ -22,8 +21,7 @@ password = "testpassword"
 
 def test_user_creation(client_and_session):
     client, session = client_and_session
-    new_user = Users(id=user_id, username=username, email=email,
-                     password=password)
+    new_user = Users(id=user_id, username=username, email=email, password=password)
     session.add(new_user)
     session.commit()
     test_user = Users.query.filter_by(id=1).first()
@@ -43,8 +41,17 @@ creator = 1
 
 def test_maze_creation(client_and_session):
     client, session = client_and_session
-    new_maze = Mazes(id=maze_id, name=maze_name, difficulty=difficulty,
-                     imgLink=imgLink, structure=structure, height=height, width=width, isTest=isTest, creator=creator)
+    new_maze = Mazes(
+        id=maze_id,
+        name=maze_name,
+        difficulty=difficulty,
+        imgLink=imgLink,
+        structure=structure,
+        height=height,
+        width=width,
+        isTest=isTest,
+        creator=creator,
+    )
     session.add(new_maze)
     session.commit()
     test_maze = Mazes.query.filter_by(id=1).first()
@@ -71,8 +78,7 @@ userId = 1
 
 def test_algorithm_creation(client_and_session):
     client, session = client_and_session
-    new_alg = Algorithms(id=alg_id, name=alg_name, code=code,
-                         userId=userId)
+    new_alg = Algorithms(id=alg_id, name=alg_name, code=code, userId=userId)
     session.add(new_alg)
     session.commit()
     test_maze = Algorithms.query.filter_by(id=1).first()
