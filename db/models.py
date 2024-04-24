@@ -79,7 +79,7 @@ class Mazes(db.Model, CRUDMixin):
     height = db.Column(db.Integer, nullable=False)
     width = db.Column(db.Integer, nullable=False)
     is_test = db.Column(db.Boolean, default=False)
-    creator = db.Column(db.String(32), db.ForeignKey("users.id"), nullable=False, index=True)
+    creator = db.Column(db.String(32), db.ForeignKey("users.id"), nullable=True, index=True)
     highscores = db.relationship("Highscores", backref="maze", lazy=True)
     maze_follower = db.relationship("MazeFollowers", backref="maze", lazy=True)
 

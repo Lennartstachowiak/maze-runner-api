@@ -68,7 +68,6 @@ for maze in dummy_mazes:
             structure=str(maze["structure"]),
             height=int(maze["height"]),
             width=int(maze["width"]),
-            creator="official",
         )
     else:
         new_maze = Mazes(
@@ -78,6 +77,5 @@ for maze in dummy_mazes:
             structure=str(maze["structure"]),
             height=int(maze["height"]),
             width=int(maze["width"]),
-            creator="official",
         )
     new_maze.save()
