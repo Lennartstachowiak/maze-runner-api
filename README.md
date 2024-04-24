@@ -273,6 +273,10 @@ You need to create a `.env` file in the root directory and need to add the datab
     SECRET_KEY=your_secret_key
     ALLOW_ORIGIN=http://localhost:3000
 
+If you get an error by setting up the database, make sure to run:
+
+    source .env
+
 #### Set up database
 
 Migration folder (`/migrations`) for the database structure should already exist.

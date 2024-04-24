@@ -16,14 +16,16 @@ class GenerationTypes:
         SIDEWINDER = "Sidewinder"
 
     def is_type_valid(self, type):
-        return type in self.GenerationTypesEnum.__members__.values()
+        enum_list = list(self.GenerationTypesEnum.__members__.values())
+        string_list = [enum.value for enum in enum_list]
+        return type in string_list
 
 
 class InputValidation:
     def validate(self, maze_size, type):
-        if maze_size > 30 or maze_size < 4:
-            return False
-        if GenerationTypes().is_type_valid(type):
+        isCorrectSize = maze_size < 30 and maze_size > 4
+        isValid = GenerationTypes().is_type_valid(type)
+        if not isCorrectSize or not isValid:
             return False
         return True
 
