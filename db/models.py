@@ -66,14 +66,14 @@ class SessionAuth(db.Model, CRUDMixin):
     expiry_date = db.Column(db.Date())
 
 
-difficulty_enum = db.Enum("Easy", "Medium", "Hard", name="difficulty", create_type=False)
+# difficulty_enum = db.Enum("Easy", "Medium", "Hard", name="difficulty")
 
 
 class Mazes(db.Model, CRUDMixin):
     __tablename__ = "mazes"
     id = db.Column(db.String(32), primary_key=True, unique=True, default=get_uuid)
     name = db.Column(db.Text, unique=True, nullable=False)
-    difficulty = db.Column(difficulty_enum, nullable=False)
+    difficulty = db.Column(db.Text, nullable=False)
     img_link = db.Column(db.Text, nullable=False)
     structure = db.Column(db.Text, nullable=False)
     height = db.Column(db.Integer, nullable=False)
