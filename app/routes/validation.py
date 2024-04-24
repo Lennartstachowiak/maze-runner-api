@@ -11,6 +11,7 @@ def register_validation(api):
     @api.before_request
     def validate_origin():
         origin = request.headers.get("Origin")
+        print("TEST ORIGIN", origin, expected_origin)
         if request.endpoint != "connect" and origin != expected_origin:
             return {"error": "Invalid request origin"}, 403
 
