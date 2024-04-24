@@ -5,7 +5,7 @@ default_algorithm = """function returnSolution(node, maze) {
     const visited = [];
 
     function solveMaze(node) {
-    
+
     }
 
     solveMaze(node);

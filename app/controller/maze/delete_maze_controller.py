@@ -4,7 +4,6 @@ from app.models.maze.delete_maze import delete_maze
 from app.models.maze.get_maze_highscores import get_maze_highscores
 from app.models.maze.get_single_maze import get_single_maze
 from app.models.user.get_user import get_user_id
-from db.db import db
 from db import models
 
 Mazes = models.Mazes

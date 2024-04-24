@@ -14,5 +14,5 @@ def follow_maze_controller(request):
             abort(409, 'Conflict')
         response = {"status": 200}
         return jsonify(response)
-    except:
+    except Exception:
         abort(400, "Internal server error")

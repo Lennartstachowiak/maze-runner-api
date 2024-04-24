@@ -2,7 +2,6 @@ from flask import abort, jsonify
 from app.models.algorithm.get_single_algorithm import get_single_algorithm
 from app.models.algorithm.rename_algorithm import rename_algorithm
 from app.models.user.get_user import get_user
-from db.db import db
 from db.models import Algorithms
 
 

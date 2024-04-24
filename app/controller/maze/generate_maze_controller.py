@@ -3,7 +3,6 @@ from app.models.maze.add_maze import add_maze
 from app.models.maze.check_if_maze_available import check_if_maze_available
 from app.models.maze.generate_maze import MazeCreationFacade
 from app.models.user.get_user import get_user_id
-from db.db import db
 from db.models import Mazes
 
 

@@ -82,9 +82,6 @@ class Maze:
         }
         return maze_dict
 
-    def __str__(self):
-        return json.dumps(self.to_dict())
-
     def __repr__(self):
         return self.__str__()
 
@@ -104,7 +101,7 @@ class Maze:
             for column_index, cell in enumerate(row):
                 # Refactor this part is duplicated
                 cell = self.structure[row_index][column_index]
-                if type(cell) == dict:
+                if isinstance(cell, dict):
                     cell = Cell(**cell)
                 cell_represent = [
                     ["#", " ", " ", "#"],
@@ -167,14 +164,14 @@ class Maze:
                     cell_represent[2][3] = "#"
 
                 # Start
-                if cell.start == True:
+                if cell.start is True:
                     cell_represent[1][1] = "S"
                     cell_represent[1][2] = "S"
                     cell_represent[2][1] = "S"
                     cell_represent[2][2] = "S"
 
                 # Goal
-                if cell.goal == True:
+                if cell.goal is True:
                     cell_represent[1][1] = "X"
                     cell_represent[1][2] = "X"
                     cell_represent[2][1] = "X"
@@ -207,7 +204,7 @@ class MazeSolver:
             for col in range(self.maze.width):
                 # Refactor this part is duplicated
                 cell = self.maze.structure[row][col]
-                if type(cell) == dict:
+                if isinstance(cell, dict):
                     cell = Cell(**cell)
                 if cell.start:
                     return (row, col)

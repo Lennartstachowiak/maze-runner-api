@@ -1,4 +1,4 @@
-from flask import abort, jsonify, make_response
+from flask import abort, make_response
 from flask_bcrypt import Bcrypt
 from app.controller.user.session_controller import session_controller
 from app.models.user.login_user import login_user

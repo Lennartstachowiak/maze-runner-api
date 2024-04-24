@@ -2,7 +2,6 @@ from flask import jsonify
 from app.models.algorithm.add_new_algorithm import add_new_algorithm
 from app.models.algorithm.get_new_algorithm import get_new_algorithm
 from app.models.user.get_user import get_user
-from db.db import db
 from db.models import Algorithms
 
 

@@ -2,7 +2,6 @@ from api import create_api
 from app.models.maze.generate_maze import MazeImageDrawer
 from app.models.maze.maze_generator_factory import RecursiveBacktrackingFactory
 from db.models import Mazes
-import base64
 
 api = create_api()
 api.app_context().push()

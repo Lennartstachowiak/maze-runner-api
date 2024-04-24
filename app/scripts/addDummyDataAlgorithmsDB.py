@@ -1,6 +1,5 @@
 import sys
 from api import create_api
-from db.models import Algorithms
 from db.models import Users
 from addAlgorithms import addAlgorithms
 

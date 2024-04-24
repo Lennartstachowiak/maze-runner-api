@@ -1,4 +1,4 @@
-from flask import abort, jsonify, make_response
+from flask import abort, make_response
 from flask_bcrypt import Bcrypt
 from app.models.user.check_if_valid_register import check_if_valid_register
 from app.models.user.register_user import register_user

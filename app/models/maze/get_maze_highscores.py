@@ -1,4 +1,4 @@
-from db.models import Highscores, Users, Mazes, Algorithms
+from db.models import Highscores, Users, Algorithms
 
 
 def get_maze_highscores(maze_id):

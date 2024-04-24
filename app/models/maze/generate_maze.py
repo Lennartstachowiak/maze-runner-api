@@ -88,7 +88,7 @@ class MazeImageDrawer:
                     draw.rectangle(rect, fill="green")
                 else:
                     draw.rectangle(rect, fill="white")
-        filename = "maze.png"
+        # filename = "maze.png"
         byte_array = BytesIO()
         # use filename in save() for local testing to generate pngs
         # and use byte_array to save it as sendable data
@@ -209,7 +209,7 @@ class MazeCreationFacade:
 
     def get_generated_maze(self, user_id, maze_name, maze_size, type):
         isValid = self.input_validation.validate(maze_size, type)
-        if (isValid == False):
+        if (isValid is False):
             abort(400, "Invalid request")
         self.maze = self.maze_generator.generate_maze(maze_size, type)
         img = self.maze_image_drawer.generate_maze_image(self.maze)

@@ -1,5 +1,4 @@
 from app.models.maze.add_maze_highscore import add_maze_highscore
-from db.db import db
 from db.models import Highscores
 
 
