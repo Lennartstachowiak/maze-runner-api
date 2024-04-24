@@ -22,5 +22,5 @@ RUN apt-get install -y nodejs
 
 # Start the API
 # Start the API with migrations
-CMD sh -c "flask db init && flask db upgrade && flask run --host=0.0.0.0"
+CMD sh -c "python3 create_db.py && flask run --host=0.0.0.0"
 
