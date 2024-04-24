@@ -29,6 +29,8 @@ jobs:
   test:
     needs: lint
     runs-on: ubuntu-latest
+    env:
+      DATABASE_TYPE: sqlite
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
