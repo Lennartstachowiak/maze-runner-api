@@ -31,11 +31,11 @@ def test_user_creation(client_and_session):
 maze_id = 1
 maze_name = "Test Maze"
 difficulty = "Easy"
-imgLink = "None"
+img_link = "None"
 structure = "None"
 height = 10
 width = 10
-isTest = True
+is_test = True
 creator = 1
 
 
@@ -45,11 +45,11 @@ def test_maze_creation(client_and_session):
         id=maze_id,
         name=maze_name,
         difficulty=difficulty,
-        imgLink=imgLink,
+        img_link=img_link,
         structure=structure,
         height=height,
         width=width,
-        isTest=isTest,
+        is_test=is_test,
         creator=creator,
     )
     session.add(new_maze)
@@ -62,10 +62,11 @@ def test_maze_creation(client_and_session):
 # IntegrityError is thrown but still fails test
 
 # def test_maze_constraints_work(client_and_session):
-#     imgLink = None
+#     img_link = None
 #     client, session = client_and_session
 #     new_maze = Mazes(id=maze_id, name=name, difficulty=difficulty,
-#                      imgLink=imgLink, structure=structure, height=height, width=width, isTest=isTest, creator=creator)
+#                      img_link=img_link, structure=structure,
+#                       height=height, width=width, is_test=is_test, creator=creator)
 #     session.add(new_maze)
 #     with pytest.raises(IntegrityError) as excinfo:
 #         session.commit()
@@ -73,12 +74,12 @@ def test_maze_creation(client_and_session):
 alg_id = 1
 alg_name = "Test Algorithm"
 code = "console.log(Hello World)"
-userId = 1
+user_id = 1
 
 
 def test_algorithm_creation(client_and_session):
     client, session = client_and_session
-    new_alg = Algorithms(id=alg_id, name=alg_name, code=code, userId=userId)
+    new_alg = Algorithms(id=alg_id, name=alg_name, code=code, user_id=user_id)
     session.add(new_alg)
     session.commit()
     test_maze = Algorithms.query.filter_by(id=1).first()

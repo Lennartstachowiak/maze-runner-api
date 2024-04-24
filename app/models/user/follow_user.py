@@ -7,7 +7,7 @@ UserFollowers = models.UserFollowers
 
 def follow_user(user_id, user_id_followed):
     try:
-        new_follow = UserFollowers(userId=user_id_followed, followerId=user_id)
+        new_follow = UserFollowers(user_id=user_id_followed, follower_id=user_id)
         db.session.add(new_follow)
         db.session.commit()
     except IntegrityError:

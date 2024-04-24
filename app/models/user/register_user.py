@@ -45,8 +45,8 @@ def register_user(bcrypt, username, email, password):
     user = Users.query.filter_by(email=email).first()
 
     # Add default user algorithms
-    userId = user.id
-    addAlgorithms(userId)
+    user_id = user.id
+    addAlgorithms(user_id)
 
     sessionData = session_controller(user)
     return sessionData

@@ -13,7 +13,7 @@ def get_mazes_objects():
                 "id": maze.id,
                 "name": maze.name,
                 "difficulty": maze.difficulty,
-                "imgLink": maze.imgLink,
+                "imgLink": maze.img_link,
                 "highscores": highscores,
                 "official": True,
             }

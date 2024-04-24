@@ -8,7 +8,7 @@ def create_maze_object(maze: type[Mazes]):
         "id": maze.id,
         "name": maze.name,
         "difficulty": maze.difficulty,
-        "imgLink": maze.imgLink,
+        "img_link": maze.img_link,
         "highscores": highscores,
         "structure": maze.structure,
         "official": False,

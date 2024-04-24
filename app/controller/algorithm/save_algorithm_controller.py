@@ -11,7 +11,7 @@ def save_algorithm_controller(request):
     algorithm_id = request.json["algorithmId"]
     new_code = request.json["newCode"]
     algorithm: type[Algorithms] = get_single_algorithm(algorithm_id)
-    if not algorithm or algorithm.userId != user_id:
+    if not algorithm or algorithm.user_id != user_id:
         abort(401, "Unauthorized")
     save_algorithm(algorithm, new_code)
     response = {"status": 200}

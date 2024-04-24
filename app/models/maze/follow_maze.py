@@ -7,7 +7,7 @@ MazeFollowers = models.MazeFollowers
 
 def follow_maze(user_id, maze_id):
     try:
-        new_maze_follow = MazeFollowers(mazeId=maze_id, followerId=user_id)
+        new_maze_follow = MazeFollowers(maze_id=maze_id, follower_id=user_id)
         db.session.add(new_maze_follow)
         db.session.commit()
     except IntegrityError:

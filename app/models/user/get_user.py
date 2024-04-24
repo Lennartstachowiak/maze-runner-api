@@ -25,7 +25,7 @@ def get_user_id(request):
     session_exists = session is not None
     if not session_exists or is_session_expired(session):
         abort(401, "Unauthorized")
-    user_id = SessionAuth.query.get(sessionId).userId
+    user_id = SessionAuth.query.get(sessionId).user_id
     if not user_id:
         abort(401, "Unauthorized")
     return user_id

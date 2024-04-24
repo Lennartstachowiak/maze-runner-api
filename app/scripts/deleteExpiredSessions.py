@@ -8,6 +8,6 @@ api.app_context().push()
 all_session = SessionAuth.query.all()
 today = date.today()
 for session in all_session:
-    if session.expiryDate <= today:
-        print("Delete", session.id, "expired since", session.expiryDate)
+    if session.expiry_date <= today:
+        print("Delete", session.id, "expired since", session.expiry_date)
         session.delete()

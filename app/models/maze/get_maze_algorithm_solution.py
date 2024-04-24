@@ -28,12 +28,12 @@ def get_maze_algorithm_solution(maze_id, algorithm_id, is_test):
     if solver.error:
         error_message = {"error": solver.error}
         # Update is working
-        algorithm_object.isWorking = False
+        algorithm_object.is_working = False
         db.session.commit()
         return error_message
     elif is_test:
         # Update is working
-        algorithm_object.isWorking = True
+        algorithm_object.is_working = True
         db.session.commit()
     check = solver.check_solution()
     if not check[0]:

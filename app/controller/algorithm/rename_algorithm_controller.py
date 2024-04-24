@@ -11,7 +11,7 @@ def rename_algorithm_controller(request):
     algorithm_id = request.json["algorithmId"]
     new_name = request.json["newName"]
     algorithm: type[Algorithms] = get_single_algorithm(algorithm_id)
-    if not algorithm or algorithm.userId != user_id:
+    if not algorithm or algorithm.user_id != user_id:
         abort(401, "Unauthorized")
     rename_algorithm(algorithm, new_name)
     response = {"status": 200}

@@ -9,6 +9,6 @@ def create_new_session(old_session: type[SessionAuth], user):
     if old_session is not None:
         remove_session(old_session)
 
-    expiryDate = datetime.today().date() + timedelta(days=7)
-    new_session = SessionAuth(userId=user.id, expiryDate=expiryDate)
+    expiry_date = datetime.today().date() + timedelta(days=7)
+    new_session = SessionAuth(user_id=user.id, expiry_date=expiry_date)
     return new_session

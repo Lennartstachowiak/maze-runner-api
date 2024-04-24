@@ -7,12 +7,12 @@ SessionAuth = models.SessionAuth
 
 
 def session_controller(user):
-    old_session = SessionAuth.query.filter_by(userId=user.id).first()
+    old_session = SessionAuth.query.filter_by(user_id=user.id).first()
     if old_session is not None:
         remove_session(old_session)
     session = create_new_session(old_session, user)
     add_session(session)
     return {
         "session_id_maze_runner": session.id,
-        "expiryDate": session.expiryDate,
+        "expiryDate": session.expiry_date,
     }

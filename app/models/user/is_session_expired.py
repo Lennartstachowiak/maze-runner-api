@@ -7,7 +7,7 @@ SessionAuth = models.SessionAuth
 
 def is_session_expired(session: type[SessionAuth]):
     today = date.today()
-    if session.expiryDate <= today:
+    if session.expiry_date <= today:
         remove_session(session)
         return True
     else:

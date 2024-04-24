@@ -10,7 +10,7 @@ def delete_algorithm_controller(request):
     user_id = user.id
     algorithm_id = request.json["algorithmId"]
     algorithm: type[Algorithms] = get_single_algorithm(algorithm_id)
-    if not algorithm or algorithm.userId != user_id:
+    if not algorithm or algorithm.user_id != user_id:
         abort(401, "Unauthorized")
     delete_algorithm(algorithm)
     response = {"status": 204}

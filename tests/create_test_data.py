@@ -31,8 +31,8 @@ def create_test_users():
 
 def create_test_session():
     tomorrow = datetime.date.today() + datetime.timedelta(days=1)
-    user_one_session = SessionAuth(id=1, userId=100000, expiryDate=tomorrow)
-    user_two_session = SessionAuth(id=2, userId=100001, expiryDate=tomorrow)
+    user_one_session = SessionAuth(id=1, user_id=100000, expiry_date=tomorrow)
+    user_two_session = SessionAuth(id=2, user_id=100001, expiry_date=tomorrow)
     db.session.add(user_one_session)
     db.session.add(user_two_session)
     db.session.commit()
@@ -41,24 +41,24 @@ def create_test_session():
 def create_test_algorithm():
     user_one_algorithm = Algorithms(
         id=1,
-        userId=100000,
+        user_id=100000,
         name="User One Algorithm",
         code="console.log(Hello World)",
-        isWorking=True,
+        is_working=True,
     )
     user_two_algorithm = Algorithms(
         id=2,
-        userId=100001,
+        user_id=100001,
         name="User Two Algorithm",
         code="console.log(Hello World)",
-        isWorking=True,
+        is_working=True,
     )
     user_three_algorithm = Algorithms(
         id=3,
-        userId=100002,
+        user_id=100002,
         name="User Three Algorithm",
         code="console.log(Hello World)",
-        isWorking=True,
+        is_working=True,
     )
     db.session.add(user_one_algorithm)
     db.session.add(user_two_algorithm)

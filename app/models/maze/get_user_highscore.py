@@ -5,10 +5,10 @@ from db.models import Highscores, Users, Mazes, Algorithms
 
 def get_user_highscores(user_id):
     highscores = (
-        Highscores.query.join(Users, Highscores.userId == Users.id)
-        .join(Mazes, Highscores.mazeId == Mazes.id)
+        Highscores.query.join(Users, Highscores.user_id == Users.id)
+        .join(Mazes, Highscores.maze_id == Mazes.id)
         .join(Algorithms, Highscores.algorithm_id == Algorithms.id)
-        .filter(Highscores.userId == user_id)
+        .filter(Highscores.user_id == user_id)
         .all()
     )
     highscoreList = []

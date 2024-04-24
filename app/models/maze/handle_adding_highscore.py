@@ -8,7 +8,7 @@ from db.models import Highscores
 
 
 def handle_adding_maze_highscore(user_id, maze_id, algorithm_id, solution):
-    user_highscore_list = Highscores.query.filter_by(mazeId=maze_id, userId=user_id).all()
+    user_highscore_list = Highscores.query.filter_by(maze_id=maze_id, user_id=user_id).all()
     user_highscores = []
     for user_highscore_object in user_highscore_list:
         user_highscore_dict = {

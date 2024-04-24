@@ -5,8 +5,8 @@ from db.models import Users, UserFollowers
 
 def get_user_following(user: Users):
     user_follows = (
-        Users.query.join(UserFollowers, Users.id == UserFollowers.userId)
-        .filter(UserFollowers.followerId == user.id)
+        Users.query.join(UserFollowers, Users.id == UserFollowers.user_id)
+        .filter(UserFollowers.follower_id == user.id)
         .all()
     )
     following_list = []

@@ -128,7 +128,7 @@ def addAlgorithms(id):
         new_algorithm = Algorithms(
             name=algorithm["name"],
             code=algorithm["code"],
-            userId=id,
-            isWorking=True,
+            user_id=id,
+            is_working=True,
         )
         new_algorithm.save()

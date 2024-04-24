@@ -23,10 +23,10 @@ hard_maze_image_base_64 = maze_image_drawer.generate_maze_image(hard_maze)
 dummy_mazes = [
     {
         "id": 100,
-        "isTest": True,
+        "is_test": True,
         "name": "Test Maze",
         "difficulty": simple_maze.difficulty.name,
-        "imgLink": simple_maze_image_base_64,
+        "img_link": simple_maze_image_base_64,
         "structure": simple_maze.structure,
         "height": simple_maze.height,
         "width": simple_maze.width,
@@ -34,7 +34,7 @@ dummy_mazes = [
     {
         "name": "Beginner Maze",
         "difficulty": simple_maze.difficulty.name,
-        "imgLink": simple_maze_image_base_64,
+        "img_link": simple_maze_image_base_64,
         "structure": simple_maze.structure,
         "height": simple_maze.height,
         "width": simple_maze.width,
@@ -42,7 +42,7 @@ dummy_mazes = [
     {
         "name": "Intermediate Maze",
         "difficulty": medium_maze.difficulty.name,
-        "imgLink": medium_maze_image_base_64,
+        "img_link": medium_maze_image_base_64,
         "structure": medium_maze.structure,
         "height": medium_maze.height,
         "width": medium_maze.width,
@@ -50,7 +50,7 @@ dummy_mazes = [
     {
         "name": "Advanced Maze",
         "difficulty": hard_maze.difficulty.name,
-        "imgLink": hard_maze_image_base_64,
+        "img_link": hard_maze_image_base_64,
         "structure": hard_maze.structure,
         "height": hard_maze.height,
         "width": hard_maze.width,
@@ -61,10 +61,10 @@ for maze in dummy_mazes:
     if "id" in maze:
         new_maze = Mazes(
             id=maze["id"],
-            isTest=maze["isTest"],
+            is_test=maze["is_test"],
             name=maze["name"],
             difficulty=maze["difficulty"],
-            imgLink=maze["imgLink"],
+            img_link=maze["img_link"],
             structure=str(maze["structure"]),
             height=int(maze["height"]),
             width=int(maze["width"]),
@@ -74,7 +74,7 @@ for maze in dummy_mazes:
         new_maze = Mazes(
             name=maze["name"],
             difficulty=maze["difficulty"],
-            imgLink=maze["imgLink"],
+            img_link=maze["img_link"],
             structure=str(maze["structure"]),
             height=int(maze["height"]),
             width=int(maze["width"]),

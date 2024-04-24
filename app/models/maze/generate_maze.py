@@ -110,7 +110,7 @@ class NewMaze:
         new_maze = Mazes(
             name=self.name,
             difficulty=self.difficulty,
-            imgLink=self.img,
+            img_link=self.img,
             structure=self.structure,
             height=self.height,
             width=self.width,

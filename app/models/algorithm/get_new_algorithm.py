@@ -21,10 +21,10 @@ function returnSolution(node, maze) {
 
 
 def get_new_algorithm(user_id):
-    algorithms_count = len(Algorithms.query.filter_by(userId=user_id).all()) + 1
+    algorithms_count = len(Algorithms.query.filter_by(user_id=user_id).all()) + 1
     new_algorithm = Algorithms(
         name=f"Algorithm {algorithms_count}",
         code=algorithm_schema_code,
-        userId=user_id,
+        user_id=user_id,
     )
     return new_algorithm

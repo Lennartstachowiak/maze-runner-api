@@ -5,8 +5,8 @@ from db.models import Users, MazeFollowers, Mazes
 
 def get_followed_mazes(user: Users):
     mazes_join = (
-        MazeFollowers.query.join(Mazes, MazeFollowers.mazeId == Mazes.id)
-        .filter(MazeFollowers.followerId == user.id)
+        MazeFollowers.query.join(Mazes, MazeFollowers.maze_id == Mazes.id)
+        .filter(MazeFollowers.follower_id == user.id)
         .all()
     )
     maze_list = []
