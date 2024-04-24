@@ -9,7 +9,7 @@ def get_algorithms_objects(algorithms: type[Algorithms]):
                 "id": algorithm.id,
                 "name": algorithm.name,
                 "code": algorithm.code,
-                "is_working": algorithm.isWorking,
+                "isWorking": algorithm.is_working,
             }
         )
     return algorithm_object_list
