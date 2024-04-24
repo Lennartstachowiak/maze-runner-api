@@ -28,7 +28,7 @@ class MazeStructure:
             for column in range(width):
                 if row == 0 and column == 0:
                     structure[row].append(Cell(start=True))
-                elif row == height-1 and column == width-1:
+                elif row == height - 1 and column == width - 1:
                     structure[row].append(Cell(goal=True))
                 else:
                     structure[row].append(Cell())
@@ -44,8 +44,7 @@ class MazeGenerator(ABC):
     def generate(self, size):
         self.height = size
         self.width = size
-        self.structure = MazeStructure.generate_structure(
-            self.height, self.width)
+        self.structure = MazeStructure.generate_structure(self.height, self.width)
         self.generate_maze()
         maze = Maze(self.height, self.width, self.structure)
         maze.calculateDifficultyOfMaze()
@@ -60,13 +59,19 @@ class RecursiveBacktracking(MazeGenerator):
     def _recursive_backtracking(self, row, column):
         neighbors = self._get_randomized_neighbors(row, column)
         for neighbor_row, neighbor_column in neighbors:
-            if self._is_valid_cell(neighbor_row, neighbor_column) and self._is_not_visited(neighbor_row, neighbor_column):
+            if self._is_valid_cell(neighbor_row, neighbor_column) and self._is_not_visited(
+                neighbor_row, neighbor_column
+            ):
                 self._carve_path(row, column, neighbor_row, neighbor_column)
                 self._recursive_backtracking(neighbor_row, neighbor_column)
 
     def _get_randomized_neighbors(self, row, column):
-        neighbors = [(row-1, column), (row, column+1),
-                     (row+1, column), (row, column-1)]  # N, E, S, W
+        neighbors = [
+            (row - 1, column),
+            (row, column + 1),
+            (row + 1, column),
+            (row, column - 1),
+        ]  # N, E, S, W
         random.shuffle(neighbors)
         return neighbors
 
@@ -106,13 +111,13 @@ class SidewinderAlgorithm(MazeGenerator):
         for row in range(self.height):
             run_start = 0
             for column in range(self.width):
-                if row > 0 and (column+1 == self.width or random.randint(0, 2) == 0):
+                if row > 0 and (column + 1 == self.width or random.randint(0, 2) == 0):
                     # end current run and carve north
                     cell = run_start + random.randint(0, column - run_start)
                     self.structure[row][cell].north = 0
-                    self.structure[row-1][cell].south = 0
-                    run_start = column+1
-                elif column+1 < self.width:
+                    self.structure[row - 1][cell].south = 0
+                    run_start = column + 1
+                elif column + 1 < self.width:
                     # carve east
                     self.structure[row][column].east = 0
-                    self.structure[row][column+1].west = 0
+                    self.structure[row][column + 1].west = 0

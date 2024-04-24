@@ -18,7 +18,7 @@ class Cell:
             "south": self.south,
             "west": self.west,
             "start": self.start,
-            "goal": self.goal
+            "goal": self.goal,
         }
 
     def get_neigbour(self, position):
@@ -78,7 +78,7 @@ class Maze:
             "height": self.height,
             "width": self.width,
             "structure": self.structure,
-            "difficulty": self.difficulty
+            "difficulty": self.difficulty,
         }
         return maze_dict
 
@@ -86,7 +86,7 @@ class Maze:
         return self.__str__()
 
     def calculateDifficultyOfMaze(self):
-        size = (self.height+self.width)/2
+        size = (self.height + self.width) / 2
         if size <= 10:
             self.difficulty = Difficulty(0, "Easy")
         elif size <= 20:
@@ -107,7 +107,7 @@ class Maze:
                     ["#", " ", " ", "#"],
                     [" ", " ", " ", " "],
                     [" ", " ", " ", " "],
-                    ["#", " ", " ", "#"]
+                    ["#", " ", " ", "#"],
                 ]
 
                 # Solution
@@ -183,8 +183,7 @@ class Maze:
             for cell_row_i in range(4):
                 cell_row_str = ""
                 for cell_row in row_cells:
-                    cell_row_str += " ".join(
-                        item for item in cell_row[cell_row_i]) + " "
+                    cell_row_str += " ".join(item for item in cell_row[cell_row_i]) + " "
                 cell_row_str += "\n"
                 row_str += cell_row_str
             maze_str += row_str
@@ -214,12 +213,15 @@ class MazeSolver:
         maze_json = json.dumps(self.maze.to_dict())
         if start and algorithm_code:
             try:
-                command = ['node', '-p',
-                           f'{algorithm_code}; returnSolution(JSON.parse(\'{json.dumps(start)}\'), {maze_json})']
+                command = [
+                    "node",
+                    "-p",
+                    f"{algorithm_code}; returnSolution(JSON.parse('{json.dumps(start)}'), {maze_json})",
+                ]
                 result = subprocess.run(
                     command,
                     capture_output=True,
-                    encoding='utf-8',
+                    encoding="utf-8",
                 )
                 stderr = result.stderr
                 stdout = result.stdout
@@ -231,8 +233,7 @@ class MazeSolver:
                 self.solution = solution
                 self.visited = visited
             except subprocess.CalledProcessError as e:
-                print(
-                    f"Command execution failed with exit code {e.returncode}")
+                print(f"Command execution failed with exit code {e.returncode}")
                 print("ERROR", e.output)
         else:
             print("No starting point in the maze")
@@ -280,7 +281,7 @@ class MazeSolver:
         # In the end we calculate the efficency and add the efficency multiplied by the search score
         maze_height = self.maze.height
         maze_width = self.maze.width
-        efficiency_score = (maze_height*maze_width)/len(self.solution)
-        search_score = len(self.visited)/(maze_height*maze_width)
-        final_score = efficiency_score+efficiency_score*search_score
+        efficiency_score = (maze_height * maze_width) / len(self.solution)
+        search_score = len(self.visited) / (maze_height * maze_width)
+        final_score = efficiency_score + efficiency_score * search_score
         self.score = round(final_score, 2)

@@ -11,8 +11,8 @@ def follow_user_controller(request):
         user_id_followed = request.json["userIdFollowed"]
         register_data = follow_user(user_id, user_id_followed)
         if register_data == 409:
-            abort(409, 'Conflict')
+            abort(409, "Conflict")
         response = {"status": 200}
         return jsonify(response)
-    except:
+    except BaseException:
         abort(400, "Internal server error")

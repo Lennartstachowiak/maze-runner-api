@@ -15,13 +15,13 @@ def create_app():
 def database_exists():
     with app.app_context():
         # Perform a check to determine if the database exists
-        return db.engine.dialect.has_table(db.engine.connect(), 'users')
+        return db.engine.dialect.has_table(db.engine.connect(), "users")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = create_app()
     if not database_exists():
         with app.app_context():
-            upgrade(directory='migrations')
-            script_command = 'python3 -m app.scripts.addDummyDataMazeDB'
+            upgrade(directory="migrations")
+            script_command = "python3 -m app.scripts.addDummyDataMazeDB"
             subprocess.run(script_command, shell=True)

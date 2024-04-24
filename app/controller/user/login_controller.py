@@ -17,5 +17,11 @@ def login_user_controller(request, api):
 
     res = make_response()
     res.set_cookie(
-        "session_id_maze_runner", value=session_data["session_id_maze_runner"], expires=session_data["expiryDate"], samesite="None", secure=True, httponly=True)
+        "session_id_maze_runner",
+        value=session_data["session_id_maze_runner"],
+        expires=session_data["expiryDate"],
+        samesite="None",
+        secure=True,
+        httponly=True,
+    )
     return res

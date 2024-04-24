@@ -14,7 +14,9 @@ default_algorithm = """function returnSolution(node, maze) {
 """
 
 algorithmList = [
-    {"name": "Depth-First Search", "code": """function returnSolution(node, maze) {
+    {
+        "name": "Depth-First Search",
+        "code": """function returnSolution(node, maze) {
     const solution = [];
     const visited = [];
 
@@ -57,8 +59,11 @@ algorithmList = [
     solveMaze(node);
     return JSON.stringify([solution, visited])
 }
-"""},
-    {"name": "Breadth-First Search", "code": """function returnSolution(node, maze) {
+""",
+    },
+    {
+        "name": "Breadth-First Search",
+        "code": """function returnSolution(node, maze) {
     const solution = [];
     const visited = [];
 
@@ -113,12 +118,17 @@ algorithmList = [
     solveMaze(node);
     return JSON.stringify([solution, visited])
 }
-"""},
+""",
+    },
 ]
 
 
 def addAlgorithms(id):
     for algorithm in algorithmList:
         new_algorithm = Algorithms(
-            name=algorithm["name"], code=algorithm["code"], userId=id, isWorking=True)
+            name=algorithm["name"],
+            code=algorithm["code"],
+            userId=id,
+            isWorking=True,
+        )
         new_algorithm.save()

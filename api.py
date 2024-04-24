@@ -14,7 +14,7 @@ load_dotenv()
 
 def create_api():
     api = Flask(__name__)
-    allow_origin = [environ.get('ALLOW_ORIGIN')]
+    allow_origin = [environ.get("ALLOW_ORIGIN")]
     CORS(api, supports_credentials=True, origins=allow_origin)
     api.config.from_object(Config)
     register_database(api)

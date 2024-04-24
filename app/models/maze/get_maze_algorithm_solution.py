@@ -11,8 +11,11 @@ def get_maze_algorithm_solution(maze_id, algorithm_id, is_test):
     # Get Maze
     maze_object = Mazes.query.filter_by(id=maze_id).first()
 
-    maze = Maze(maze_object.height, maze_object.width,
-                json.loads(maze_object.structure))
+    maze = Maze(
+        maze_object.height,
+        maze_object.width,
+        json.loads(maze_object.structure),
+    )
 
     solver = MazeSolver(maze=maze)
 
@@ -37,7 +40,9 @@ def get_maze_algorithm_solution(maze_id, algorithm_id, is_test):
         return check
     solver.calculateScore()
 
-    solver_result = {"solution": solver.solution,
-                     "visited": solver.visited,
-                     "score": solver.score}
+    solver_result = {
+        "solution": solver.solution,
+        "visited": solver.visited,
+        "score": solver.score,
+    }
     return solver_result

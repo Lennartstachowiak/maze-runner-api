@@ -2,13 +2,13 @@ import re
 
 
 def is_valid_email(email):
-    email_regex = r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'
+    email_regex = r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
     return re.match(email_regex, email)
 
 
 def is_valid_password(password):
     # Regular expression pattern for password validation
-    password_regex = r'^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]{8,}$'
+    password_regex = r"^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]{8,}$"
     return re.match(password_regex, password)
 
 

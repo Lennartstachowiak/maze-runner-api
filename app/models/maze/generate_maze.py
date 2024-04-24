@@ -4,7 +4,10 @@ from enum import Enum
 from io import BytesIO
 from PIL import Image, ImageDraw
 from flask import abort
-from app.models.maze.maze_generator_factory import RecursiveBacktrackingFactory, SidewinderFactory
+from app.models.maze.maze_generator_factory import (
+    RecursiveBacktrackingFactory,
+    SidewinderFactory,
+)
 from db import models
 
 Mazes = models.Mazes
@@ -50,21 +53,16 @@ class MazeImageDrawer:
         width = maze.width
         height = maze.height
         cells = maze.structure
-        img = Image.new(
-            "RGBA",
-            (width * self.cell_size,
-             height * self.cell_size),
-            "black"
-        )
+        img = Image.new("RGBA", (width * self.cell_size, height * self.cell_size), "black")
         draw = ImageDraw.Draw(img)
         for row in range(height):
             for column in range(width):
                 cell = cells[row][column]
 
                 left_border = 0 if column != 0 else self.cell_border
-                right_border = 0 if column != width-1 else self.cell_border
+                right_border = 0 if column != width - 1 else self.cell_border
                 top_border = 0 if row != 0 else self.cell_border
-                bottom_border = 0 if row != height-1 else self.cell_border
+                bottom_border = 0 if row != height - 1 else self.cell_border
 
                 if cell.west == 1:
                     left_border += self.cell_border
@@ -94,19 +92,18 @@ class MazeImageDrawer:
         # and use byte_array to save it as sendable data
         img.save(byte_array, format="png")
         maze_image_byte_array = byte_array.getvalue()
-        maze_image_base_64 = base64.b64encode(
-            maze_image_byte_array).decode('utf-8')
+        maze_image_base_64 = base64.b64encode(maze_image_byte_array).decode("utf-8")
         return maze_image_base_64
 
 
 class NewMaze:
     def __init__(self):
         self.name = None
-        self.difficulty = None,
-        self.img = None,
-        self.structure = None,
-        self.height = None,
-        self.width = None,
+        self.difficulty = (None,)
+        self.img = (None,)
+        self.structure = (None,)
+        self.height = (None,)
+        self.width = (None,)
         self.creator = None
 
     def get_new_maze(self):
@@ -117,7 +114,8 @@ class NewMaze:
             structure=self.structure,
             height=self.height,
             width=self.width,
-            creator=self.creator)
+            creator=self.creator,
+        )
         return new_maze
 
 
@@ -196,8 +194,9 @@ class NewMazeDirector:
         self.builder = builder
 
     def construct_new_maze(self, name, difficulty, img, structure, height, width, creator):
-        self.builder.set_name(name).set_difficulty(difficulty).set_img(img).set_structure(
-            structure).set_height(height).set_width(width).set_creator(creator)
+        self.builder.set_name(name).set_difficulty(difficulty).set_img(img).set_structure(structure).set_height(
+            height
+        ).set_width(width).set_creator(creator)
 
 
 class MazeCreationFacade:
@@ -209,7 +208,7 @@ class MazeCreationFacade:
 
     def get_generated_maze(self, user_id, maze_name, maze_size, type):
         isValid = self.input_validation.validate(maze_size, type)
-        if (isValid is False):
+        if isValid is False:
             abort(400, "Invalid request")
         self.maze = self.maze_generator.generate_maze(maze_size, type)
         img = self.maze_image_drawer.generate_maze_image(self.maze)
@@ -217,7 +216,14 @@ class MazeCreationFacade:
         builder = NewMazeBuilder()
         director = NewMazeDirector(builder)
         director.construct_new_maze(
-            name=maze_name, difficulty=self.maze.difficulty.name, img=img, structure=str(self.maze.structure), height=int(self.maze.height), width=int(self.maze.width), creator=user_id)
+            name=maze_name,
+            difficulty=self.maze.difficulty.name,
+            img=img,
+            structure=str(self.maze.structure),
+            height=int(self.maze.height),
+            width=int(self.maze.width),
+            creator=user_id,
+        )
         new_maze = builder.get_maze()
 
         return new_maze

@@ -12,8 +12,7 @@ def register_user_controller(request, api):
     password = request.json.get("password")
     repeated_password = request.json.get("repeatedPassword")
 
-    are_credentials_valid = check_if_valid_register(
-        email, password, repeated_password)
+    are_credentials_valid = check_if_valid_register(email, password, repeated_password)
 
     if not are_credentials_valid:
         abort(401)
@@ -26,5 +25,11 @@ def register_user_controller(request, api):
 
     res = make_response()
     res.set_cookie(
-        "session_id_maze_runner", value=session_data["session_id_maze_runner"], expires=session_data["expiryDate"], samesite="None", secure=True, httponly=True)
+        "session_id_maze_runner",
+        value=session_data["session_id_maze_runner"],
+        expires=session_data["expiryDate"],
+        samesite="None",
+        secure=True,
+        httponly=True,
+    )
     return res

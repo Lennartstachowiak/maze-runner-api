@@ -4,9 +4,11 @@ from db.models import Users, MazeFollowers, Mazes
 
 
 def get_followed_mazes(user: Users):
-    mazes_join = MazeFollowers.query.join(
-        Mazes, MazeFollowers.mazeId == Mazes.id
-    ).filter(MazeFollowers.followerId == user.id).all()
+    mazes_join = (
+        MazeFollowers.query.join(Mazes, MazeFollowers.mazeId == Mazes.id)
+        .filter(MazeFollowers.followerId == user.id)
+        .all()
+    )
     maze_list = []
     for maze in mazes_join:
         maze_id = maze.maze.id

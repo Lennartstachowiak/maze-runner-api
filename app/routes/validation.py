@@ -6,7 +6,7 @@ load_dotenv()
 
 
 def register_validation(api):
-    expected_origin = environ.get('ALLOW_ORIGIN')
+    expected_origin = environ.get("ALLOW_ORIGIN")
 
     @api.before_request
     def validate_origin():

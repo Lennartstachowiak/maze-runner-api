@@ -18,11 +18,10 @@ def get_user(request):
 
 
 def get_user_id(request):
-    sessionId = request.cookies.get('session_id_maze_runner')
+    sessionId = request.cookies.get("session_id_maze_runner")
     if not sessionId:
         abort(401, "Unauthorized")
-    session = SessionAuth.query.filter_by(
-        id=sessionId).first()
+    session = SessionAuth.query.filter_by(id=sessionId).first()
     session_exists = session is not None
     if not session_exists or is_session_expired(session):
         abort(401, "Unauthorized")

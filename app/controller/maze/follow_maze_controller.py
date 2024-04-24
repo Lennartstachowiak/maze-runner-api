@@ -11,7 +11,7 @@ def follow_maze_controller(request):
         maze_id = request.json["mazeId"]
         register_data = follow_maze(user_id, maze_id)
         if register_data == 409:
-            abort(409, 'Conflict')
+            abort(409, "Conflict")
         response = {"status": 200}
         return jsonify(response)
     except Exception:

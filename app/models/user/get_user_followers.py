@@ -4,9 +4,11 @@ from db.models import Users, UserFollowers
 
 
 def get_user_followers(user: Users):
-    user_followers = Users.query.join(
-        UserFollowers, Users.id == UserFollowers.followerId
-    ).filter(UserFollowers.userId == user.id).all()
+    user_followers = (
+        Users.query.join(UserFollowers, Users.id == UserFollowers.followerId)
+        .filter(UserFollowers.userId == user.id)
+        .all()
+    )
     follower_list = []
     for user_follower in user_followers:
         user_follower_id = user_follower.id

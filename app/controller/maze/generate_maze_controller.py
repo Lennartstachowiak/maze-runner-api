@@ -14,7 +14,6 @@ def generate_maze_controller(request):
     is_maze_available = check_if_maze_available(maze_name)
     if not is_maze_available:
         abort(409)
-    new_maze: type[Mazes] = MazeCreationFacade().get_generated_maze(
-        user_id, maze_name, maze_size, type)
+    new_maze: Mazes = MazeCreationFacade().get_generated_maze(user_id, maze_name, maze_size, type)
     add_maze(new_maze)
     return jsonify("New maze generated!")

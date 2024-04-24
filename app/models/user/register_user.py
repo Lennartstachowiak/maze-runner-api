@@ -20,8 +20,7 @@ class UserBuilder:
         return self
 
     def set_password(self, password):
-        hashed_password = self.bcrypt.generate_password_hash(
-            password).decode('utf-8')
+        hashed_password = self.bcrypt.generate_password_hash(password).decode("utf-8")
         self.user.password = hashed_password
         return self
 
@@ -38,8 +37,7 @@ def register_user(bcrypt, username, email, password):
     # Builder Pattern
 
     user_builder = UserBuilder(bcrypt)
-    new_user = user_builder.set_username(username).set_email(
-        email).set_password(password).build()
+    new_user = user_builder.set_username(username).set_email(email).set_password(password).build()
 
     #  Add User to db
     db.session.add(new_user)
