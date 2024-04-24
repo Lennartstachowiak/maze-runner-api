@@ -1,14 +1,12 @@
 from db.db import db
-from db import models
+from db.models import Users
 from app.scripts.addAlgorithms import addAlgorithms
 from app.controller.user.session_controller import session_controller
-
-User = models.Users
 
 
 class UserBuilder:
     def __init__(self, bcrypt):
-        self.user = User()
+        self.user = Users()
         self.bcrypt = bcrypt
 
     def set_username(self, username):
@@ -29,7 +27,7 @@ class UserBuilder:
 
 
 def register_user(bcrypt, username, email, password):
-    user_exists = User.query.filter_by(email=email).first() is not None
+    user_exists = Users.query.filter_by(email=email).first() is not None
 
     if user_exists:
         return 409
@@ -44,7 +42,7 @@ def register_user(bcrypt, username, email, password):
     db.session.commit()
 
     # Get User
-    user = User.query.filter_by(email=email).first()
+    user = Users.query.filter_by(email=email).first()
 
     # Add default user algorithms
     userId = user.id
