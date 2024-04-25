@@ -47,7 +47,7 @@ class MazeGenerator(ABC):
         self.structure = MazeStructure.generate_structure(self.height, self.width)
         self.generate_maze()
         maze = Maze(self.height, self.width, self.structure)
-        maze.calculateDifficultyOfMaze()
+        maze.calculate_difficulty_of_maze()
         return maze
 
 

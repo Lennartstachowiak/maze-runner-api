@@ -85,7 +85,13 @@ class Maze:
     def __repr__(self):
         return self.__str__()
 
-    def calculateDifficultyOfMaze(self):
+    def calculate_difficulty_of_maze(self):
+        """
+        Calculates difficulty of maze
+        Small mazes: Easy
+        Medium mazes: Medium
+        Big mazes: Hard
+        """
         size = (self.height + self.width) / 2
         if size <= 10:
             self.difficulty = Difficulty(0, "Easy")
@@ -95,6 +101,9 @@ class Maze:
             self.difficulty = Difficulty(2, "Hard")
 
     def __str__(self, solutionList=[]):
+        """
+        Returns a string representation of the maze
+        """
         maze_str = ""
         for row_index, row in enumerate(self.structure):
             row_cells = []
@@ -209,6 +218,9 @@ class MazeSolver:
                     return (row, col)
 
     def solve(self, algorithm_code):
+        """
+        Solves the maze with the given algorithm.
+        """
         start = self._find_start()
         maze_json = json.dumps(self.maze.to_dict())
         if start and algorithm_code:
@@ -242,6 +254,11 @@ class MazeSolver:
             print("No solution found")
 
     def check_solution(self):
+        """
+        Checks if the solution and visited path are correct.
+        Incorrect path are path which are skipping cells or teleporting.
+        Correct path are path for which each cell follows its next cell.
+        """
         solution = self.solution
         visited = self.visited
         if not solution:
@@ -274,11 +291,13 @@ class MazeSolver:
             return (False, "No Goal found")
         return (True, "All good")
 
-    def calculateScore(self):
-        # The score will be calculate by efficency of the solution and search percentage
-        #   - efficency -> solution steps divided by maze size 0 to ∞
-        #   - search -> how many cells have been visited in the maze to find the solution (0 to 1)
-        # In the end we calculate the efficency and add the efficency multiplied by the search score
+    def calculate_score(self):
+        """
+        The score will be calculate by efficency of the solution and search percentage
+          - efficency -> solution steps divided by maze size 0 to ∞
+          - search -> how many cells have been visited in the maze to find the solution (0 to 1)
+        In the end we calculate the efficency and add the efficency multiplied by the search score
+        """
         maze_height = self.maze.height
         maze_width = self.maze.width
         efficiency_score = (maze_height * maze_width) / len(self.solution)

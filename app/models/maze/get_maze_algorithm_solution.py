@@ -23,7 +23,7 @@ def get_maze_algorithm_solution(maze_object, algorithm_object):
         solver_result["check"] = check
         return solver_result
 
-    solver.calculateScore()
+    solver.calculate_score()
 
     solver_result.update(
         {

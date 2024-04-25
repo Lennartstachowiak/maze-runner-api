@@ -20,4 +20,5 @@ def delete_maze_controller(request):
     for highscore in highscores:
         delete_highscore(highscore)
     delete_maze(maze)
-    return jsonify("Maze deleted!")
+    response = {"status": 204}
+    return jsonify(response)
