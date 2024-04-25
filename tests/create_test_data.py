@@ -2,6 +2,7 @@ from db.db import db
 from db.models import Users, SessionAuth, Algorithms
 import subprocess
 import datetime
+from tests.dummy_algorithm import get_dummy_algorithm
 
 
 def create_test_users():
@@ -60,9 +61,11 @@ def create_test_algorithm():
         code="console.log(Hello World)",
         is_working=True,
     )
+    working_dummy_algorithm = get_dummy_algorithm()
     db.session.add(user_one_algorithm)
     db.session.add(user_two_algorithm)
     db.session.add(user_three_algorithm)
+    db.session.add(working_dummy_algorithm)
     db.session.commit()
 
 
