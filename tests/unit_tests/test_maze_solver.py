@@ -1,19 +1,6 @@
-import pytest
-from db.db import db
-from tests.create_test_data import create_test_data
+from tests.dummy_maze import get_dummy_maze
+from tests.dummy_algorithm import get_dummy_algorithm
 from app.models.maze.get_maze_algorithm_solution import get_maze_algorithm_solution
-
-
-@pytest.fixture
-def client_and_session_and_api(client_and_api):
-    # Creates all tables before each test and kills each table after each test
-    client, api = client_and_api
-    with client.application.app_context():
-        db.drop_all()  # Just to be sure that the db is empty
-        db.create_all()
-        create_test_data()
-        yield client, db.session, api
-        db.drop_all()
 
 
 def check_if_path_is_correct(path):
@@ -28,8 +15,10 @@ def check_if_path_is_correct(path):
     return True
 
 
-def test_maze_solver(client_and_session_and_api):
-    solution = get_maze_algorithm_solution(100, 100, True)
+def test_maze_solver():
+    dummy_maze = get_dummy_maze()
+    dummy_algorithm = get_dummy_algorithm()
+    solution = get_maze_algorithm_solution(dummy_maze, dummy_algorithm)
     solution_path = solution["solution"]
     visited_path = solution["visited"]
     assert isinstance(solution_path, list)
