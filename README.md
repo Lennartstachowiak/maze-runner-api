@@ -354,6 +354,30 @@ In the project directory you can run:
 
 ---
 
+# Clean Code <a name="cleancode"></a>
+
+### Readability and Cleanliness
+
+- I use snake case for variables, methods and function names
+  - [app/models/maze/get_single_highscore.py](app/models/maze/get_single_highscore.py)
+- I use pascal case for class names
+  - [app/models/maze/maze_generator_factory.py](app/models/maze/maze_generator_factory.py)
+- Every function explains what it does and every dependency describes what it is (Intention is given):
+  - [app/models/user/register_user.py](app/models/user/register_user.py)
+  - [app/models/maze/delete_maze.py](app/models/maze/delete_maze.py)
+- DRY principle is followed
+  - For example `get_single_maze` is used always if a function tries to get a maze by its id ([app/models/maze/get_single_maze.py](app/models/maze/get_single_maze.py), [app/models/maze/get_followed_mazes.py](app/models/maze/get_followed_mazes.py))
+- For better understanding what complex methods are doing I used DocStrings as well as for all API endpoints
+  - [app/models/maze/maze.py](app/models/maze/maze.py)
+  - [app/routes/user.py](app/routes/user.py)
+
+### Clear separation of concerns and well structured
+
+- Function and methods are doing one thing and are folloing the Single-Responsibility Principle
+  -
+
+---
+
 # Security <a name="security"></a>
 
 The following parts are security measures for the **backend application** here as well as for the [**frontend application**](https://github.com/Lennartstachowiak/maze-runner-website).
