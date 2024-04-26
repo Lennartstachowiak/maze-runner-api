@@ -379,6 +379,8 @@ In the project directory you can run:
 
 # Relational Database <a name="database"></a>
 
+<img src="db/erd.png" alt="Entity Realtionship Diagram">
+
 To be continued...
 
 ---
