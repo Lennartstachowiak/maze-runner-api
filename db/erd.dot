@@ -6,74 +6,74 @@ digraph ERD {
     Users [label = <
         <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0">
         <TR><TD><B>Users</B></TD></TR>
-        <TR><TD>+id: String (PK)</TD></TR>
-        <TR><TD>+username: String</TD></TR>
-        <TR><TD>+email: String</TD></TR>
-        <TR><TD>+password: Text</TD></TR>
+        <TR><TD>id: String (PK)</TD></TR>
+        <TR><TD>username: String</TD></TR>
+        <TR><TD>email: String</TD></TR>
+        <TR><TD>password: Text</TD></TR>
         </TABLE>
         >;];
     
     SessionAuth [label = <
         <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
         <TR><TD><B>SessionAuth</B></TD></TR>
-        <TR><TD>+id: String (PK)</TD></TR>
-        <TR><TD>+user_id: String (FK, Indexed)</TD></TR>
-        <TR><TD>+expiry_date: Date</TD></TR>
+        <TR><TD>id: String (PK)</TD></TR>
+        <TR><TD>user_id: String (FK, Indexed)</TD></TR>
+        <TR><TD>expiry_date: Date</TD></TR>
         </TABLE>
         >;];
     
     Mazes [label = <
         <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
         <TR><TD><B>Mazes</B></TD></TR>
-        <TR><TD>+id: String (PK)</TD></TR>
-        <TR><TD>+name: Text</TD></TR>
-        <TR><TD>+difficulty: Enum</TD></TR>
-        <TR><TD>+img_link: Text</TD></TR>
-        <TR><TD>+structure: Text</TD></TR>
-        <TR><TD>+height: Integer</TD></TR>
-        <TR><TD>+width: Integer</TD></TR>
-        <TR><TD>+is_test: Boolean</TD></TR>
-        <TR><TD>+creator: String (FK, Indexed)</TD></TR>
+        <TR><TD>id: String (PK)</TD></TR>
+        <TR><TD>name: Text</TD></TR>
+        <TR><TD>difficulty: Enum</TD></TR>
+        <TR><TD>img_link: Text</TD></TR>
+        <TR><TD>structure: Text</TD></TR>
+        <TR><TD>height: Integer</TD></TR>
+        <TR><TD>width: Integer</TD></TR>
+        <TR><TD>is_test: Boolean</TD></TR>
+        <TR><TD>creator: String (FK, Indexed)</TD></TR>
         </TABLE>
         >;];
     
     Highscores [label = <
         <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
         <TR><TD><B>Highscores</B></TD></TR>
-        <TR><TD>+id: String (PK)</TD></TR>
-        <TR><TD>+user_id: String (FK, Indexed)</TD></TR>
-        <TR><TD>+maze_id: String (FK, Indexed)</TD></TR>
-        <TR><TD>+algorithm_id: String (FK, Indexed)</TD></TR>
-        <TR><TD>+score: Float</TD></TR>
+        <TR><TD>id: String (PK)</TD></TR>
+        <TR><TD>user_id: String (FK, Indexed)</TD></TR>
+        <TR><TD>maze_id: String (FK, Indexed)</TD></TR>
+        <TR><TD>algorithm_id: String (FK, Indexed)</TD></TR>
+        <TR><TD>score: Float</TD></TR>
         </TABLE>
         >;];
     
     Algorithms [label = <
         <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
         <TR><TD><B>Algorithms</B></TD></TR>
-        <TR><TD>+id: String (PK)</TD></TR>
-        <TR><TD>+name: Text</TD></TR>
-        <TR><TD>+code: Text</TD></TR>
-        <TR><TD>+user_id: String (FK, Indexed)</TD></TR>
-        <TR><TD>+is_working: Boolean</TD></TR>
+        <TR><TD>id: String (PK)</TD></TR>
+        <TR><TD>name: Text</TD></TR>
+        <TR><TD>code: Text</TD></TR>
+        <TR><TD>user_id: String (FK, Indexed)</TD></TR>
+        <TR><TD>is_working: Boolean</TD></TR>
         </TABLE>
         >;];
     
     MazeFollowers [label = <
         <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
         <TR><TD><B>MazeFollowers</B></TD></TR>
-        <TR><TD>+id: String (PK)</TD></TR>
-        <TR><TD>+maze_id: String (FK, Indexed)</TD></TR>
-        <TR><TD>+follower_id: String (FK, Indexed)</TD></TR>
+        <TR><TD>id: String (PK)</TD></TR>
+        <TR><TD>maze_id: String (FK, Indexed)</TD></TR>
+        <TR><TD>follower_id: String (FK, Indexed)</TD></TR>
         </TABLE>
         >;];
     
     UserFollowers [label = <
         <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
         <TR><TD><B>UserFollowers</B></TD></TR>
-        <TR><TD>+id: String (PK)</TD></TR>
-        <TR><TD>+user_id: String (FK, Indexed)</TD></TR>
-        <TR><TD>+follower_id: String (FK, Indexed)</TD></TR>
+        <TR><TD>id: String (PK)</TD></TR>
+        <TR><TD>user_id: String (FK, Indexed)</TD></TR>
+        <TR><TD>follower_id: String (FK, Indexed)</TD></TR>
         </TABLE>
         >;];
     

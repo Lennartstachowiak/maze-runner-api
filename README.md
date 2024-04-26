@@ -373,8 +373,13 @@ In the project directory you can run:
 
 ### Clear separation of concerns and well structured
 
-- Function and methods are doing one thing and are folloing the Single-Responsibility Principle
-  -
+- ## Function and methods are doing one thing and are folloing the Single-Responsibility Principle
+
+---
+
+# Relational Database <a name="database"></a>
+
+To be continued...
 
 ---
 
