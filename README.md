@@ -400,10 +400,22 @@ The scripts for that are explained in the documentation section about [setting u
 
 To see how the database can be queried there are some test created for demonstration.
 
+#### Tests
+
 - [test_db](tests/integration_tests/test_db.py) is having some test to query to the db.
   - Creating a new entry in the db and quering it for User, Maze and Algorithm
   - Database is SQLite and only created during the test and doesn't interfere with the production or development database
 - [create_test_data](tests/integration_tests/create_test_data.py) is used to create dummy data for testing and also demonstrated how do create data to the database
+
+#### Queries
+
+Database queries can be found in the files of the models folder.
+Examples are the following:
+
+- [Get a sinlge maze by id](app/models/maze/get_single_maze.py)
+- [Add a new algorithm to the database](app/models/algorithm/add_new_algorithm.py)
+- [Create test data](tests/integration_tests/create_test_data.py)
+- [Rename a algorithm (update data)](app/models/algorithm/rename_algorithm.py)
 
 ### Performance
 
