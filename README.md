@@ -277,7 +277,7 @@ If you get an error by setting up the database, make sure to run:
 
     source .env
 
-#### Set up database
+#### Set up database <a name="migration"></a>
 
 Migration folder (`/migrations`) for the database structure should already exist.
 
@@ -381,7 +381,45 @@ In the project directory you can run:
 
 <img src="db/erd.png" alt="Entity Realtionship Diagram">
 
-To be continued...
+- In the ERD can be seen that the database in normalized
+  - No data is duplicated
+  - Relationship between tables
+
+The set up of the database can be found in the db/ folder.
+
+The [db.py](db/db.py) file is used to register the database in the project.
+
+In [db/models.py](db/models.py) are all the models for the database which are managed by SQLAlchamy an ORM.
+The database includes tables like Users, SessionAuth, Mazes, Highscores, Algorithms, MazeFollowers, and UserFollowers, holding user info, session details, mazes, scores, and follower connections.
+Every table has constraints to prevent mistakes at the creation, like unique email or names or duplicated followers.
+
+For managing my database over time I also use [migrations](migrations). The migration can be found in migrations folder. Migrations is used as a version control system for the database to upgrade or downgrade the db.
+The scripts for that are explained in the documentation section about [setting up the database](#migration)
+
+### Testing and quering to the database
+
+To see how the database can be queried there are some test created for demonstration.
+
+- [test_db](tests/integration_tests/test_db.py) is having some test to query to the db.
+  - Creating a new entry in the db and quering it for User, Maze and Algorithm
+  - Database is SQLite and only created during the test and doesn't interfere with the production or development database
+- [create_test_data](tests/integration_tests/create_test_data.py) is used to create dummy data for testing and also demonstrated how do create data to the database
+
+### Performance
+
+I optimized the quering of data by indexing typical data points. That can be see on the ERD or in [db/models.py](db/models.py).
+
+Furthermore, I created joins to not query multiple times for some data from different tables.
+
+- [get_followed_mazes](app/models/maze/get_followed_mazes.py) is joining Maze data and Maze follower data.
+- [get_maze_highscores](app/models//maze/get_maze_highscores.py) is joining User, Algorithm, and Highscore tables.
+- [get_user_highscore](app/models/maze/get_user_highscore.py) is joining User, Maze, Algorithm and Highscore tables.
+
+### Database Security
+
+The database is secure against SQL Injections through the use of SQLAlchamy.
+
+The production database is creating backups everyday to prevent data loss.
 
 ---
 
