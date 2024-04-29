@@ -373,7 +373,18 @@ In the project directory you can run:
 
 ### Clear separation of concerns and well structured
 
-- ## Function and methods are doing one thing and are folloing the Single-Responsibility Principle
+- Function, methods and classes are doing one thing and are folloing the Single-Responsibility Principle
+  - Examples:
+    - [maze_generator_factory](app/models/maze/maze_generator_factory.py)
+    - [generate_maze](app/models/maze/generate_maze.py)
+  - In maze generator factory can also be seen that each method has few arguments as well
+- The functions are able to test and that can be seen in the [tests folder](tests/)
+- Errors are handled and are also returned to the user
+  - Error thrown if mistake:
+    - [Getting user example](app/models/user/get_user.py)
+    - [Maze conflict example](app/controller/maze/generate_maze_controller.py)
+  - Error handeling in endpoints:
+    - [Error validation](app/routes/validation.py)
 
 ---
 
