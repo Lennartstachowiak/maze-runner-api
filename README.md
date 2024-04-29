@@ -386,6 +386,26 @@ In the project directory you can run:
   - Error handeling in endpoints:
     - [Error validation](app/routes/validation.py)
 
+### Tools (analysis, styling and formatting)
+
+#### Formatting
+
+For formatting I use [black](https://github.com/psf/black).
+It runs before every commit and formates the code if it doesn't agree to the configuration format. If black does a change the commit fails and changes have to be reviewed for another commit try.
+
+#### Style checking
+
+[flake8](https://github.com/PyCQA/flake8) is checking if the code follows the PEP8 (Python) style to assure quality of the code. This also runs before every commit and fails if commit has a style conflict.
+flake8 also runs again in an github action after the commit for Pull Requests. A Pull Request can only be merged if the actions pass.
+
+### Refactoring Workflow
+
+Example:
+
+- Maze Solver
+  - Added tests (Commit: 624a6c6)
+  - Refactor code (Commit: 539b5a1)
+
 ---
 
 # Relational Database <a name="database"></a>
