@@ -482,8 +482,8 @@ Queries for each table:
 
 ##### Users
 
-- [Login user](app/models/user/login_user.py)
-- [Register user](app/models/user/register_user.py)
+- [Get user for login](app/models/user/login_user.py)
+- [Create user for registrations](app/models/user/register_user.py)
 - [Search for user with email](app/models/user/search_users.py)
 
 ##### UserFollowers & Users (Join)
