@@ -486,6 +486,10 @@ Queries for each table:
 - [Create user for registrations](app/models/user/register_user.py)
 - [Search for user with email](app/models/user/search_users.py)
 
+##### UserFollowers
+
+- [Follow a user](app/models/user/follow_user.py)
+
 ##### UserFollowers & Users (Join)
 
 - [Get a following list of user](app/models/user/get_user_following.py)
